@@ -10,6 +10,13 @@ namespace AweV1.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly MyContext _context;
+
+        public HomeController(MyContext context) 
+        {
+            _context = context;
+        }
+
         public IActionResult Index()
         {
             return View();
