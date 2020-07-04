@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AweV1.Areas.Identity.Data;
 using AweV1.Data;
+using AweV1.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

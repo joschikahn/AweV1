@@ -16,16 +16,19 @@ namespace AweV1.Models
         public MyContext(DbContextOptions<MyContext> options) : base(options) { }
 
         public DbSet<Thesis> thesis { get; set; }
+        public DbSet<Supervisor> supervisors { get; set; }
+        public DbSet<Programme> programme { get; set; }
     }
 
 
-    //TODO Mit Fremdschlüssel Entitäten verbinden 
     //TODO Mehrzeiliger Text? -> Limits setzen oder reicht String? -> rich text
-    //TODO Grade - Enum oder int?? -> Aufgabenstellung nachlesen
-    //TODO lastmodified -> TimeStamp: wie wird das sauber dargestellt?
     //TODO Englische übersetzung -> teilweise schlecht übersetzt
 
-    
+    //TODO Grade - Enum oder int?? -> Aufgabenstellung nachlesen
+    //TODO lastmodified -> TimeStamp: wie wird das sauber dargestellt?
+    //TODO Bachelor/Master fehlt asl bool
+
+
     public class Thesis
     {
         public int Id { get; set; }
