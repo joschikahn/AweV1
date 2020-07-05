@@ -12,6 +12,7 @@ namespace AweV1.Controllers
     {
         private readonly MyContext _context;
 
+        // evtl. kann das Weg und muss in jede einzelen Controllerklasse rein
         public HomeController(MyContext context) 
         {
             _context = context;
