@@ -16,6 +16,7 @@ namespace AweV1.Data
             : base(options)
         {
         }
+        public AppDbContext() { }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

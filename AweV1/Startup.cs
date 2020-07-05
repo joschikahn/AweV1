@@ -45,7 +45,7 @@ namespace AweV1
                 .AddEntityFrameworkStores<AppDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddDbContext<MyContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AppDbContextConnection")));
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AppDbContextConnection")));
 
         }
 

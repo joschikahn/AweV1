@@ -2,12 +2,41 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace AweV1.Migrations.My
+namespace AweV1.Migrations
 {
-    public partial class MyFirstMigration : Migration
+    public partial class Test2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "programme",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_programme", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "supervisors",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Active = table.Column<bool>(nullable: false),
+                    Email = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_supervisors", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "thesis",
                 columns: table => new
@@ -45,18 +74,53 @@ namespace AweV1.Migrations.My
                     DifficultyWt = table.Column<int>(nullable: false),
                     NoveltyWt = table.Column<int>(nullable: false),
                     RichnessWt = table.Column<int>(nullable: false),
-                    Grade = table.Column<decimal>(nullable: false)
+                    Grade = table.Column<decimal>(nullable: false),
+                    ProgrammeId = table.Column<int>(nullable: true),
+                    SupervisorId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_thesis", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_thesis_programme_ProgrammeId",
+                        column: x => x.ProgrammeId,
+                        principalTable: "programme",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_thesis_supervisors_SupervisorId",
+                        column: x => x.SupervisorId,
+                        principalTable: "supervisors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.InsertData(
+                table: "programme",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 1, "Dichtael Schwarz" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_thesis_ProgrammeId",
+                table: "thesis",
+                column: "ProgrammeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_thesis_SupervisorId",
+                table: "thesis",
+                column: "SupervisorId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "thesis");
+
+            migrationBuilder.DropTable(
+                name: "programme");
+
+            migrationBuilder.DropTable(
+                name: "supervisors");
         }
     }
 }

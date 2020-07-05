@@ -5,15 +5,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AweV1.Models;
+using AweV1.Data;
 
 namespace AweV1.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly MyContext _context;
+        private readonly AppDbContext _context;
 
         // evtl. kann das Weg und muss in jede einzelen Controllerklasse rein
-        public HomeController(MyContext context) 
+        public HomeController(AppDbContext context) 
         {
             _context = context;
         }

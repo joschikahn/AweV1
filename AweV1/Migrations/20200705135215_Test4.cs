@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace AweV1.Migrations.My
+namespace AweV1.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Test4 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
