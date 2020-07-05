@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AweV1.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200705134711_Test2")]
-    partial class Test2
+    [Migration("20200705145524_Test1")]
+    partial class Test1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -106,6 +106,10 @@ namespace AweV1.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("supervisors");
+
+                    b.HasData(
+                        new { Id = 1, Active = true, Email = "woeidhj@web.de", FirstName = "Hans", LastName = "Kanns" }
+                    );
                 });
 
             modelBuilder.Entity("AweV1.Models.Thesis", b =>
