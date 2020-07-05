@@ -157,7 +157,8 @@ namespace AweV1.Models
 
             [Display(Name = "Note")]
             public decimal Grade { get; set; }
-        }
+       
+    }
     public enum Status
     {
         [Display(Name = "Frei")]
