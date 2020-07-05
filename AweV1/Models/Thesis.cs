@@ -49,12 +49,16 @@ namespace AweV1.Models
             [Display(Name = "Zusammenfassung")]
             public string Summary { get; set; }
 
+            //public bool Bacherlor { get; set; }
+
+            //public bool Master { get; set; }
 
 
-            //                              ******************** Student ********************
 
-            // Studentname wurde in Vor und Nachname aufgeteilt - In Aufgabenstellung Name in einem
-            [Display(Name = "Student Vorname")]
+        //                              ******************** Student ********************
+
+        // Studentname wurde in Vor und Nachname aufgeteilt - In Aufgabenstellung Name in einem
+        [Display(Name = "Student Vorname")]
             public string StudentFirstName { get; set; }
 
             [Display(Name = "Student Nachname")]
