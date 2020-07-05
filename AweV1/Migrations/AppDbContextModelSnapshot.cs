@@ -104,6 +104,10 @@ namespace AweV1.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("supervisors");
+
+                    b.HasData(
+                        new { Id = 1, Active = true, Email = "woeidhj@web.de", FirstName = "Hans", LastName = "Kanns" }
+                    );
                 });
 
             modelBuilder.Entity("AweV1.Models.Thesis", b =>

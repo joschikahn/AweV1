@@ -21,9 +21,13 @@ namespace AweV1.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
+            
             builder.Entity<Programme>().HasData(
                 new Programme() { Id = 1, Name = "Dichtael Schwarz" }
+            );
+
+            builder.Entity<Supervisor>().HasData(
+                new Supervisor() { Id = 1, FirstName = "Hans", LastName = "Kanns", Active =  true, Email = "woeidhj@web.de"}
             );
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
