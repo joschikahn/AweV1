@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Joschi du trottel
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,12 +69,12 @@ namespace AweV1.Data
             );
 
             
-
+          
             builder.Entity<Supervisor>().HasData(
                 new Supervisor() { 
-                    Id=1, 
-                    FirstName="Elliot",
-                    LastName="Anderson", 
+                    Id = 1, 
+                    FirstName ="Elliot",
+                    LastName ="Anderson", 
                     Active = true,
                     Email = "mail@mail.mail",
                     thesisList = theses
