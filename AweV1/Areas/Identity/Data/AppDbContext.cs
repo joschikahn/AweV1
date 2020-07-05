@@ -18,16 +18,18 @@ namespace AweV1.Data
             : base(options)
         {
         }
-        public AppDbContext() { }
+        //public AppDbContext() { }
 
-
+        public DbSet<Thesis> thesis { get; set; }
+        public DbSet<Supervisor> supervisors { get; set; }
+        public DbSet<Programme> programme { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
             base.OnModelCreating(builder);
 
-            /*Thesis thesis1 = new Thesis()
+            Thesis thesis1 = new Thesis()
             {
                 Id = 1,
                 LastModified = DateTime.Now,
@@ -57,15 +59,15 @@ namespace AweV1.Data
             };
 
 
-            var theses = new List<Thesis>();
-            theses.Add(thesis1);
+            //var theses = new List<Thesis>();
+            //theses.Add(thesis1);
 
             builder.Entity<Thesis>().HasData(
               thesis1 
           );
 
             builder.Entity<Programme>().HasData(
-                new Programme() { Id = 1, Name = "Dichtael Schwarz", thesisList = theses }
+                new Programme() { Id = 1, Name = "Dichtael Schwarz", thesisList = new List<Thesis>() }
             );
 
             
@@ -77,15 +79,12 @@ namespace AweV1.Data
                     LastName ="Anderson", 
                     Active = true,
                     Email = "mail@mail.mail",
-                    thesisList = theses
+                    thesisList = new List<Thesis>()
                 }
                 );
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);*/
         }
-        public DbSet<Thesis> thesis { get; set; }
-        public DbSet<Supervisor> supervisors { get; set; }
-        public DbSet<Programme> programme { get; set; }
     }
 }

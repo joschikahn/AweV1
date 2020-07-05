@@ -44,7 +44,7 @@ namespace AweV1.Models
             public DateTime Filing { get; set; }
 
             [Display(Name = "Typ")]
-            public Type type { get; set; }
+            public Type Type { get; set; }
 
             [Display(Name = "Zusammenfassung")]
             public string Summary { get; set; }
@@ -58,7 +58,7 @@ namespace AweV1.Models
             public string StudentFirstName { get; set; }
 
             [Display(Name = "Student Nachname")]
-            public string StudenLastName { get; set; }
+            public string StudentLastName { get; set; }
 
             [Display(Name = "E-Mail")]
             public string Email { get; set; }
