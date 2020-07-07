@@ -4,14 +4,16 @@ using AweV1.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AweV1.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200705213012_Test1")]
+    partial class Test1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,6 +83,10 @@ namespace AweV1.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("programme");
+
+                    b.HasData(
+                        new { Id = 1, Name = "Dichtael Schwarz" }
+                    );
                 });
 
             modelBuilder.Entity("AweV1.Models.Supervisor", b =>
@@ -100,6 +106,10 @@ namespace AweV1.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("supervisors");
+
+                    b.HasData(
+                        new { Id = 1, Active = true, Email = "mail@mail.mail", FirstName = "Elliot", LastName = "Anderson" }
+                    );
                 });
 
             modelBuilder.Entity("AweV1.Models.Thesis", b =>
@@ -107,8 +117,6 @@ namespace AweV1.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Bachelor");
 
                     b.Property<int>("ContentVal");
 
@@ -129,7 +137,7 @@ namespace AweV1.Migrations
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate();
 
-                    b.Property<double>("Grade");
+                    b.Property<decimal>("Grade");
 
                     b.Property<DateTime>("LastModified")
                         .IsConcurrencyToken()
@@ -142,8 +150,6 @@ namespace AweV1.Migrations
                     b.Property<int>("LiteratureVal");
 
                     b.Property<int>("LiteratureWt");
-
-                    b.Property<bool>("Master");
 
                     b.Property<int>("NoveltyVal");
 
@@ -195,6 +201,10 @@ namespace AweV1.Migrations
                     b.HasIndex("SupervisorId");
 
                     b.ToTable("thesis");
+
+                    b.HasData(
+                        new { Id = 1, ContentVal = 5, ContentWt = 0, Description = "Wahnsinns Arbeit", DifficultyVal = 200, DifficultyWt = 0, Email = "joschikahn@web.de", Evaluation = "war ganz ok", Filing = new DateTime(2020, 7, 5, 23, 30, 11, 932, DateTimeKind.Local), Grade = 1m, LastModified = new DateTime(2020, 7, 5, 23, 30, 11, 928, DateTimeKind.Local), LayoutVal = 5, LayoutWt = 0, LiteratureVal = 5, LiteratureWt = 0, NoveltyVal = 5, NoveltyWt = 0, Registration = new DateTime(2020, 7, 5, 23, 30, 11, 932, DateTimeKind.Local), RichnessVal = 5, RichnessWt = 0, Status = 3, Strengths = "Alles Super", StructureVal = 5, StructureWt = 0, StudentFirstName = "Tschoschi", StudentID = 2278467, StudentLastName = "Hamburger", StyleVal = 5, StyleWt = 0, Summary = "Es geht um Omni Channels", Title = "Omni Channel Retail", Type = 0, Weaknesses = "Weak was?" }
+                    );
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

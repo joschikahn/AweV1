@@ -6,7 +6,14 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace AweV1.Models
-{  
+{
+    //TODO Mehrzeiliger Text? -> Limits setzen oder reicht String? -> rich text
+    //TODO Englische übersetzung -> teilweise schlecht übersetzt
+
+    //TODO Grade - Enum oder int?? -> Aufgabenstellung nachlesen
+    //TODO lastmodified -> TimeStamp: wie wird das sauber dargestellt?
+    //TODO Bachelor/Master fehlt asl bool
+
     public class Thesis
         {
             public int Id { get; set; }
@@ -36,22 +43,22 @@ namespace AweV1.Models
             [Display(Name = "Abgabe")]
             public DateTime Filing { get; set; }
 
-            public Boolean Bachelor { get; set; }
-           
-            public Boolean Master { get; set; }
-
             [Display(Name = "Typ")]
             public Type Type { get; set; }
 
             [Display(Name = "Zusammenfassung")]
             public string Summary { get; set; }
 
+            public bool Bachelor { get; set; }
+
+            public bool Master { get; set; }
 
 
-            //                              ******************** Student ********************
 
-            // Studentname wurde in Vor und Nachname aufgeteilt - In Aufgabenstellung Name in einem
-            [Display(Name = "Student Vorname")]
+        //                              ******************** Student ********************
+
+        // Studentname wurde in Vor und Nachname aufgeteilt - In Aufgabenstellung Name in einem
+             [Display(Name = "Student Vorname")]
             public string StudentFirstName { get; set; }
 
             [Display(Name = "Student Nachname")]

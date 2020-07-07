@@ -1,4 +1,5 @@
-﻿using System;
+﻿//Joschi du trottel
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace AweV1.Data
         {
 
             base.OnModelCreating(builder);
-
+            /*
             Thesis thesis1 = new Thesis()
             {
                 Id = 1,
@@ -56,12 +57,10 @@ namespace AweV1.Data
                 DifficultyVal = 5,
                 NoveltyVal = 5,
                 RichnessVal = 5,
-                Grade = 1
+                Grade =1,
+              
             };
 
-
-            //var theses = new List<Thesis>();
-            //theses.Add(thesis1);
 
             builder.Entity<Thesis>().HasData(
               thesis1 
