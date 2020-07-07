@@ -1,5 +1,4 @@
-﻿//Joschi du trottel
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,6 +37,8 @@ namespace AweV1.Data
                 Status = Status.Filed,
                 Registration = DateTime.Now,
                 Filing = DateTime.Now,
+                Bachelor = true,
+                Master = true,
                 Type = Models.Type.Bachelor,
                 Summary = "Es geht um Omni Channels",
                 StudentFirstName = "Tschoschi",

@@ -46,7 +46,6 @@ namespace AweV1
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AppDbContextConnection")));
-            //Penius
 
         }
 

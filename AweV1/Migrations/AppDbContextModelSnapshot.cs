@@ -171,11 +171,11 @@ namespace AweV1.Migrations
 
                     b.Property<int>("StructureWt");
 
+                    b.Property<string>("StudentLastName");
+
                     b.Property<string>("StudentFirstName");
 
                     b.Property<int>("StudentID");
-
-                    b.Property<string>("StudentLastName");
 
                     b.Property<int>("StyleVal");
 
@@ -188,9 +188,9 @@ namespace AweV1.Migrations
                     b.Property<string>("Title")
                         .IsRequired();
 
-                    b.Property<int>("Type");
-
                     b.Property<string>("Weaknesses");
+
+                    b.Property<int>("type");
 
                     b.HasKey("Id");
 
@@ -201,7 +201,7 @@ namespace AweV1.Migrations
                     b.ToTable("thesis");
 
                     b.HasData(
-                        new { Id = 1, ContentVal = 5, ContentWt = 0, Description = "Wahnsinns Arbeit", DifficultyVal = 200, DifficultyWt = 0, Email = "joschikahn@web.de", Evaluation = "war ganz ok", Filing = new DateTime(2020, 7, 5, 23, 30, 11, 932, DateTimeKind.Local), Grade = 1m, LastModified = new DateTime(2020, 7, 5, 23, 30, 11, 928, DateTimeKind.Local), LayoutVal = 5, LayoutWt = 0, LiteratureVal = 5, LiteratureWt = 0, NoveltyVal = 5, NoveltyWt = 0, Registration = new DateTime(2020, 7, 5, 23, 30, 11, 932, DateTimeKind.Local), RichnessVal = 5, RichnessWt = 0, Status = 3, Strengths = "Alles Super", StructureVal = 5, StructureWt = 0, StudentFirstName = "Tschoschi", StudentID = 2278467, StudentLastName = "Hamburger", StyleVal = 5, StyleWt = 0, Summary = "Es geht um Omni Channels", Title = "Omni Channel Retail", Type = 0, Weaknesses = "Weak was?" }
+                        new { Id = 1, ContentVal = 5, ContentWt = 0, Description = "Wahnsinns Arbeit", DifficultyVal = 5, DifficultyWt = 0, Email = "joschikahn@web.de", Evaluation = "war ganz ok", Filing = new DateTime(2020, 7, 5, 22, 38, 2, 683, DateTimeKind.Local), Grade = 1m, LastModified = new DateTime(2020, 7, 5, 22, 38, 2, 680, DateTimeKind.Local), LayoutVal = 5, LayoutWt = 0, LiteratureVal = 5, LiteratureWt = 0, NoveltyVal = 5, NoveltyWt = 0, Registration = new DateTime(2020, 7, 5, 22, 38, 2, 683, DateTimeKind.Local), RichnessVal = 5, RichnessWt = 0, Status = 3, Strengths = "Alles Super", StructureVal = 5, StructureWt = 0, StudenLastName = "Hamburger", StudentFirstName = "Tschoschi", StudentID = 2278467, StyleVal = 5, StyleWt = 0, Summary = "Es geht um Omni Channels", Title = "Omni Channel Retail", Weaknesses = "Weak was?", type = 0 }
                     );
                 });
 
