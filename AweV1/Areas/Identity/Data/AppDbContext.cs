@@ -37,6 +37,8 @@ namespace AweV1.Data
                 Status = Status.Filed,
                 Registration = DateTime.Now,
                 Filing = DateTime.Now,
+                Bachelor = true,
+                Master = true,
                 Type = Models.Type.Bachelor,
                 Summary = "Es geht um Omni Channels",
                 StudentFirstName = "Tschoschi",
