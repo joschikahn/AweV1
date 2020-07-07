@@ -14,108 +14,106 @@ namespace AweV1.Models
     //TODO lastmodified -> TimeStamp: wie wird das sauber dargestellt?
     //TODO Bachelor/Master fehlt asl bool
 
-    public class Thesis
-        {
-            public int Id { get; set; }
+    public class Thesis : IValidatableObject
+    {
 
-            [Required, Timestamp]
-            [Display(Name = "Letzte Datenänderung")]
-            public DateTime LastModified { get; set; }
+        public int Id { get; set; }
+
+        // [Timestamp]
+        [Display(Name = "Letzte Datenänderung")]
+        public DateTime LastModified { get; set; } = DateTime.Now;
 
 
 
-            //                               ******************** Thema/Arbeit ********************
-            [Required]
-            [Display(Name = "Titel")]
-            public string Title { get; set; }
+        //                               ******************** Thema/Arbeit ********************
+        [Required]
+        [Display(Name = "Titel")]
+        public string Title { get; set; }
 
-            [Required]
-            [Display(Name = "Beschreibung")]
-            public string Description { get; set; }
+        [Required]
+        [Display(Name = "Beschreibung")]
+        public string Description { get; set; }
 
-            public Status Status { get; set; }
+        public Status Status { get; set; }
 
-            [Timestamp]
-            [Display(Name = "Anmeldung")]
-            public DateTime Registration { get; set; }
+        [Display(Name = "Anmeldung")]
+        public DateTime Registration { get; set; }
 
-            [Timestamp]
-            [Display(Name = "Abgabe")]
-            public DateTime Filing { get; set; }
+        [Display(Name = "Abgabe")]
+        public DateTime Filing { get; set; }
 
-            [Display(Name = "Typ")]
-            public Type Type { get; set; }
+        [Display(Name = "Typ")]
+        public Type Type { get; set; }
 
-            [Display(Name = "Zusammenfassung")]
-            public string Summary { get; set; }
+        [Display(Name = "Zusammenfassung")]
+        public string Summary { get; set; }
 
-            public bool Bachelor { get; set; }
+        public bool Bachelor { get; set; }
 
-            public bool Master { get; set; }
+        public bool Master { get; set; }
 
 
 
         //                              ******************** Student ********************
 
         // Studentname wurde in Vor und Nachname aufgeteilt - In Aufgabenstellung Name in einem
-             [Display(Name = "Student Vorname")]
-            public string StudentFirstName { get; set; }
+        [Display(Name = "Student Vorname")]
+        public string StudentFirstName { get; set; }
 
-            [Display(Name = "Student Nachname")]
-            public string StudentLastName { get; set; }
+        [Display(Name = "Student Nachname")]
+        public string StudentLastName { get; set; }
 
-            [Display(Name = "E-Mail")]
-            public string Email { get; set; }
+        [Display(Name = "E-Mail")]
+        public string Email { get; set; }
 
-            [Required]
-            [Display(Name = "Matrikelnummer")]
-            public int StudentID { get; set; }
-
+        [Display(Name = "Matrikelnummer")]
+        public string StudentID { get; set; }
 
 
-            //                               ******************* Benotung **********************
 
-            [Display(Name = "Stärken")]
-            public string Strengths { get; set; }
+        //                               ******************* Benotung **********************
 
-            [Display(Name = "Schwächen")]
-            public string Weaknesses { get; set; }
+        [Display(Name = "Stärken")]
+        public string Strengths { get; set; }
 
-            [Display(Name = "Evaluation")]
-            public string Evaluation { get; set; }
+        [Display(Name = "Schwächen")]
+        public string Weaknesses { get; set; }
 
-            //Bewertung
-            [Range(1, 5)]
-            [Display(Name = "Inhalt Pkt.")]
-            public int ContentVal { get; set; }
+        [Display(Name = "Evaluation")]
+        public string Evaluation { get; set; }
 
-            [Range(1, 5)]
-            [Display(Name = "Layout Pkt.")]
-            public int LayoutVal { get; set; }
+        //Bewertung
+        [Range(1, 5)]
+        [Display(Name = "Inhalt Pkt.")]
+        public int? ContentVal { get; set; }
 
-            [Range(1, 5)]
-            [Display(Name = "Struktur Pkt.")]
-            public int StructureVal { get; set; }
+        [Range(1, 5)]
+        [Display(Name = "Layout Pkt.")]
+        public int? LayoutVal { get; set; }
 
-            [Range(1, 5)]
-            [Display(Name = "Stil Pkt.")]
-            public int StyleVal { get; set; }
+        [Range(1, 5)]
+        [Display(Name = "Struktur Pkt.")]
+        public int? StructureVal { get; set; }
 
-            [Range(1, 5)]
-            [Display(Name = "Literatur Pkt.")]
-            public int LiteratureVal { get; set; }
+        [Range(1, 5)]
+        [Display(Name = "Stil Pkt.")]
+        public int? StyleVal { get; set; }
 
-            [Range(1, 5)]
-            [Display(Name = "Komplexität Pkt.")]
-            public int DifficultyVal { get; set; }
+        [Range(1, 5)]
+        [Display(Name = "Literatur Pkt.")]
+        public int? LiteratureVal { get; set; }
 
-            [Range(1, 5)]
-            [Display(Name = "Neuheit Pkt.")]
-            public int NoveltyVal { get; set; }
+        [Range(1, 5)]
+        [Display(Name = "Komplexität Pkt.")]
+        public int? DifficultyVal { get; set; }
 
-            [Range(1, 5)]
-            [Display(Name = "Reichhaltigkeit Pkt.")]
-            public int RichnessVal { get; set; }
+        [Range(1, 5)]
+        [Display(Name = "Neuheit Pkt.")]
+        public int? NoveltyVal { get; set; }
+
+        [Range(1, 5)]
+        [Display(Name = "Reichhaltigkeit Pkt.")]
+        public int? RichnessVal { get; set; }
 
 
         //Gewichtung
@@ -152,8 +150,18 @@ namespace AweV1.Models
         public int RichnessWt { get; set; } = 10;
 
         [Display(Name = "Note")]
-        public double Grade { get; set; }
-       
+        public double? Grade { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (ContentWt + LayoutWt + StructureWt + StyleWt + LiteratureWt + DifficultyWt + NoveltyWt + RichnessWt != 100)
+                return new ValidationResult[] { new ValidationResult("Die Summe muss 100 sein!") };
+            else if (Bachelor == false && Master == false)
+            {
+                return new ValidationResult[] { new ValidationResult("Eins muss ausgewählt sein"), };
+            }
+            else return new ValidationResult[] { };
+        }
     }
     public enum Status
     {
@@ -177,5 +185,6 @@ namespace AweV1.Models
         Bachelor = 0,
         Master = 1
     }
+
 }
 
