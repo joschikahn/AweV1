@@ -4,14 +4,16 @@ using AweV1.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AweV1.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200708101547_final")]
+    partial class final
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -91,14 +93,11 @@ namespace AweV1.Migrations
 
                     b.Property<bool>("Active");
 
-                    b.Property<string>("Email")
-                        .IsRequired();
+                    b.Property<string>("Email");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired();
+                    b.Property<string>("FirstName");
 
-                    b.Property<string>("LastName")
-                        .IsRequired();
+                    b.Property<string>("LastName");
 
                     b.HasKey("Id");
 
@@ -130,7 +129,7 @@ namespace AweV1.Migrations
 
                     b.Property<DateTime?>("Filing");
 
-                    b.Property<int?>("Grade");
+                    b.Property<double?>("Grade");
 
                     b.Property<DateTime>("LastModified");
 

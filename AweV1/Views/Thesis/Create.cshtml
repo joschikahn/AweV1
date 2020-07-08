@@ -23,26 +23,6 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Registration" class="control-label"></label>
-                <input type="date" asp-for="Registration" class="form-control" />
-                <span asp-validation-for="Registration" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Filing" class="control-label"></label>
-                <input type="date" asp-for="Filing" class="form-control" />
-                <span asp-validation-for="Filing" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <select asp-for="Status" asp-items="@Html.GetEnumSelectList(typeof(Status))" class="form-control"></select>
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Type" class="control-label"></label>
-                <select asp-for="Type" asp-items="@Html.GetEnumSelectList(typeof(AweV1.Models.Type))" class="form-control"></select>
-                <span asp-validation-for="Type" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="Summary" class="control-label"></label>
                 <input asp-for="Summary" class="form-control" />
                 <span asp-validation-for="Summary" class="text-danger"></span>
@@ -62,6 +42,26 @@
                 </div>
             </div>
             <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="Status" asp-items="@Html.GetEnumSelectList(typeof(Status))" class="form-control"></select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Registration" class="control-label"></label>
+                <input type="date" asp-for="Registration" class="form-control" />
+                <span asp-validation-for="Registration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Filing" class="control-label"></label>
+                <input type="date" asp-for="Filing" class="form-control" />
+                <span asp-validation-for="Filing" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Type" class="control-label"></label>
+                <select asp-for="Type" asp-items="@Html.GetEnumSelectList(typeof(AweV1.Models.Type))" class="form-control"></select>
+                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="StudentFirstName" class="control-label"></label>
                 <input asp-for="StudentFirstName" class="form-control" />
                 <span asp-validation-for="StudentFirstName" class="text-danger"></span>
@@ -73,7 +73,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+                <input type="email" asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">

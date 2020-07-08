@@ -4,14 +4,16 @@ using AweV1.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AweV1.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200708124210_hoffentlichletzte")]
+    partial class hoffentlichletzte
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -130,7 +132,7 @@ namespace AweV1.Migrations
 
                     b.Property<DateTime?>("Filing");
 
-                    b.Property<int?>("Grade");
+                    b.Property<double?>("Grade");
 
                     b.Property<DateTime>("LastModified");
 
