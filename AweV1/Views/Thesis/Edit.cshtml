@@ -179,7 +179,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Grade" class="control-label"></label>
-                <input asp-for="Grade" class="form-control" />
+                <select asp-for="Grade" asp-items="@Html.GetEnumSelectList(typeof(Grade))" class="form-control"></select>
                 <span asp-validation-for="Grade" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -149,8 +149,7 @@ namespace AweV1.Models
         public int RichnessWt { get; set; } = 10;
 
         [Display(Name = "Note")]
-        [Range(1,5, ErrorMessage = "Bitte eine Note zwischen 1-5 angeben!")]
-        public int? Grade { get; set; }
+        public Grade? Grade { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
@@ -170,7 +169,7 @@ namespace AweV1.Models
                   return new ValidationResult[] { new ValidationResult("Anmeldedatum muss vor dem Abgabedatum liegen!") };
             }
             // Was sollte alles eingetragen sein, wenn es Status benotet ist?
-            else if(Status == Status.Graded && Grade == null)
+            else if((Status == Status.Graded) && (Grade == Models.Grade.Note_Empty))
             {
                 return new ValidationResult[] { new ValidationResult("Bitte Note einfügen!") };
             }
@@ -216,6 +215,35 @@ namespace AweV1.Models
     {
         Bachelor = 0,
         Master = 1
+    }
+
+    public enum Grade
+    {
+        [Display(Name = "---")]
+        Note_Empty = 0,
+        [Display(Name = "1.0")]
+        Note_10 = 1,
+        [Display(Name = "1.3")]
+        Note_13 = 2,
+        [Display(Name = "1.7")]
+        Note_17 = 3,
+        [Display(Name = "2.0")]
+        Note_20 = 4,
+        [Display(Name = "2.3")]
+        Note_23 = 5,
+        [Display(Name = "2.7")]
+        Note_27 = 6,
+        [Display(Name = "3.0")]
+        Note_30 = 7,
+        [Display(Name = "3.3")]
+        Note_33 = 8,
+        [Display(Name = "3.7")]
+        Note_37 = 9,
+        [Display(Name = "4.0")]
+        Note_40 = 10,
+        [Display(Name = "5.0")]
+        Note_50 = 11,
+
     }
 
 }
