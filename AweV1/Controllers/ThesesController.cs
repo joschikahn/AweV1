@@ -13,6 +13,18 @@ namespace AweV1.Controllers
 {
     public class ThesisController : Controller
     {
+        public enum SortCriteria
+        {
+            Title,
+            Status,
+            Registration,
+            Filing,
+            Type,
+            StudentFirstName,
+            StudentLastName,
+            StudentID
+        }
+
         private readonly AppDbContext _context;
 
         public ThesisController(AppDbContext context)
