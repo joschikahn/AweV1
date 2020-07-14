@@ -7,12 +7,7 @@ using System.Threading.Tasks;
 
 namespace AweV1.Models
 {
-    //TODO Mehrzeiliger Text? -> Limits setzen oder reicht String? -> rich text
-    //TODO Englische übersetzung -> teilweise schlecht übersetzt
-
-    //TODO Grade - Enum oder int?? -> Aufgabenstellung nachlesen
-    //TODO lastmodified -> TimeStamp: wie wird das sauber dargestellt?
-    //TODO Bachelor/Master fehlt asl bool
+    
 
     public class Thesis : IValidatableObject
     {
@@ -150,6 +145,12 @@ namespace AweV1.Models
 
         [Display(Name = "Note")]
         public Grade? Grade { get; set; }
+
+
+        //Fremdschlüssel
+        public Supervisor Supervisor { get; set; }
+        public Programme Programme { get; set; }
+
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
