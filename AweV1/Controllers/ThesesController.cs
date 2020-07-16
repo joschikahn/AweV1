@@ -20,8 +20,6 @@ namespace AweV1.Controllers
             Registration,
             Filing,
             Type,
-            StudentFirstName,
-            StudentLastName,
             StudentID
         }
 
@@ -33,9 +31,49 @@ namespace AweV1.Controllers
         }
 
         // GET: Thesis
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string Search, string Filter, SortCriteria Sort = SortCriteria.StudentID, int Page = 1, int PageSize = 10)
         {
-            return View(await _context.thesis.ToListAsync());
+            IQueryable<Thesis> query = _context.thesis;
+            query = (Search != null) ? query.Where(m => (m.Title.Contains(Search))) : query;
+            // Filter-Funktion auskommentiert, da 'm.Type == Filter' nicht funktioniert (wg. Boolean-Type)
+            // Option, dass man nach Typ (BA/MA) filtern kann
+            // query = (Filter != null) ? query.Where(m => m.Type == Filter) : query;
+
+            switch (Sort)
+            {
+                case SortCriteria.Title:
+                    query = query.OrderBy(m => m.Title);
+                    break;
+                case SortCriteria.Status:
+                    query = query.OrderBy(m => m.Status);
+                    break;
+                case SortCriteria.Registration:
+                    query = query.OrderBy(m => m.Registration);
+                    break;
+                case SortCriteria.Filing:
+                    query = query.OrderBy(m => m.Filing);
+                    break;
+                case SortCriteria.Type:
+                    query = query.OrderBy(m => m.Type);
+                    break;
+                default:
+                    query = query.OrderBy(m => m.StudentID);
+                    break;
+            }
+
+            int PageTotal = ((await query.CountAsync()) + PageSize - 1) / PageSize;
+            Page = (Page > PageTotal) ? PageTotal : Page;
+            Page = (Page < 1) ? 1 : Page;
+
+            ViewBag.Search = Search;
+            ViewBag.Filter = Filter;
+            ViewBag.FilterValues = new SelectList(await _context.thesis.Select(m => m.Type).Distinct().ToListAsync());
+            ViewBag.Sort = Sort;
+            ViewBag.Page = Page;
+            ViewBag.PageTotal = PageTotal;
+            ViewBag.PageSize = PageSize;
+
+            return View(await query.Skip(PageSize * (Page - 1)).Take(PageSize).ToListAsync());
         }
 
         // GET: Thesis/Details/5
