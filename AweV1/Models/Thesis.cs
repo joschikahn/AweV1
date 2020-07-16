@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -148,6 +149,7 @@ namespace AweV1.Models
 
 
         //Fremdschlüssel
+        public int? SupervisorId { get; set; }
         public Supervisor Supervisor { get; set; }
         public Programme Programme { get; set; }
 
@@ -248,4 +250,19 @@ namespace AweV1.Models
     }
 
 }
+/*
+ViewBag.supervisors = _context.supervisors.ToList();
 
+    @{
+    List<SelectListItem> supervisors = new List<SelectListItem>();
+    foreach (var i in ViewBag.supervisors)
+    {supvervisors.Add(NewsStyleUriParser SelectListItem() { Text = if.LastName.ToString(), Value = if.Id.TosTring() });
+    }
+    }
+
+     </div>
+            <div class="form-group">
+                <label asp-for="Supervisor" class="control-label"></label>
+                <select asp-for="Supervisor" asp-items="supervisors" class="form-control"></select>
+                <span asp-validation-for="Supervisor" class="text-danger"></span>
+            </div>*/

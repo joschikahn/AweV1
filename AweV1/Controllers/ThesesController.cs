@@ -83,10 +83,12 @@ namespace AweV1.Controllers
             {
                 return NotFound();
             }
-
+               
             var thesis = await _context.thesis
+                .Include(t => t.Supervisor)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (thesis == null)
+           
+           if (thesis == null)
             {
                 return NotFound();
             }
@@ -98,6 +100,7 @@ namespace AweV1.Controllers
         [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
+          
             return View();
         }
 
@@ -107,7 +110,7 @@ namespace AweV1.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> Create([Bind("Id,LastModified,Title,Description,Status,Registration,Filing,Type,Summary,Bachelor,Master,StudentFirstName,StudentLastName,Email,StudentID,Strengths,Weaknesses,Evaluation,ContentVal,LayoutVal,StructureVal,StyleVal,LiteratureVal,DifficultyVal,NoveltyVal,RichnessVal,ContentWt,LayoutWt,StyleWt,LiteratureWt,StructureWt,DifficultyWt,NoveltyWt,RichnessWt,Grade")] Thesis thesis)
+        public async Task<IActionResult> Create([Bind("Id,LastModified,Title,Description,Status,Registration,Filing,Type,Summary,Bachelor,Master,StudentFirstName,StudentLastName,Email,StudentID,Strengths,Weaknesses,Evaluation,ContentVal,LayoutVal,StructureVal,StyleVal,LiteratureVal,DifficultyVal,NoveltyVal,RichnessVal,ContentWt,LayoutWt,StyleWt,LiteratureWt,StructureWt,DifficultyWt,NoveltyWt,RichnessWt,Grade,SupervisorId")] Thesis thesis)
         {
             if (ModelState.IsValid)
             {
@@ -115,6 +118,7 @@ namespace AweV1.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["SupervisorId"] = new SelectList(_context.supervisors, "Id", "LastName", thesis.SupervisorId);
             return View(thesis);
         }
 

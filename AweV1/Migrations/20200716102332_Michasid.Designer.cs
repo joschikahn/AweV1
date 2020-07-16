@@ -4,14 +4,16 @@ using AweV1.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AweV1.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200716102332_Michasid")]
+    partial class Michasid
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -176,7 +178,7 @@ namespace AweV1.Migrations
 
                     b.Property<string>("Summary");
 
-                    b.Property<int?>("SupervisorId");
+                    b.Property<int>("SupervisorId");
 
                     b.Property<string>("Title")
                         .IsRequired();
@@ -312,7 +314,8 @@ namespace AweV1.Migrations
 
                     b.HasOne("AweV1.Models.Supervisor", "Supervisor")
                         .WithMany("thesisList")
-                        .HasForeignKey("SupervisorId");
+                        .HasForeignKey("SupervisorId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
