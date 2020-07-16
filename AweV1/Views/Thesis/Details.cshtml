@@ -47,6 +47,30 @@
             @Html.DisplayFor(model => model.Master)
         </dd>
         <dt>
+            @Html.DisplayNameFor(model => model.Supervisor)
+        </dt>
+        <dd>
+            @foreach (var supervisor in ViewBag.supervisor)
+            {
+                if (supervisor.Id == Model.SupervisorId)
+                {
+                    @supervisor.LastName;
+                }
+            }
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Programme)
+        </dt>
+        <dd>
+            @foreach (var programm in ViewBag.programme)
+            {
+                if (programm.Id == Model.ProgrammId)
+                {
+                    @programm.Name;
+                }
+            }
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.Status)
         </dt>
         <dd>

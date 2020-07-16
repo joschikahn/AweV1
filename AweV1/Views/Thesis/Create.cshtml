@@ -42,6 +42,16 @@
                 </div>
             </div>
             <div class="form-group">
+                <label asp-for="SupervisorId" class="control-label"></label>
+                <select asp-for="SupervisorId" asp-items="ViewBag.SupervisorId" class="col-md-10 form-control">Supervisor</select>
+                <span asp-validation-for="SupervisorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProgrammId" class="control-label"></label>
+                <select asp-for="ProgrammId" asp-items="ViewBag.ProgrammId" class="col-md-10 form-control">Programm</select>
+                <span asp-validation-for="ProgrammId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
                 <select asp-for="Status" asp-items="@Html.GetEnumSelectList(typeof(Status))" class="form-control"></select>
                 <span asp-validation-for="Status" class="text-danger"></span>
@@ -181,17 +191,6 @@
                 <select asp-for="Grade" asp-items="@Html.GetEnumSelectList(typeof(Grade))" class="form-control"></select>
                 <span asp-validation-for="Grade" class="text-danger"></span>
             </div>
-
-
-
-          
-            <div class="form-group">
-                <label asp-for="SupervisorId" class="control-label"></label>
-                <select asp-for="SupervisorId" asp-items="ViewBag.SupervisorId" class="col-md-10 form-control">Supervisor</select>
-                <span asp-validation-for="SupervisorId" class="text-danger"></span>
-            </div>
-
-
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
