@@ -100,7 +100,7 @@ namespace AweV1.Controllers
         [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
-          
+            ViewData["SupervisorId"] = new SelectList(_context.supervisors, "Id", "LastName");
             return View();
         }
 
@@ -118,7 +118,7 @@ namespace AweV1.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["SupervisorId"] = new SelectList(_context.supervisors, "Id", "LastName", thesis.SupervisorId);
+            ViewData["SupervisorId"] = new SelectList(_context.supervisors, "Id", "LastName");
             return View(thesis);
         }
 
