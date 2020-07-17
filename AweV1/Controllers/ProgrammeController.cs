@@ -5,45 +5,39 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
 using AweV1.Data;
-using AweV1.Models;
+using Microsoft.AspNetCore.Authorization;
 
-namespace AweV1.Controllers
+namespace AweV1.Models
 {
-    public class SupervisorController : Controller
+    public class ProgrammeController : Controller
     {
 
         public enum SortCriteria
         {
-            FirstName,
-            LastName,
-            Active
+            Name
         }
 
         private readonly AppDbContext _context;
 
-        public SupervisorController(AppDbContext context)
+        public ProgrammeController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: Supervisor
-        public async Task<IActionResult> Index(string Search, string Filter, SortCriteria Sort = SortCriteria.LastName, int Page = 1, int PageSize = 10)
+        // GET: Programme
+        public async Task<IActionResult> Index(string Search, SortCriteria Sort = SortCriteria.Name, int Page = 1, int PageSize = 10)
         {
-            IQueryable<Supervisor> query = _context.supervisors;
-            query = (Search != null) ? query.Where(m => (m.LastName.Contains(Search))) : query;
+            IQueryable<Programme> query = _context.programme;
+            query = (Search != null) ? query.Where(m => (m.Name.Contains(Search))) : query;
 
             switch (Sort)
             {
-                case SortCriteria.FirstName:
-                    query = query.OrderBy(m => m.FirstName);
-                    break;
-                case SortCriteria.LastName:
-                    query = query.OrderBy(m => m.LastName);
+                case SortCriteria.Name:
+                    query = query.OrderBy(m => m.Name);
                     break;
                 default:
-                    query = query.OrderBy(m => m.Active);
+                    query = query.OrderBy(m => m.Name);
                     break;
             }
 
@@ -52,8 +46,7 @@ namespace AweV1.Controllers
             Page = (Page < 1) ? 1 : Page;
 
             ViewBag.Search = Search;
-            ViewBag.Filter = Filter;
-            ViewBag.FilterValues = new SelectList(await _context.thesis.Select(m => m.Type).Distinct().ToListAsync());
+            ViewBag.FilterValues = new SelectList(await _context.programme.Select(m => m.Name).Distinct().ToListAsync());
             ViewBag.Sort = Sort;
             ViewBag.Page = Page;
             ViewBag.PageTotal = PageTotal;
@@ -62,7 +55,7 @@ namespace AweV1.Controllers
             return View(await query.Skip(PageSize * (Page - 1)).Take(PageSize).ToListAsync());
         }
 
-        // GET: Supervisor/Details/5
+        // GET: Programme/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -70,41 +63,41 @@ namespace AweV1.Controllers
                 return NotFound();
             }
 
-            var supervisor = await _context.supervisors
+            var programme = await _context.programme
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (supervisor == null)
+            if (programme == null)
             {
                 return NotFound();
             }
 
-            return View(supervisor);
+            return View(programme);
         }
 
-        // GET: Supervisor/Create
+        // GET: Programme/Create
         [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Supervisor/Create
+        // POST: Programme/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Active,Email")] Supervisor supervisor)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Programme programme)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(supervisor);
+                _context.Add(programme);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(supervisor);
+            return View(programme);
         }
 
-        // GET: Supervisor/Edit/5
+        // GET: Programme/Edit/5
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -113,23 +106,23 @@ namespace AweV1.Controllers
                 return NotFound();
             }
 
-            var supervisor = await _context.supervisors.FindAsync(id);
-            if (supervisor == null)
+            var programme = await _context.programme.FindAsync(id);
+            if (programme == null)
             {
                 return NotFound();
             }
-            return View(supervisor);
+            return View(programme);
         }
 
-        // POST: Supervisor/Edit/5
+        // POST: Programme/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Active,Email")] Supervisor supervisor)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Programme programme)
         {
-            if (id != supervisor.Id)
+            if (id != programme.Id)
             {
                 return NotFound();
             }
@@ -138,12 +131,12 @@ namespace AweV1.Controllers
             {
                 try
                 {
-                    _context.Update(supervisor);
+                    _context.Update(programme);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!SupervisorExists(supervisor.Id))
+                    if (!ProgrammeExists(programme.Id))
                     {
                         return NotFound();
                     }
@@ -154,10 +147,10 @@ namespace AweV1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(supervisor);
+            return View(programme);
         }
 
-        // GET: Supervisor/Delete/5
+        // GET: Programme/Delete/5
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -166,31 +159,31 @@ namespace AweV1.Controllers
                 return NotFound();
             }
 
-            var supervisor = await _context.supervisors
+            var programme = await _context.programme
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (supervisor == null)
+            if (programme == null)
             {
                 return NotFound();
             }
 
-            return View(supervisor);
+            return View(programme);
         }
 
-        // POST: Supervisor/Delete/5
+        // POST: Programme/Delete/5
         [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var supervisor = await _context.supervisors.FindAsync(id);
-            _context.supervisors.Remove(supervisor);
+            var programme = await _context.programme.FindAsync(id);
+            _context.programme.Remove(programme);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool SupervisorExists(int id)
+        private bool ProgrammeExists(int id)
         {
-            return _context.supervisors.Any(e => e.Id == id);
+            return _context.programme.Any(e => e.Id == id);
         }
     }
 }

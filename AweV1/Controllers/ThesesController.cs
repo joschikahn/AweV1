@@ -72,6 +72,7 @@ namespace AweV1.Controllers
             ViewBag.Page = Page;
             ViewBag.PageTotal = PageTotal;
             ViewBag.PageSize = PageSize;
+            ViewBag.supervisor = _context.supervisors;
 
             return View(await query.Skip(PageSize * (Page - 1)).Take(PageSize).ToListAsync());
         }
@@ -86,13 +87,16 @@ namespace AweV1.Controllers
                
             var thesis = await _context.thesis
                 .Include(t => t.Supervisor)
+                .Include(t => t.Programme)
                 .FirstOrDefaultAsync(m => m.Id == id);
            
            if (thesis == null)
             {
                 return NotFound();
             }
-
+            ViewData["SupervisorId"] = new SelectList(_context.supervisors, "Id", "LastName");
+            ViewBag.supervisor = _context.supervisors;
+            ViewBag.programme = _context.programme;
             return View(thesis);
         }
 
@@ -101,6 +105,7 @@ namespace AweV1.Controllers
         public IActionResult Create()
         {
             ViewData["SupervisorId"] = new SelectList(_context.supervisors, "Id", "LastName");
+            ViewData["ProgrammId"] = new SelectList(_context.programme, "Id", "Name");
             return View();
         }
 
@@ -110,7 +115,7 @@ namespace AweV1.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> Create([Bind("Id,LastModified,Title,Description,Status,Registration,Filing,Type,Summary,Bachelor,Master,StudentFirstName,StudentLastName,Email,StudentID,Strengths,Weaknesses,Evaluation,ContentVal,LayoutVal,StructureVal,StyleVal,LiteratureVal,DifficultyVal,NoveltyVal,RichnessVal,ContentWt,LayoutWt,StyleWt,LiteratureWt,StructureWt,DifficultyWt,NoveltyWt,RichnessWt,Grade,SupervisorId")] Thesis thesis)
+        public async Task<IActionResult> Create([Bind("Id,LastModified,Title,Description,ProgrammId,Status,Registration,Filing,Type,Summary,Bachelor,Master,StudentFirstName,StudentLastName,Email,StudentID,Strengths,Weaknesses,Evaluation,ContentVal,LayoutVal,StructureVal,StyleVal,LiteratureVal,DifficultyVal,NoveltyVal,RichnessVal,ContentWt,LayoutWt,StyleWt,LiteratureWt,StructureWt,DifficultyWt,NoveltyWt,RichnessWt,Grade,SupervisorId")] Thesis thesis)
         {
             if (ModelState.IsValid)
             {
@@ -119,6 +124,7 @@ namespace AweV1.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["SupervisorId"] = new SelectList(_context.supervisors, "Id", "LastName");
+            ViewData["ProgrammId"] = new SelectList(_context.programme, "Id", "Name");
             return View(thesis);
         }
 
@@ -136,6 +142,8 @@ namespace AweV1.Controllers
             {
                 return NotFound();
             }
+            ViewData["SupervisorId"] = new SelectList(_context.supervisors, "Id", "LastName");
+            ViewData["ProgrammId"] = new SelectList(_context.programme, "Id", "Name");
             return View(thesis);
         }
 
@@ -145,7 +153,7 @@ namespace AweV1.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,LastModified,Title,Description,Status,Registration,Filing,Type,Summary,Bachelor,Master,StudentFirstName,StudentLastName,Email,StudentID,Strengths,Weaknesses,Evaluation,ContentVal,LayoutVal,StructureVal,StyleVal,LiteratureVal,DifficultyVal,NoveltyVal,RichnessVal,ContentWt,LayoutWt,StyleWt,LiteratureWt,StructureWt,DifficultyWt,NoveltyWt,RichnessWt,Grade")] Thesis thesis)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,LastModified,SupervisorId,ProgrammId,Title,Description,Status,Registration,Filing,Type,Summary,Bachelor,Master,StudentFirstName,StudentLastName,Email,StudentID,Strengths,Weaknesses,Evaluation,ContentVal,LayoutVal,StructureVal,StyleVal,LiteratureVal,DifficultyVal,NoveltyVal,RichnessVal,ContentWt,LayoutWt,StyleWt,LiteratureWt,StructureWt,DifficultyWt,NoveltyWt,RichnessWt,Grade")] Thesis thesis)
         {
             if (id != thesis.Id)
             {
@@ -172,6 +180,8 @@ namespace AweV1.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["SupervisorId"] = new SelectList(_context.supervisors, "Id", "LastName");
+            ViewData["ProgrammId"] = new SelectList(_context.programme, "Id", "Name");
             return View(thesis);
         }
 

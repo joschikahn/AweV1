@@ -1,0 +1,54 @@
+﻿@model AweV1.Models.Programme
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+    <style>
+        .programmclass {
+            padding-left: 10px;
+        }
+
+        .formular {
+            padding: 20px;
+        }
+
+        .panel-default > .panel-heading {
+            background-color: #BFD2FA;
+        }
+    </style>
+
+<h2>Programme: Create</h2>
+
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="programmclass">
+                    <h4>Programm</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="formular">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+</form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

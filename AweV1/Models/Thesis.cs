@@ -149,8 +149,11 @@ namespace AweV1.Models
 
 
         //Fremdschlüssel
-        public int? SupervisorId { get; set; }
+        [Required(ErrorMessage = "Bitte geben Sie den Supervisor an!")]
+        public int SupervisorId { get; set; }
         public Supervisor Supervisor { get; set; }
+        [Required(ErrorMessage = "Bitte geben Sie ein Programm an!")]
+        public int ProgrammId { get; set; }
         public Programme Programme { get; set; }
 
 
