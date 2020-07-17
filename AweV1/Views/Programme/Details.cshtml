@@ -4,20 +4,54 @@
     ViewData["Title"] = "Details";
 }
 
-<h2>Details</h2>
+    <style>
+        .panel-default > .panel-heading {
+            background-color: #BFD2FA;
+        }
+    </style>
 
-<div>
-    <h4>Programme</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-    </dl>
+<h2>Programme: Details</h2>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="allgemeinclass">
+                <div class="col-xs-6">
+                    <h4>Programm</h4>
+                </div>
+                <div class="col-xs-6">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-bordered">
+        <tr>
+            <th class="text-left" style="width: 50%">
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th class="text-left" style="width: 50%">
+                @Html.DisplayFor(model => model.Name)
+            </th>
+        </tr>
+    </table>
 </div>
+
+<!--     <div>
+         <h4>Programme</h4>
+         <hr />
+         <dl class="dl-horizontal">
+             <dt>
+                 @Html.DisplayNameFor(model => model.Name)
+             </dt>
+             <dd>
+                 @Html.DisplayFor(model => model.Name)
+             </dd>
+         </dl>
+     </div> -->
+
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>

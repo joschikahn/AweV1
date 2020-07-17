@@ -72,6 +72,7 @@ namespace AweV1.Controllers
             ViewBag.Page = Page;
             ViewBag.PageTotal = PageTotal;
             ViewBag.PageSize = PageSize;
+            ViewBag.supervisor = _context.supervisors;
 
             return View(await query.Skip(PageSize * (Page - 1)).Take(PageSize).ToListAsync());
         }

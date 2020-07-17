@@ -69,7 +69,13 @@
                         @Html.DisplayFor(modelItem => item.Status)
                     </td>
                     <td style="vertical-align: middle">
-                        @Html.DisplayFor(modelItem => item.Supervisor)
+                        @foreach (var supervisor in ViewBag.supervisor)
+                        {
+                            if (supervisor.Id == item.SupervisorId)
+                            {
+                                @supervisor.LastName;
+                            }
+                        }
                     </td>
                     <td style="vertical-align: middle">
                         @Html.DisplayFor(modelItem => item.Registration)
