@@ -137,14 +137,14 @@
                     <th>
                         <div class="form-group">
                             <label asp-for="ContentVal" class="control-label"></label>
-                            <input asp-for="ContentVal" class="form-control" />
+                            <input asp-for="ContentVal" class="form-control" id="ContentVal"/>
                             <span asp-validation-for="ContentVal" class="text-danger"></span>
                         </div>
                     </th>
                     <th>
                         <div class="form-group">
                             <label asp-for="ContentWt" class="control-label"></label>
-                            <input asp-for="ContentWt" class="form-control" />
+                            <input asp-for="ContentWt" class="form-control" id="ContentWt"/>
                             <span asp-validation-for="ContentWt" class="text-danger"></span>
                         </div>
                     </th>
@@ -153,7 +153,7 @@
                     <th>
                         <div class="form-group">
                             <label asp-for="LayoutVal" class="control-label"></label>
-                            <input asp-for="LayoutVal" class="form-control" />
+                            <input asp-for="LayoutVal" class="form-control" id="LayoutVal"/>
                             <span asp-validation-for="LayoutVal" class="text-danger"></span>
                         </div>
                     </th>
@@ -169,7 +169,7 @@
                     <th>
                         <div class="form-group">
                             <label asp-for="StructureVal" class="control-label"></label>
-                            <input asp-for="StructureVal" class="form-control" />
+                            <input asp-for="StructureVal" class="form-control" id="StructureVal"/>
                             <span asp-validation-for="StructureVal" class="text-danger"></span>
                         </div>
                     </th>
@@ -185,14 +185,14 @@
                     <th>
                         <div class="form-group">
                             <label asp-for="StyleVal" class="control-label"></label>
-                            <input asp-for="StyleVal" class="form-control" />
+                            <input asp-for="StyleVal" class="form-control" id="StyleVal"/>
                             <span asp-validation-for="StyleVal" class="text-danger"></span>
                         </div>
                     </th>
                     <th>
                         <div class="form-group">
                             <label asp-for="StyleWt" class="control-label"></label>
-                            <input asp-for="StyleWt" class="form-control" />
+                            <input asp-for="StyleWt" class="form-control" id="StyleWt"/>
                             <span asp-validation-for="StyleWt" class="text-danger"></span>
                         </div>
                     </th>
@@ -201,7 +201,7 @@
                     <th>
                         <div class="form-group">
                             <label asp-for="LiteratureVal" class="control-label"></label>
-                            <input asp-for="LiteratureVal" class="form-control" />
+                            <input asp-for="LiteratureVal" class="form-control" id="LiteratureVal"/>
                             <span asp-validation-for="LiteratureVal" class="text-danger"></span>
                         </div>
                     </th>
@@ -217,7 +217,7 @@
                     <th>
                         <div class="form-group">
                             <label asp-for="DifficultyVal" class="control-label"></label>
-                            <input asp-for="DifficultyVal" class="form-control" />
+                            <input asp-for="DifficultyVal" class="form-control" id="DifficultyVal"/>
                             <span asp-validation-for="DifficultyVal" class="text-danger"></span>
                         </div>
                     </th>
@@ -233,7 +233,7 @@
                     <th>
                         <div class="form-group">
                             <label asp-for="NoveltyVal" class="control-label"></label>
-                            <input asp-for="NoveltyVal" class="form-control" />
+                            <input asp-for="NoveltyVal" class="form-control" id="NoveltyVal"/>
                             <span asp-validation-for="NoveltyVal" class="text-danger"></span>
                         </div>
                     </th>
@@ -249,7 +249,7 @@
                     <th>
                         <div class="form-group">
                             <label asp-for="RichnessVal" class="control-label"></label>
-                            <input asp-for="RichnessVal" class="form-control" />
+                            <input asp-for="RichnessVal" class="form-control" id="RichnessVal"/>
                             <span asp-validation-for="RichnessVal" class="text-danger"></span>
                         </div>
                     </th>
@@ -282,11 +282,17 @@
                 </div>
             </div>
         </div>
+
+
         <table class="table table-bordered">
             <tr>
                 <th>
-                    Notenvorschlag
+                    <input type="button" value="Notenvorschlag" class="btn btn-default pull-left" onclick="notenVorschlag()">
+                    <div class=" form-group"></div>
+                    <label for="Ergebnis">Ergebnis</label>
+                    <input type="text" class="form-control" id="Ergebnis" readonly />
                 </th>
+
                 <th>
                     <div class="form-group">
                         <label asp-for="Grade" class="control-label"></label>
@@ -298,6 +304,39 @@
         </table>
 
 </form>
+<script>
+    function notenVorschlag() {
+        var content = document.getElementById("ContentVal").value;
+        var layout = document.getElementById("LayoutVal").value;
+        var structure = document.getElementById("StructureVal").value;
+        var style = document.getElementById("StyleVal").value;
+        var literature = document.getElementById("LiteratureVal").value;
+        var difficulty = document.getElementById("DifficultyVal").value;
+        var novelty = document.getElementById("NoveltyVal").value;
+        var richness = document.getElementById("RichnessVal").value;
+
+        var res;
+        var zwischenergebnis;
+
+        var contentw = document.getElementById("ContentWt").value;
+        var layoutw = document.getElementById("LayoutWt").value;
+        var structurew = document.getElementById("StructureWt").value;
+        var stylew = document.getElementById("StyleWt").value;
+        var literaturew = document.getElementById("LiteratureWt").value;
+        var difficultyw = document.getElementById("DifficultyWt").value;
+        var noveltyw = document.getElementById("NoveltyWt").value;
+        var richnessw = document.getElementById("RichnessWt").value;
+
+
+
+        
+
+        zwischenergebnis = (Number(content * contentw) + Number(layout * layoutw) + Number(structure * structurew) + Number(style * stylew) + Number(literature * literaturew) + Number(difficulty * difficultyw) + Number(novelty * noveltyw) + Number(richness * richnessw));
+        res = (zwischenergebnis / 100).toFixed(2);
+        document.getElementById("Ergebnis").value = res
+        
+    }
+</script>
 </div>
 
 
