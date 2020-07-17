@@ -12,6 +12,12 @@ namespace AweV1.Models
 {
     public class ProgrammeController : Controller
     {
+
+        public enum SortCriteria
+        {
+            Name
+        }
+
         private readonly AppDbContext _context;
 
         public ProgrammeController(AppDbContext context)
@@ -20,9 +26,33 @@ namespace AweV1.Models
         }
 
         // GET: Programme
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string Search, SortCriteria Sort = SortCriteria.Name, int Page = 1, int PageSize = 10)
         {
-            return View(await _context.programme.ToListAsync());
+            IQueryable<Programme> query = _context.programme;
+            query = (Search != null) ? query.Where(m => (m.Name.Contains(Search))) : query;
+
+            switch (Sort)
+            {
+                case SortCriteria.Name:
+                    query = query.OrderBy(m => m.Name);
+                    break;
+                default:
+                    query = query.OrderBy(m => m.Name);
+                    break;
+            }
+
+            int PageTotal = ((await query.CountAsync()) + PageSize - 1) / PageSize;
+            Page = (Page > PageTotal) ? PageTotal : Page;
+            Page = (Page < 1) ? 1 : Page;
+
+            ViewBag.Search = Search;
+            ViewBag.FilterValues = new SelectList(await _context.programme.Select(m => m.Name).Distinct().ToListAsync());
+            ViewBag.Sort = Sort;
+            ViewBag.Page = Page;
+            ViewBag.PageTotal = PageTotal;
+            ViewBag.PageSize = PageSize;
+
+            return View(await query.Skip(PageSize * (Page - 1)).Take(PageSize).ToListAsync());
         }
 
         // GET: Programme/Details/5

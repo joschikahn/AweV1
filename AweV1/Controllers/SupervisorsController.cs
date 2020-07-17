@@ -13,6 +13,14 @@ namespace AweV1.Controllers
 {
     public class SupervisorController : Controller
     {
+
+        public enum SortCriteria
+        {
+            FirstName,
+            LastName,
+            Active
+        }
+
         private readonly AppDbContext _context;
 
         public SupervisorController(AppDbContext context)
@@ -21,9 +29,37 @@ namespace AweV1.Controllers
         }
 
         // GET: Supervisor
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string Search, string Filter, SortCriteria Sort = SortCriteria.LastName, int Page = 1, int PageSize = 10)
         {
-            return View(await _context.supervisors.ToListAsync());
+            IQueryable<Supervisor> query = _context.supervisors;
+            query = (Search != null) ? query.Where(m => (m.LastName.Contains(Search))) : query;
+
+            switch (Sort)
+            {
+                case SortCriteria.FirstName:
+                    query = query.OrderBy(m => m.FirstName);
+                    break;
+                case SortCriteria.LastName:
+                    query = query.OrderBy(m => m.LastName);
+                    break;
+                default:
+                    query = query.OrderBy(m => m.Active);
+                    break;
+            }
+
+            int PageTotal = ((await query.CountAsync()) + PageSize - 1) / PageSize;
+            Page = (Page > PageTotal) ? PageTotal : Page;
+            Page = (Page < 1) ? 1 : Page;
+
+            ViewBag.Search = Search;
+            ViewBag.Filter = Filter;
+            ViewBag.FilterValues = new SelectList(await _context.thesis.Select(m => m.Type).Distinct().ToListAsync());
+            ViewBag.Sort = Sort;
+            ViewBag.Page = Page;
+            ViewBag.PageTotal = PageTotal;
+            ViewBag.PageSize = PageSize;
+
+            return View(await query.Skip(PageSize * (Page - 1)).Take(PageSize).ToListAsync());
         }
 
         // GET: Supervisor/Details/5

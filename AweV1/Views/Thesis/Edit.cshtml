@@ -31,7 +31,7 @@
     }
 </style>
 
-<h2>Edit</h2>
+<h2>Thesis: Edit</h2>
 
 <form asp-action="Edit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -54,8 +54,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <!-- Bin ich mir nicht genau sicher, ob Zeile 58 korrekt ist (aber funktioniert :D) -->
-                <textarea class="form-control" asp-for="Description" rows="3"></textarea>
+                <textarea asp-for="Description" class="form-control"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -98,6 +97,16 @@
                 <label asp-for="Status" class="control-label"></label>
                 <select asp-for="Status" asp-items="@Html.GetEnumSelectList(typeof(Status))" class="form-control"></select>
                 <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Registration" class="control-label"></label>
+                <input type="date" asp-for="Registration" class="form-control" />
+                <span asp-validation-for="Registration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Filing" class="control-label"></label>
+                <input type="date" asp-for="Filing" class="form-control" />
+                <span asp-validation-for="Filing" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="StudentFirstName" class="control-label"></label>

@@ -15,7 +15,7 @@
     }
 </script>
 
-<h2>Index</h2>
+<h2>Thesis: Index</h2>
 
 <form id="Form" asp-action="Index" method="get">
 
@@ -48,11 +48,12 @@
 
         <table class="table table-bordered">
             <thead>
-            <th class="text-left" style="width: 25%">@Html.DisplayNameFor(model => model.Title)</th>
-            <th style="width: 7%">@Html.DisplayNameFor(model => model.Status)</th>
-            <th style="width: 15%">@Html.DisplayNameFor(model => model.Registration)</th>
-            <th class="text-left" style="width: 15%">@Html.DisplayNameFor(model => model.Filing)</th>
-            <th class="text-left" style="width: 7%">@Html.DisplayNameFor(model => model.Type)</th>
+            <th class="text-left" style="width: 17%">@Html.DisplayNameFor(model => model.Title)</th>
+            <th style="width: 8%">@Html.DisplayNameFor(model => model.Status)</th>
+            <th style="width: 10%">@Html.DisplayNameFor(model => model.Supervisor)</th>
+            <th style="width: 14%">@Html.DisplayNameFor(model => model.Registration)</th>
+            <th class="text-left" style="width: 14%">@Html.DisplayNameFor(model => model.Filing)</th>
+            <th class="text-left" style="width: 5%">@Html.DisplayNameFor(model => model.Type)</th>
             <th class="text-left" style="width: 10%">@Html.DisplayNameFor(model => model.StudentID)</th>
             <tr>
 
@@ -66,6 +67,9 @@
                     </td>
                     <td style="vertical-align: middle">
                         @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td style="vertical-align: middle">
+                        @Html.DisplayFor(modelItem => item.Supervisor)
                     </td>
                     <td style="vertical-align: middle">
                         @Html.DisplayFor(modelItem => item.Registration)
