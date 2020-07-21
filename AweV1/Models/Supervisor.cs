@@ -10,13 +10,21 @@ namespace AweV1.Models
     public class Supervisor
     {
         public int Id { get; set; }
+       
         [Required(ErrorMessage = "Bitte Vorname eingeben!")]
-        public string FirstName { [Display(Name = "Vorname")] get; set; }
+        [Display (Name ="Vorname")]
+        public string FirstName { get; set; }
+        
         [Required(ErrorMessage = "Bitte Nachname eingeben!")]
-        public string LastName { [Display(Name = "Nachname")] get; set; }
-        public Boolean Active { [Display(Name = "aktiv")] get; set; }
+        [Display(Name = "Nachname")]
+        public string LastName { get; set; }
+      
+        [Display(Name = "Aktiv")]
+        public Boolean Active { get; set; }
+       
         [Required(ErrorMessage = "Bitte E-Mail eingeben!")]
-        public string Email { [Display(Name = "E-Mail")] get; set; }
+        [Display(Name = "E-Mail")]
+        public string Email {  get; set; }
 
         // 1:m Verbindung zu Thesis
         public ICollection<Thesis> thesisList { get; set; }
