@@ -11,6 +11,7 @@ using AweV1.Models;
 
 namespace AweV1.Controllers
 {
+    [Authorize(Roles = "Administrator")]
     public class SupervisorController : Controller
     {
 
@@ -81,7 +82,6 @@ namespace AweV1.Controllers
         }
 
         // GET: Supervisor/Create
-        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             return View();
@@ -90,7 +90,6 @@ namespace AweV1.Controllers
         // POST: Supervisor/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Active,Email")] Supervisor supervisor)
@@ -105,7 +104,6 @@ namespace AweV1.Controllers
         }
 
         // GET: Supervisor/Edit/5
-        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -124,7 +122,6 @@ namespace AweV1.Controllers
         // POST: Supervisor/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Active,Email")] Supervisor supervisor)
@@ -158,7 +155,6 @@ namespace AweV1.Controllers
         }
 
         // GET: Supervisor/Delete/5
-        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -177,7 +173,6 @@ namespace AweV1.Controllers
         }
 
         // POST: Supervisor/Delete/5
-        [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

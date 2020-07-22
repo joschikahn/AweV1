@@ -3,6 +3,8 @@
 using Rotativa.AspNetCore;
 
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -11,10 +13,11 @@ using Microsoft.EntityFrameworkCore;
 using AweV1.Data;
 using AweV1.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AweV1.Controllers
 {
-    public class ThesisController : Controller
+    public class ThesisController : Controller, IValidatableObject
     {
         public enum SortCriteria
         {
@@ -34,7 +37,8 @@ namespace AweV1.Controllers
         }
 
         // GET: Thesis
-        public async Task<IActionResult> Index(string Search, string Filter, SortCriteria Sort = SortCriteria.StudentID, int Page = 1, int PageSize = 10)
+        public async Task<IActionResult> Index(string Search, string Filter, SortCriteria Sort = SortCriteria.StudentID,
+            int Page = 1, int PageSize = 10)
         {
             IQueryable<Thesis> query = _context.thesis;
             query = (Search != null) ? query.Where(m => (m.Title.Contains(Search))) : query;
@@ -76,7 +80,8 @@ namespace AweV1.Controllers
             ViewBag.PageTotal = PageTotal;
             ViewBag.PageSize = PageSize;
             ViewBag.supervisor = _context.supervisors;
-
+            if (!this.User.IsInRole("Administrator"))
+                return View("publicThesis",await query.Skip(PageSize * (Page - 1)).Take(PageSize).ToListAsync());
             return View(await query.Skip(PageSize * (Page - 1)).Take(PageSize).ToListAsync());
         }
 
@@ -87,16 +92,17 @@ namespace AweV1.Controllers
             {
                 return NotFound();
             }
-               
+
             var thesis = await _context.thesis
                 .Include(t => t.Supervisor)
                 .Include(t => t.Programme)
                 .FirstOrDefaultAsync(m => m.Id == id);
-           
-           if (thesis == null)
+
+            if (thesis == null)
             {
                 return NotFound();
             }
+
             ViewData["SupervisorId"] = new SelectList(_context.supervisors, "Id", "LastName");
             ViewBag.supervisor = _context.supervisors;
             ViewBag.programme = _context.programme;
@@ -106,16 +112,16 @@ namespace AweV1.Controllers
         // Rotativa
         public ActionResult ThesisDetailPDF()
         {
-            return new ViewAsPdf ("Details");
+            return new ViewAsPdf("Details");
         }
 
 
 
         // GET: Thesis/Create
-        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             ViewData["SupervisorId"] = new SelectList(_context.supervisors, "Id", "LastName");
+            
             ViewData["ProgrammId"] = new SelectList(_context.programme, "Id", "Name");
             return View();
         }
@@ -125,22 +131,25 @@ namespace AweV1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> Create([Bind("Id,LastModified,Title,Description,ProgrammId,Status,Registration,Filing,Type,Summary,Bachelor,Master,StudentFirstName,StudentLastName,Email,StudentID,Strengths,Weaknesses,Evaluation,ContentVal,LayoutVal,StructureVal,StyleVal,LiteratureVal,DifficultyVal,NoveltyVal,RichnessVal,ContentWt,LayoutWt,StyleWt,LiteratureWt,StructureWt,DifficultyWt,NoveltyWt,RichnessWt,Grade,SupervisorId")] Thesis thesis)
+        public async Task<IActionResult> Create(
+            [Bind(
+                "Id,LastModified,Title,Description,ProgrammId,Status,Registration,Filing,Type,Summary,Bachelor,Master,StudentFirstName,StudentLastName,Email,StudentID,Strengths,Weaknesses,Evaluation,ContentVal,LayoutVal,StructureVal,StyleVal,LiteratureVal,DifficultyVal,NoveltyVal,RichnessVal,ContentWt,LayoutWt,StyleWt,LiteratureWt,StructureWt,DifficultyWt,NoveltyWt,RichnessWt,Grade,SupervisorId")]
+            Thesis thesis)
         {
             if (ModelState.IsValid)
             {
+                Validate(thesis);
                 _context.Add(thesis);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["SupervisorId"] = new SelectList(_context.supervisors, "Id", "LastName");
             ViewData["ProgrammId"] = new SelectList(_context.programme, "Id", "Name");
             return View(thesis);
         }
 
         // GET: Thesis/Edit/5
-        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -153,6 +162,7 @@ namespace AweV1.Controllers
             {
                 return NotFound();
             }
+
             ViewData["SupervisorId"] = new SelectList(_context.supervisors, "Id", "LastName");
             ViewData["ProgrammId"] = new SelectList(_context.programme, "Id", "Name");
             return View(thesis);
@@ -163,8 +173,10 @@ namespace AweV1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,LastModified,SupervisorId,ProgrammId,Title,Description,Status,Registration,Filing,Type,Summary,Bachelor,Master,StudentFirstName,StudentLastName,Email,StudentID,Strengths,Weaknesses,Evaluation,ContentVal,LayoutVal,StructureVal,StyleVal,LiteratureVal,DifficultyVal,NoveltyVal,RichnessVal,ContentWt,LayoutWt,StyleWt,LiteratureWt,StructureWt,DifficultyWt,NoveltyWt,RichnessWt,Grade")] Thesis thesis)
+        public async Task<IActionResult> Edit(int id,
+            [Bind(
+                "Id,LastModified,SupervisorId,ProgrammId,Title,Description,Status,Registration,Filing,Type,Summary,Bachelor,Master,StudentFirstName,StudentLastName,Email,StudentID,Strengths,Weaknesses,Evaluation,ContentVal,LayoutVal,StructureVal,StyleVal,LiteratureVal,DifficultyVal,NoveltyVal,RichnessVal,ContentWt,LayoutWt,StyleWt,LiteratureWt,StructureWt,DifficultyWt,NoveltyWt,RichnessWt,Grade")]
+            Thesis thesis)
         {
             if (id != thesis.Id)
             {
@@ -189,15 +201,16 @@ namespace AweV1.Controllers
                         throw;
                     }
                 }
+
                 return RedirectToAction(nameof(Index));
             }
+
             ViewData["SupervisorId"] = new SelectList(_context.supervisors, "Id", "LastName");
             ViewData["ProgrammId"] = new SelectList(_context.programme, "Id", "Name");
             return View(thesis);
         }
 
         // GET: Thesis/Delete/5
-        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -218,7 +231,6 @@ namespace AweV1.Controllers
         // POST: Thesis/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var thesis = await _context.thesis.FindAsync(id);
@@ -231,7 +243,80 @@ namespace AweV1.Controllers
         {
             return _context.thesis.Any(e => e.Id == id);
         }
-        
-     
+
+        public IEnumerable<ValidationResult> Validate(Thesis thesis)
+        {
+            if (ModelState.IsValid)
+            {
+                // Sind Gewichtungen 100?
+                if (thesis.ContentWt + thesis.LayoutWt + thesis.StructureWt + thesis.StyleWt + thesis.LiteratureWt +
+                    thesis.DifficultyWt + thesis.NoveltyWt + thesis.RichnessWt != 100)
+                {
+                    int sum = thesis.ContentWt + thesis.LayoutWt + thesis.StructureWt + thesis.StyleWt +
+                              thesis.LiteratureWt + thesis.DifficultyWt + thesis.NoveltyWt + thesis.RichnessWt;
+                    return new ValidationResult[]
+                        {new ValidationResult("Die Summe der Gewichtungen muss 100 sein, aber ist " + sum)};
+                }
+                // Ist Bachelor und/oder Master ausgewählt?
+                else if (thesis.Bachelor == false && thesis.Master == false)
+                {
+                    throw new InvalidDataException("ja ne wähl mal was");
+                }
+                // Ist Anmeldedatum vor Abgabedatum?
+                else if (thesis.Registration > thesis.Filing)
+                {
+                    return new ValidationResult[]
+                        {new ValidationResult("Anmeldedatum muss vor dem Abgabedatum liegen!")};
+
+                }
+                // Was sollte alles eingetragen sein, wenn es Status benotet ist?
+                else if ((thesis.Status == Status.Graded) && (thesis.Grade == Models.Grade.Note_Empty))
+                {
+                    return new ValidationResult[] {new ValidationResult("Bitte Note einfügen!")};
+
+                }
+                else if ((thesis.Status == Status.Graded) && (thesis.NoveltyVal == null || thesis.RichnessVal == null ||
+                                                              thesis.StructureVal == null || thesis.StyleVal == null ||
+                                                              thesis.LiteratureVal == null ||
+                                                              thesis.LayoutVal == null ||
+                                                              thesis.DifficultyVal == null ||
+                                                              thesis.ContentVal == null))
+                {
+                    return new ValidationResult[] {new ValidationResult("Bitte alle Punkte einfügen!")};
+
+                }
+                // Was sollte alles eingetragen sein, wenn der Status registered, filed oder graded ist?
+                else if ((thesis.Status == Status.Registered || thesis.Status == Status.Filed ||
+                          thesis.Status == Status.Graded) && thesis.Registration == null)
+                {
+                    return new ValidationResult[] {new ValidationResult("Anmeldedatum einfügen!")};
+
+                }
+                else if ((thesis.Status == Status.Registered || thesis.Status == Status.Filed ||
+                          thesis.Status == Status.Graded) &&
+                         (thesis.StudentID == null || thesis.StudentFirstName == null ||
+                          thesis.StudentLastName == null || thesis.Email == null))
+                {
+                    return new ValidationResult[]
+                    {
+                        new ValidationResult(
+                            "Bitte Daten von Student eingeben (Matrikelnummer, Vorname, Nachname, E-Mail)!")
+                    };
+
+                }
+                // Was sollte eingetragen sein, wenn der Status filed ist?
+                else if ((thesis.Status == Status.Filed || thesis.Status == Status.Graded) && thesis.Filing == null)
+                {
+                    return new ValidationResult[] {new ValidationResult("Bitte Abgabedatum einfügen!")};
+                }
+            }
+
+            return new ValidationResult[] { };
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
