@@ -307,9 +307,9 @@
             <tr>
                 <th>
                     <input type="button" value="Notenvorschlag" class="btn btn-default pull-left" onclick="notenVorschlag()">
-                    <div class=" form-group"></div>
+                    <div class=" form-group"></div> <br/>
                     <label for="Ergebnis">Ergebnis</label>
-                    <input type="text" class="form-control" id="Ergebnis" readonly />
+                    <input type="text" class="form-control" id="Ergebnis" size="5" maxlength="8" readonly />
                 </th>
 
                 <th>
@@ -325,6 +325,8 @@
             <input type="submit" value="Save" class="btn btn-default" />
         </div>
 </form>
+
+
 <script>
     function notenVorschlag() {
         var content = document.getElementById("ContentVal").value;
@@ -349,14 +351,40 @@
         var richnessw = document.getElementById("RichnessWt").value;
 
 
-
-        
-
+       
         zwischenergebnis = (Number(content * contentw) + Number(layout * layoutw) + Number(structure * structurew) + Number(style * stylew) + Number(literature * literaturew) + Number(difficulty * difficultyw) + Number(novelty * noveltyw) + Number(richness * richnessw));
         res = (zwischenergebnis / 100).toFixed(2);
         document.getElementById("Ergebnis").value = res
+
+     
         
+        if (document.getElementById("ContentVal").value == "") {
+            alert("alert");
+        }
+        if (document.getElementById("LayoutVal").value == "") {
+            alert("alert");
+        }
+        if (document.getElementById("StructureVal").value == "") {
+            alert("alert");
+        }
+        if (document.getElementById("StyleVal").value == "") {
+            alert("alert");
+        }
+        if (document.getElementById("LiteratureVal").value == "") {
+            alert("alert");
+        }
+        if (document.getElementById("DifficultyVal").value == "") {
+            alert("alert");
+        }
+        if (document.getElementById("NoveltyVal").value == "") {
+            alert("alert");
+        }
+        if (document.getElementById("RichnessVal").value == "") {
+            alert("alert");
+        }
     }
+
+  
 </script>
 </div>
 
