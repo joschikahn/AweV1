@@ -1,14 +1,9 @@
 ﻿//Joschi du trottel
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AweV1.Areas.Identity.Data;
 using AweV1.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Rotativa;
 
 namespace AweV1.Data
 {
@@ -18,7 +13,7 @@ namespace AweV1.Data
             : base(options)
         {
         }
-        //public AppDbContext() { }
+       
 
         public DbSet<Thesis> thesis { get; set; }
         public DbSet<Supervisor> supervisors { get; set; }

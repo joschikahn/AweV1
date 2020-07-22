@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+
+using Rotativa.AspNetCore;
+
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -99,6 +102,14 @@ namespace AweV1.Controllers
             ViewBag.programme = _context.programme;
             return View(thesis);
         }
+
+        // Rotativa
+        public ActionResult ThesisDetailPDF()
+        {
+            return new ViewAsPdf ("Details");
+        }
+
+
 
         // GET: Thesis/Create
         [Authorize(Roles = "Administrator")]
@@ -220,5 +231,7 @@ namespace AweV1.Controllers
         {
             return _context.thesis.Any(e => e.Id == id);
         }
+        
+     
     }
 }
