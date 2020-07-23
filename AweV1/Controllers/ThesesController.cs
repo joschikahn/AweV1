@@ -21,11 +21,19 @@ namespace AweV1.Controllers
     {
         public enum SortCriteria
         {
+            [Display(Name = "Titel")]
             Title,
+            [Display(Name = "Status")]
             Status,
+            [Display(Name = "Betreuer")]
+            Supervisor,
+            [Display(Name = "Anmeldung")]
             Registration,
+            [Display(Name = "Abgabe")]
             Filing,
+            [Display(Name = "Typ")]
             Type,
+            [Display(Name = "Matrikelnummer")]
             StudentID
         }
 
@@ -53,6 +61,9 @@ namespace AweV1.Controllers
                     break;
                 case SortCriteria.Status:
                     query = query.OrderBy(m => m.Status);
+                    break;
+                case SortCriteria.Supervisor:
+                    query = query.OrderBy(m => m.Supervisor);
                     break;
                 case SortCriteria.Registration:
                     query = query.OrderBy(m => m.Registration);
