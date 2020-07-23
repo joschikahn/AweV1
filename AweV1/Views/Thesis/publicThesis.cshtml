@@ -1,8 +1,63 @@
 ﻿@model IEnumerable<AweV1.Models.Thesis>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Public";
 }
+
+<!--noch nicht fertig!-->
+<style>
+
+    /* Dropdown Button */
+    .dropbtn {
+        /*background-color: #3498DB;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;*/
+    }
+
+        /* Dropdown button on hover & focus 
+        .dropbtn:hover, .dropbtn:focus {
+            background-color: #2980B9;
+        }*/
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        /*background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;*/
+    }
+
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+            /* Change color of dropdown links on hover 
+            .dropdown-content a:hover {
+                background-color: #ddd
+            }*/
+
+    /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+    .show {
+        display: block;
+    }
+
+    
+</style>
 
 <script>
     function resetForm() {
@@ -12,8 +67,28 @@
         document.getElementById("Page").value = null;
         document.getElementById("PageSize").value = null;
         document.getElementById("Form").submit();
-    }     
-  
+    }
+
+    /* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
 </script>
 
 <h2>Thesis: Index</h2>
@@ -51,49 +126,31 @@
 
         <table class="table table-bordered">
             <thead>
-            <th class="text-left" style="width: 17%">@Html.DisplayNameFor(model => model.Title)</th>
-            <th style="width: 8%">@Html.DisplayNameFor(model => model.Status)</th>
-            <th style="width: 10%">@Html.DisplayNameFor(model => model.Supervisor)</th>
-            <th style="width: 14%">@Html.DisplayNameFor(model => model.Registration)</th>
-            <th class="text-left" style="width: 14%">@Html.DisplayNameFor(model => model.Filing)</th>
-            <th class="text-left" style="width: 5%">@Html.DisplayNameFor(model => model.Type)</th>
-            <th class="text-left" style="width: 10%">@Html.DisplayNameFor(model => model.StudentID)</th>
+            <th class="text-left">@Html.DisplayNameFor(model => model.Title) (@Html.DisplayNameFor(model => model.Type))</th>
             <tr>
-
-                </thead>
+            </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
-                <tr>
-                    <td style="vertical-align: middle">
-                        @Html.DisplayFor(modelItem => item.Title)
-                    </td>
-                    <td style="vertical-align: middle">
-                        @Html.DisplayFor(modelItem => item.Status)
-                    </td>
-                    <td style="vertical-align: middle">
-                        @foreach (var supervisor in ViewBag.supervisor)
-                        {
-                            if (supervisor.Id == item.SupervisorId)
-                            {
-                                @supervisor.LastName;
-                            }
-                        }
-                    </td>
-                    <td style="vertical-align: middle">
-                        @Html.DisplayFor(modelItem => item.Registration)
-                    </td>
-                    <td style="vertical-align: middle">
-                        @Html.DisplayFor(modelItem => item.Filing)
-                    </td>
-                    <td style="vertical-align: middle">
-                        @Html.DisplayFor(modelItem => item.Type)
-                    </td>
-                    <td style="vertical-align: middle">
-                        @Html.DisplayFor(modelItem => item.StudentID)
-                    </td>
-                </tr>
+                    <tr>
+                        <td class="dropdown">
+                            <input type="button" value="@Html.DisplayFor(modelItem => item.Title)" onclick="myFunction()" class="dropbtn" /> (@Html.DisplayFor(modelItem => item.Type))
+                            <div id="myDropdown" class="dropdown-content">
+                                <a>@Html.DisplayFor(modelItem => item.Description)</a>
+                                <a>@Html.DisplayFor(modelItem => item.Status)</a>                                
+                                    @foreach (var supervisor in ViewBag.supervisor)
+                                    {
+                                        if (supervisor.Id == item.SupervisorId)
+                                        {
+                                            <a href="mailto:@supervisor.Email">@supervisor.LastName</a>
+                                        }
+                                    } 
+                                
+                            </div>
+                        </td>                   
+                    </tr>
                 }
+
             </tbody>
         </table>
 

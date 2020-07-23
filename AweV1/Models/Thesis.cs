@@ -1,14 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AweV1.Models
 {
-    
+
 
     public class Thesis : IValidatableObject
     {
@@ -158,70 +154,70 @@ namespace AweV1.Models
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-           // Sind Gewichtungen 100?
-                if (ContentWt + LayoutWt + StructureWt + StyleWt + LiteratureWt +
-                    DifficultyWt + NoveltyWt + RichnessWt != 100)
-                {
-                    int sum = ContentWt + LayoutWt + StructureWt + StyleWt +
-                              LiteratureWt + DifficultyWt + NoveltyWt + RichnessWt;
-                    return new ValidationResult[]
-                        {new ValidationResult("Die Summe der Gewichtungen muss 100 sein, aber ist " + sum)};
-                }
-                // Ist Bachelor und/oder Master ausgewählt?
-                else if (Bachelor == false && Master == false)
-                {
-                    return new ValidationResult[]
-                        {new ValidationResult("Bitte Bachelor oder Master wählen")};
-                }
-                // Ist Anmeldedatum vor Abgabedatum?
-                else if (Registration > Filing)
-                {
-                    return new ValidationResult[]
-                        {new ValidationResult("Anmeldedatum muss vor dem Abgabedatum liegen!")};
+            // Sind Gewichtungen 100?
+            if (ContentWt + LayoutWt + StructureWt + StyleWt + LiteratureWt +
+                DifficultyWt + NoveltyWt + RichnessWt != 100)
+            {
+                int sum = ContentWt + LayoutWt + StructureWt + StyleWt +
+                          LiteratureWt + DifficultyWt + NoveltyWt + RichnessWt;
+                return new ValidationResult[]
+                    {new ValidationResult("Die Summe der Gewichtungen muss 100 sein, aber ist " + sum)};
+            }
+            // Ist Bachelor und/oder Master ausgewählt?
+            else if (Bachelor == false && Master == false)
+            {
+                return new ValidationResult[]
+                    {new ValidationResult("Bitte Bachelor oder Master wählen")};
+            }
+            // Ist Anmeldedatum vor Abgabedatum?
+            else if (Registration > Filing)
+            {
+                return new ValidationResult[]
+                    {new ValidationResult("Anmeldedatum muss vor dem Abgabedatum liegen!")};
 
-                }
-                // Was sollte alles eingetragen sein, wenn es Status benotet ist?
-                else if ((Status == Status.Graded) && (Grade == Models.Grade.Note_Empty))
-                {
-                    return new ValidationResult[] { new ValidationResult("Bitte Note einfügen!") };
+            }
+            // Was sollte alles eingetragen sein, wenn es Status benotet ist?
+            else if ((Status == Status.Graded) && (Grade == Models.Grade.Note_Empty))
+            {
+                return new ValidationResult[] { new ValidationResult("Bitte Note einfügen!") };
 
-                }
-                else if ((Status == Status.Graded) && (NoveltyVal == null || RichnessVal == null ||
-                                                              StructureVal == null || StyleVal == null ||
-                                                              LiteratureVal == null ||
-                                                              LayoutVal == null ||
-                                                              DifficultyVal == null ||
-                                                              ContentVal == null))
-                {
-                    return new ValidationResult[] { new ValidationResult("Bitte alle Punkte einfügen!") };
+            }
+            else if ((Status == Status.Graded) && (NoveltyVal == null || RichnessVal == null ||
+                                                          StructureVal == null || StyleVal == null ||
+                                                          LiteratureVal == null ||
+                                                          LayoutVal == null ||
+                                                          DifficultyVal == null ||
+                                                          ContentVal == null))
+            {
+                return new ValidationResult[] { new ValidationResult("Bitte alle Punkte einfügen!") };
 
-                }
-                // Was sollte alles eingetragen sein, wenn der Status registered, filed oder graded ist?
-                else if ((Status == Status.Registered || Status == Status.Filed ||
-                          Status == Status.Graded) && Registration == null)
-                {
-                    return new ValidationResult[] { new ValidationResult("Anmeldedatum einfügen!") };
+            }
+            // Was sollte alles eingetragen sein, wenn der Status registered, filed oder graded ist?
+            else if ((Status == Status.Registered || Status == Status.Filed ||
+                      Status == Status.Graded) && Registration == null)
+            {
+                return new ValidationResult[] { new ValidationResult("Anmeldedatum einfügen!") };
 
-                }
-                else if ((Status == Status.Registered || Status == Status.Filed ||
-                          Status == Status.Graded) &&
-                         (StudentID == null || StudentFirstName == null ||
-                          StudentLastName == null || Email == null))
+            }
+            else if ((Status == Status.Registered || Status == Status.Filed ||
+                      Status == Status.Graded) &&
+                     (StudentID == null || StudentFirstName == null ||
+                      StudentLastName == null || Email == null))
+            {
+                return new ValidationResult[]
                 {
-                    return new ValidationResult[]
-                    {
                         new ValidationResult(
                             "Bitte Daten von Student eingeben (Matrikelnummer, Vorname, Nachname, E-Mail)!")
-                    };
+                };
 
-                }
-                // Was sollte eingetragen sein, wenn der Status filed ist?
-                else if ((Status == Status.Filed || Status == Status.Graded) && Filing == null)
-                {
-                    return new ValidationResult[] {new ValidationResult("Bitte Abgabedatum einfügen!")};
-                }
+            }
+            // Was sollte eingetragen sein, wenn der Status filed ist?
+            else if ((Status == Status.Filed || Status == Status.Graded) && Filing == null)
+            {
+                return new ValidationResult[] { new ValidationResult("Bitte Abgabedatum einfügen!") };
+            }
 
-                return new ValidationResult[] { };
+            return new ValidationResult[] { };
         }
     }
     public enum Status

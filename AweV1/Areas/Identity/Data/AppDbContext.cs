@@ -1,9 +1,7 @@
-﻿//Joschi du trottel
-using AweV1.Areas.Identity.Data;
+﻿using AweV1.Areas.Identity.Data;
 using AweV1.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Rotativa;
 
 namespace AweV1.Data
 {
@@ -13,7 +11,7 @@ namespace AweV1.Data
             : base(options)
         {
         }
-       
+
 
         public DbSet<Thesis> thesis { get; set; }
         public DbSet<Supervisor> supervisors { get; set; }

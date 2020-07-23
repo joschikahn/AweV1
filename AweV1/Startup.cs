@@ -1,5 +1,4 @@
 ﻿
-using System.Threading.Tasks;
 using AweV1.Areas.Identity.Data;
 using AweV1.Data;
 using Microsoft.AspNetCore.Builder;
@@ -11,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Rotativa.AspNetCore;
+using System.Threading.Tasks;
 
 namespace AweV1
 {
@@ -74,9 +74,9 @@ namespace AweV1
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            RotativaConfiguration.Setup(env.WebRootPath, "Rotativa"); 
+            RotativaConfiguration.Setup(env.WebRootPath, "Rotativa");
             CreateUsersRoles(um, rm).Wait();
-     
+
         }
 
         private async Task CreateUsersRoles(UserManager<AppUser> um, RoleManager<IdentityRole> rm)

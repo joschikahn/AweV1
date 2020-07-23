@@ -1,5 +1,3 @@
-using System;
-
 namespace AweV1.Models
 {
     public class ErrorViewModel

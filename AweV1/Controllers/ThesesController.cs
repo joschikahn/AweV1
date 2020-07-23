@@ -1,19 +1,16 @@
 ﻿
 
+using AweV1.Data;
+using AweV1.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Rotativa.AspNetCore;
-
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using AweV1.Data;
-using AweV1.Models;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace AweV1.Controllers
 {
@@ -92,7 +89,7 @@ namespace AweV1.Controllers
             ViewBag.PageSize = PageSize;
             ViewBag.supervisor = _context.supervisors;
             if (!this.User.IsInRole("Administrator"))
-                return View("publicThesis",await query.Skip(PageSize * (Page - 1)).Take(PageSize).ToListAsync());
+                return View("publicThesis", await query.Skip(PageSize * (Page - 1)).Take(PageSize).ToListAsync());
             return View(await query.Skip(PageSize * (Page - 1)).Take(PageSize).ToListAsync());
         }
 
@@ -132,7 +129,7 @@ namespace AweV1.Controllers
         public IActionResult Create()
         {
             ViewData["SupervisorId"] = new SelectList(_context.supervisors, "Id", "LastName");
-            
+
             ViewData["ProgrammId"] = new SelectList(_context.programme, "Id", "Name");
             return View();
         }
@@ -283,7 +280,7 @@ namespace AweV1.Controllers
                 // Was sollte alles eingetragen sein, wenn es Status benotet ist?
                 else if ((thesis.Status == Status.Graded) && (thesis.Grade == Models.Grade.Note_Empty))
                 {
-                    return new ValidationResult[] {new ValidationResult("Bitte Note einfügen!")};
+                    return new ValidationResult[] { new ValidationResult("Bitte Note einfügen!") };
 
                 }
                 else if ((thesis.Status == Status.Graded) && (thesis.NoveltyVal == null || thesis.RichnessVal == null ||
@@ -293,14 +290,14 @@ namespace AweV1.Controllers
                                                               thesis.DifficultyVal == null ||
                                                               thesis.ContentVal == null))
                 {
-                    return new ValidationResult[] {new ValidationResult("Bitte alle Punkte einfügen!")};
+                    return new ValidationResult[] { new ValidationResult("Bitte alle Punkte einfügen!") };
 
                 }
                 // Was sollte alles eingetragen sein, wenn der Status registered, filed oder graded ist?
                 else if ((thesis.Status == Status.Registered || thesis.Status == Status.Filed ||
                           thesis.Status == Status.Graded) && thesis.Registration == null)
                 {
-                    return new ValidationResult[] {new ValidationResult("Anmeldedatum einfügen!")};
+                    return new ValidationResult[] { new ValidationResult("Anmeldedatum einfügen!") };
 
                 }
                 else if ((thesis.Status == Status.Registered || thesis.Status == Status.Filed ||
@@ -318,7 +315,7 @@ namespace AweV1.Controllers
                 // Was sollte eingetragen sein, wenn der Status filed ist?
                 else if ((thesis.Status == Status.Filed || thesis.Status == Status.Graded) && thesis.Filing == null)
                 {
-                    return new ValidationResult[] {new ValidationResult("Bitte Abgabedatum einfügen!")};
+                    return new ValidationResult[] { new ValidationResult("Bitte Abgabedatum einfügen!") };
                 }
             }
 
