@@ -149,7 +149,7 @@ namespace AweV1.Migrations
 
                     b.Property<int>("NoveltyWt");
 
-                    b.Property<int?>("ProgrammId");
+                    b.Property<int>("ProgrammId");
 
                     b.Property<int?>("ProgrammeId");
 
@@ -179,7 +179,7 @@ namespace AweV1.Migrations
 
                     b.Property<string>("Summary");
 
-                    b.Property<int?>("SupervisorId");
+                    b.Property<int>("SupervisorId");
 
                     b.Property<string>("Title")
                         .IsRequired();
@@ -315,7 +315,8 @@ namespace AweV1.Migrations
 
                     b.HasOne("AweV1.Models.Supervisor", "Supervisor")
                         .WithMany("thesisList")
-                        .HasForeignKey("SupervisorId");
+                        .HasForeignKey("SupervisorId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

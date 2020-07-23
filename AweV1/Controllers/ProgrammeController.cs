@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace AweV1.Models
 {
+    [Authorize(Roles = "Administrator")]
     public class ProgrammeController : Controller
     {
 
@@ -74,7 +75,6 @@ namespace AweV1.Models
         }
 
         // GET: Programme/Create
-        [Authorize(Roles = "Administrator")]
         public IActionResult Create()
         {
             return View();
@@ -83,7 +83,6 @@ namespace AweV1.Models
         // POST: Programme/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Name")] Programme programme)
@@ -98,7 +97,6 @@ namespace AweV1.Models
         }
 
         // GET: Programme/Edit/5
-        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -117,7 +115,6 @@ namespace AweV1.Models
         // POST: Programme/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [Authorize(Roles = "Administrator")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Programme programme)
@@ -151,7 +148,6 @@ namespace AweV1.Models
         }
 
         // GET: Programme/Delete/5
-        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -170,7 +166,6 @@ namespace AweV1.Models
         }
 
         // POST: Programme/Delete/5
-        [Authorize(Roles = "Administrator")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
