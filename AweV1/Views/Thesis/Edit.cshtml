@@ -119,9 +119,9 @@
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProgrammId" class="control-label">Programme</label>
-                <select asp-for="ProgrammId" asp-items="ViewBag.ProgrammId" class="form-control"></select>
-                <span asp-validation-for="ProgrammId" class="text-danger"></span>
+                <label asp-for="ProgrammeId" class="control-label">Programme</label>
+                <select asp-for="ProgrammeId" asp-items="ViewBag.ProgrammeId" class="form-control"></select>
+                <span asp-validation-for="ProgrammeId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Registration" class="control-label"></label>
@@ -337,6 +337,7 @@
                     <input type="submit" value="Speichern" class="btn btn-default" />
                 </div>
             </div>
+         </div>
 </form>
 
 
@@ -398,7 +399,7 @@
     }
 
 </script>
-</div>
+
 
 <div>
     <a asp-action="Index">Zurück zur Liste</a>

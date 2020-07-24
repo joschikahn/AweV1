@@ -149,7 +149,7 @@ namespace AweV1.Models
         public int SupervisorId { get; set; }
         public Supervisor Supervisor { get; set; }
         [Required(ErrorMessage = "Bitte geben Sie ein Programm an!")]
-        public int ProgrammId { get; set; }
+        public int ProgrammeId { get; set; }
         public Programme Programme { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

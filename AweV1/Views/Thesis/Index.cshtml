@@ -96,6 +96,9 @@
                         <a class="btn btn-sm btn-default" asp-action="Details" asp-route-id="@item.Id">
                             <span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span>
                         </a>
+                        <a class="btn btn-sm btn-default" asp-action="DetailsPDF" asp-route-id="@item.Id">
+                            <span class='glyphicon glyphicon-download' aria-hidden='true'></span>
+                        </a>
                         <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id">
                             <span class='glyphicon glyphicon-trash' aria-hidden='true'></span>
                         </a>
