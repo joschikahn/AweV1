@@ -22,16 +22,16 @@ namespace AweV1.Controllers
             Title,
             [Display(Name = "Status")]
             Status,
-            [Display(Name = "Betreuer")]
-            Supervisor,
+            [Display(Name = "Student")]
+            StudentLastName,
             [Display(Name = "Anmeldung")]
             Registration,
             [Display(Name = "Abgabe")]
             Filing,
             [Display(Name = "Typ")]
             Type,
-            [Display(Name = "Matrikelnummer")]
-            StudentID
+            [Display(Name = "Betreuer")]
+            Supervisor
         }
 
         private readonly AppDbContext _context;
@@ -42,7 +42,7 @@ namespace AweV1.Controllers
         }
 
         // GET: Thesis
-        public async Task<IActionResult> Index(string Search, Type Filter, SortCriteria Sort = SortCriteria.StudentID,
+        public async Task<IActionResult> Index(string Search, Type Filter, SortCriteria Sort = SortCriteria.StudentLastName,
             int Page = 1, int PageSize = 10)
         {
             IQueryable<Thesis> query = _context.thesis;
@@ -109,29 +109,16 @@ namespace AweV1.Controllers
                 return NotFound();
             }
 
-          
-            return  View(thesis);
+            ViewData["SupervisorId"] = new SelectList(_context.supervisors, "Id", "LastName");
+            ViewBag.supervisor = _context.supervisors;
+            ViewBag.programme = _context.programme;
+            return View(thesis);
         }
 
-        public async Task<IActionResult> DetailsPDF(int? id)
+        // Rotativa
+        public ActionResult ThesisDetailPDF()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var thesis = await _context.thesis
-                .Include(t => t.Supervisor)
-                .Include(t => t.Programme)
-                .FirstOrDefaultAsync(m => m.Id == id);
-
-            if (thesis == null)
-            {
-                return NotFound();
-            }
-
-
-            return new ViewAsPdf(thesis) { FileName = "Gutachten.pdf" };
+            return new ViewAsPdf("Details");
         }
 
 
@@ -141,7 +128,7 @@ namespace AweV1.Controllers
         {
             ViewData["SupervisorId"] = new SelectList(_context.supervisors, "Id", "LastName");
 
-            ViewData["ProgrammeId"] = new SelectList(_context.programme, "Id", "Name");
+            ViewData["ProgrammId"] = new SelectList(_context.programme, "Id", "Name");
             return View();
         }
 
@@ -152,7 +139,7 @@ namespace AweV1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
             [Bind(
-                "Id,LastModified,Title,Description,ProgrammeId,Status,Registration,Filing,Type,Summary,Bachelor,Master,StudentFirstName,StudentLastName,Email,StudentID,Strengths,Weaknesses,Evaluation,ContentVal,LayoutVal,StructureVal,StyleVal,LiteratureVal,DifficultyVal,NoveltyVal,RichnessVal,ContentWt,LayoutWt,StyleWt,LiteratureWt,StructureWt,DifficultyWt,NoveltyWt,RichnessWt,Grade,SupervisorId")]
+                "Id,LastModified,Title,Description,ProgrammId,Status,Registration,Filing,Type,Summary,Bachelor,Master,StudentFirstName,StudentLastName,Email,StudentID,Strengths,Weaknesses,Evaluation,ContentVal,LayoutVal,StructureVal,StyleVal,LiteratureVal,DifficultyVal,NoveltyVal,RichnessVal,ContentWt,LayoutWt,StyleWt,LiteratureWt,StructureWt,DifficultyWt,NoveltyWt,RichnessWt,Grade,SupervisorId")]
             Thesis thesis)
         {
             if (ModelState.IsValid)
@@ -164,7 +151,7 @@ namespace AweV1.Controllers
             }
 
             ViewData["SupervisorId"] = new SelectList(_context.supervisors, "Id", "LastName");
-            ViewData["ProgrammeId"] = new SelectList(_context.programme, "Id", "Name");
+            ViewData["ProgrammId"] = new SelectList(_context.programme, "Id", "Name");
             return View(thesis);
         }
 
@@ -183,7 +170,7 @@ namespace AweV1.Controllers
             }
 
             ViewData["SupervisorId"] = new SelectList(_context.supervisors, "Id", "LastName");
-            ViewData["ProgrammeId"] = new SelectList(_context.programme, "Id", "Name");
+            ViewData["ProgrammId"] = new SelectList(_context.programme, "Id", "Name");
             return View(thesis);
         }
 
@@ -194,7 +181,7 @@ namespace AweV1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id,
             [Bind(
-                "Id,LastModified,SupervisorId,ProgrammeId,Title,Description,Status,Registration,Filing,Type,Summary,Bachelor,Master,StudentFirstName,StudentLastName,Email,StudentID,Strengths,Weaknesses,Evaluation,ContentVal,LayoutVal,StructureVal,StyleVal,LiteratureVal,DifficultyVal,NoveltyVal,RichnessVal,ContentWt,LayoutWt,StyleWt,LiteratureWt,StructureWt,DifficultyWt,NoveltyWt,RichnessWt,Grade")]
+                "Id,LastModified,SupervisorId,ProgrammId,Title,Description,Status,Registration,Filing,Type,Summary,Bachelor,Master,StudentFirstName,StudentLastName,Email,StudentID,Strengths,Weaknesses,Evaluation,ContentVal,LayoutVal,StructureVal,StyleVal,LiteratureVal,DifficultyVal,NoveltyVal,RichnessVal,ContentWt,LayoutWt,StyleWt,LiteratureWt,StructureWt,DifficultyWt,NoveltyWt,RichnessWt,Grade")]
             Thesis thesis)
         {
             if (id != thesis.Id)
@@ -225,7 +212,7 @@ namespace AweV1.Controllers
             }
 
             ViewData["SupervisorId"] = new SelectList(_context.supervisors, "Id", "LastName");
-            ViewData["ProgrammeId"] = new SelectList(_context.programme, "Id", "Name");
+            ViewData["ProgrammId"] = new SelectList(_context.programme, "Id", "Name");
             return View(thesis);
         }
 

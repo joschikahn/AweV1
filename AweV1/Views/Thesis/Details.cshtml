@@ -56,15 +56,13 @@
                 @Html.DisplayNameFor(model => model.Supervisor)
             </th>
             <th class="text-left" style="width: 50%">
-                @Html.DisplayFor(model => model.Supervisor.LastName)
-            </th>
-        </tr>
-        <tr>
-            <th class="text-left" style="width: 50%">
-                @Html.DisplayNameFor(model => model.Programme)
-            </th>
-            <th>
-                @Html.DisplayFor(model => model.Programme.Name)
+                @foreach (var supervisor in ViewBag.supervisor)
+                {
+                    if (supervisor.Id == Model.SupervisorId)
+                    {
+                        @supervisor.LastName;
+                    }
+                }
             </th>
         </tr>
         <tr>
@@ -73,7 +71,7 @@
             </th>
             <th class="text-left" style="width: 50%">
                 @Html.DisplayFor(model => model.Bachelor)
-        </tr>
+</tr>
         <tr>
             <th class="text-left" style="width: 50%">
                 @Html.DisplayNameFor(model => model.Master)
@@ -183,7 +181,20 @@
                 @Html.DisplayFor(model => model.StudentID)
             </th>
         </tr>
-        
+        <tr>
+            <th class="text-left" style="width: 50%">
+                @Html.DisplayNameFor(model => model.Programme)
+            </th>
+            <th class="text-left" style="width: 50%">
+                @foreach (var programm in ViewBag.programme)
+                {
+                    if (programm.Id == Model.ProgrammId)
+                    {
+                        @programm.Name;
+                    }
+                }
+            </th>
+        </tr>
         <tr>
             <th class="text-left" style="width: 50%">
                 @Html.DisplayNameFor(model => model.Type)
@@ -192,7 +203,6 @@
                 @Html.DisplayFor(model => model.Type)
             </th>
         </tr>
-       
     </table>
 </div>
 
@@ -307,7 +317,246 @@
                 @Html.DisplayFor(model => model.Grade)
             </th>
         </tr>
-
     </table>
 </div>
 
+<!--
+        <div>
+            <h4>Thesis</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.LastModified)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.LastModified)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Title)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Title)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Summary)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Summary)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Bachelor)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Bachelor)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Master)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Master)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Supervisor)
+                </dt>
+                <dd>
+                    @foreach (var supervisor in ViewBag.supervisor)
+                    {
+                        if (supervisor.Id == Model.SupervisorId)
+                        {
+                            @supervisor.LastName;
+                        }
+                    }
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Programme)
+                </dt>
+                <dd>
+                    @foreach (var programm in ViewBag.programme)
+                    {
+                        if (programm.Id == Model.ProgrammId)
+                        {
+                            @programm.Name;
+                        }
+                    }
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Status)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Status)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Type)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Type)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Registration)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Registration)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Filing)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Filing)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.StudentFirstName)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.StudentFirstName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.StudentLastName)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.StudentLastName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.StudentID)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.StudentID)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Strengths)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Strengths)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Weaknesses)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Weaknesses)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Evaluation)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Evaluation)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ContentVal)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ContentVal)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.LayoutVal)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.LayoutVal)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.StructureVal)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.StructureVal)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.StyleVal)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.StyleVal)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.LiteratureVal)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.LiteratureVal)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.DifficultyVal)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DifficultyVal)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.NoveltyVal)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.NoveltyVal)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.RichnessVal)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.RichnessVal)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ContentWt)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ContentWt)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.LayoutWt)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.LayoutWt)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.StyleWt)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.StyleWt)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.LiteratureWt)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.LiteratureWt)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.StructureWt)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.StructureWt)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.DifficultyWt)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DifficultyWt)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.NoveltyWt)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.NoveltyWt)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.RichnessWt)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.RichnessWt)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Grade)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Grade)
+                </dd>
+            </dl>
+        </div> -->
+<div>
+    <div style="text-align:right">@Html.ActionLink("Liste als PDF","ThesisDetailPDF")</div> 
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

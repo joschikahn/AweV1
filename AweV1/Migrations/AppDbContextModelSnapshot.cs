@@ -149,7 +149,9 @@ namespace AweV1.Migrations
 
                     b.Property<int>("NoveltyWt");
 
-                    b.Property<int>("ProgrammeId");
+                    b.Property<int>("ProgrammId");
+
+                    b.Property<int?>("ProgrammeId");
 
                     b.Property<DateTime?>("Registration");
 
@@ -309,8 +311,7 @@ namespace AweV1.Migrations
                 {
                     b.HasOne("AweV1.Models.Programme", "Programme")
                         .WithMany("thesisList")
-                        .HasForeignKey("ProgrammeId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ProgrammeId");
 
                     b.HasOne("AweV1.Models.Supervisor", "Supervisor")
                         .WithMany("thesisList")

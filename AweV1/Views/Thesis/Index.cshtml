@@ -16,13 +16,13 @@
   
 </script>
 
-<h2>Thesis: Index</h2>
+<h2>Thesis: Übersicht</h2>
 
 <form id="Form" asp-action="Index" method="get">
 
     <p>
         <a class="btn btn-primary" asp-action="Create"><span class="glyphicon glyphicon-plus"></span>&nbsp;Neue Thesis</a>
-        <input type="button" value="Reset" class="btn btn-default pull-right" onclick="resetForm()" />
+        <input type="button" value="Zurücksetzen" class="btn btn-default pull-right" onclick="resetForm()" />
 
         
 
@@ -50,11 +50,11 @@
             <thead>
             <th class="text-left" style="width: 19%">@Html.DisplayNameFor(model => model.Title)</th>
             <th style="width: 8%">@Html.DisplayNameFor(model => model.Status)</th>
-            <th style="width: 10%">@Html.DisplayNameFor(model => model.Supervisor)</th>
+            <th style="width: 10%">@Html.DisplayNameFor(model => model.StudentLastName)</th>
             <th style="width: 14%">@Html.DisplayNameFor(model => model.Registration)</th>
             <th class="text-left" style="width: 14%">@Html.DisplayNameFor(model => model.Filing)</th>
             <th class="text-left" style="width: 5%">@Html.DisplayNameFor(model => model.Type)</th>
-            <th class="text-left" style="width: 10%">@Html.DisplayNameFor(model => model.StudentID)</th>
+            <th class="text-left" style="width: 10%">@Html.DisplayNameFor(model => model.Supervisor)</th>
             <tr>
 
                 </thead>
@@ -69,13 +69,7 @@
                         @Html.DisplayFor(modelItem => item.Status)
                     </td>
                     <td style="vertical-align: middle">
-                        @foreach (var supervisor in ViewBag.supervisor)
-                        {
-                            if (supervisor.Id == item.SupervisorId)
-                            {
-                                @supervisor.LastName;
-                            }
-                        }
+                        @Html.DisplayFor(modelItem => item.StudentLastName)
                     </td>
                     <td style="vertical-align: middle">
                         @Html.DisplayFor(modelItem => item.Registration)
@@ -87,7 +81,13 @@
                         @Html.DisplayFor(modelItem => item.Type)
                     </td>
                     <td style="vertical-align: middle">
-                        @Html.DisplayFor(modelItem => item.StudentID)
+                        @foreach (var supervisor in ViewBag.supervisor)
+                        {
+                            if (supervisor.Id == item.SupervisorId)
+                            {
+                                @supervisor.LastName;
+                            }
+                        }
                     </td>
                     <td class="text-center" style="vertical-align: middle">
                         <a class="btn btn-sm btn-default" asp-action="Edit" asp-route-id="@item.Id">
@@ -95,9 +95,6 @@
                         </a>
                         <a class="btn btn-sm btn-default" asp-action="Details" asp-route-id="@item.Id">
                             <span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span>
-                        </a>
-                        <a class="btn btn-sm btn-default" asp-action="DetailsPDF" asp-route-id="@item.Id">
-                            <span class='glyphicon glyphicon-download' aria-hidden='true'></span>
                         </a>
                         <a class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id">
                             <span class='glyphicon glyphicon-trash' aria-hidden='true'></span>
@@ -129,7 +126,7 @@
                 </div>
                 <div class="col-xs-4">
                     <div class="form-group pull-right">
-                        <span style="vertical-align: middle">Zeilen pro Seite:&nbsp;</span>
+                        <span style="vertical-align: middle">Thesen pro Seite:&nbsp;</span>
                         @Html.DropDownList("PageSize", new SelectList(new string[] { "10", "20", "30", "40", "50" }, ViewBag.PageSize), new { id = "PageSize", @class = "form-control", style = "vertical-align: middle", onchange = "document.getElementById('Form').submit()" })
                     </div>
                 </div>
