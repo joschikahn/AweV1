@@ -1,6 +1,10 @@
 ﻿@model IEnumerable<AweV1.Models.Thesis>
 
 @{
+    Layout = "_PublicLayout";
+}
+
+@{
     ViewData["Title"] = "Public";
 }
 
@@ -17,7 +21,7 @@
         cursor: pointer;*/
     }
 
-        /* Dropdown button on hover & focus 
+    /* Dropdown button on hover & focus
         .dropbtn:hover, .dropbtn:focus {
             background-color: #2980B9;
         }*/
@@ -32,21 +36,33 @@
     .dropdown-content {
         display: none;
         position: absolute;
-        /*background-color: #f1f1f1;
-        min-width: 160px;
+        background-color: #fff;
+        position: relative;
+        /*min-width: 160px;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;*/
     }
 
         /* Links inside the dropdown */
         .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
+            color: #000;
+            padding: 12px 12px;
+            */ text-decoration: none;
             display: block;
         }
 
-            /* Change color of dropdown links on hover 
+        .dropdown-content span {
+            color: #000;
+            padding: 12px 12px;
+            */ text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            color: #337ab7;
+        }
+
+    /* Change color of dropdown links on hover
             .dropdown-content a:hover {
                 background-color: #ddd
             }*/
@@ -55,8 +71,6 @@
     .show {
         display: block;
     }
-
-    
 </style>
 
 <script>
@@ -71,23 +85,23 @@
 
     /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
+    function myFunction(itemId) {
+        document.getElementById(itemId).classList.toggle("show");
     }
-  }
-}
+
+    // Close the dropdown menu if the user clicks outside of it
+    window.onclick = function (event) {
+        if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
 
 </script>
 
@@ -98,7 +112,7 @@ window.onclick = function(event) {
     <p>
         <input type="button" value="Reset" class="btn btn-default pull-right" onclick="resetForm()" />
 
-        
+
 
     </p>
 
@@ -128,26 +142,32 @@ window.onclick = function(event) {
             <thead>
             <th class="text-left">@Html.DisplayNameFor(model => model.Title) (@Html.DisplayNameFor(model => model.Type))</th>
             <tr>
-            </thead>
+                </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
+                    string studiengangType;
+                    if (item.Bachelor && item.Master) { studiengangType = "Bachelor, Master"; }
+                    else if (item.Bachelor && !item.Master) { studiengangType = "Bachelor"; }
+                    else { studiengangType = "Master"; }
+
                     <tr>
                         <td class="dropdown">
-                            <input type="button" value="@Html.DisplayFor(modelItem => item.Title)" onclick="myFunction()" class="dropbtn" /> (@Html.DisplayFor(modelItem => item.Type))
-                            <div id="myDropdown" class="dropdown-content">
+                            <input type="button" value="@Html.DisplayFor(modelItem => item.Title)" onclick="myFunction(@item.Id)" class="dropbtn" /> (@studiengangType)
+                            <div id="@item.Id" class="dropdown-content">
                                 <a>@Html.DisplayFor(modelItem => item.Description)</a>
-                                <a>@Html.DisplayFor(modelItem => item.Status)</a>                                
-                                    @foreach (var supervisor in ViewBag.supervisor)
+                                <a>@Html.DisplayFor(modelItem => item.Status)</a>
+                                @foreach (var supervisor in ViewBag.supervisor)
+                                {
+                                    if (supervisor.Id == item.SupervisorId)
                                     {
-                                        if (supervisor.Id == item.SupervisorId)
-                                        {
-                                            <a href="mailto:@supervisor.Email">@supervisor.LastName</a>
-                                        }
-                                    } 
-                                
+
+                                        <a href="mailto:@supervisor.Email">@supervisor.LastName</a>
+                                    }
+                                }
+
                             </div>
-                        </td>                   
+                        </td>
                     </tr>
                 }
 
