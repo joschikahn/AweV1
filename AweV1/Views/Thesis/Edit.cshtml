@@ -99,7 +99,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Registration" class="control-label"></label>
-                <input id="datepicker" type="date" asp-for="Registration" class="form-control" />
+                <input type="date" asp-for="Registration" class="form-control" />
                 <span asp-validation-for="Registration" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -383,12 +383,6 @@
         }
     }
 
-    $(document).ready(function () {
-        $("#datepicker").kendoDatePicker({
-            culture: 'de-DE',
-            value: new Date()
-        });
-
 </script>
 </div>
 
@@ -398,10 +392,4 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
-
-    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.2.617/styles/kendo.default-v2.min.css" />
-
-    <script src="https://kendo.cdn.telerik.com/2020.2.617/js/jquery.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2020.2.617/js/kendo.all.min.js"></script>
 }
