@@ -42,14 +42,12 @@ namespace AweV1.Controllers
         }
 
         // GET: Thesis
-        public async Task<IActionResult> Index(string Search, string Filter, SortCriteria Sort = SortCriteria.StudentID,
+        public async Task<IActionResult> Index(string Search, Type Filter, SortCriteria Sort = SortCriteria.StudentID,
             int Page = 1, int PageSize = 10)
         {
             IQueryable<Thesis> query = _context.thesis;
             query = (Search != null) ? query.Where(m => (m.Title.Contains(Search))) : query;
-            // Filter-Funktion auskommentiert, da 'm.Type == Filter' nicht funktioniert (wg. Boolean-Type)
-            // Option, dass man nach Typ (BA/MA) filtern kann
-            // query = (Filter != null) ? query.Where(m => m.Type == Filter) : query;
+            query = (!Filter.Equals(null)) ? query.Where(m => m.Type == Filter) : query;
 
             switch (Sort)
             {
