@@ -110,10 +110,31 @@ namespace AweV1.Controllers
             }
 
           
+            return  View(thesis);
+        }
+
+        public async Task<IActionResult> DetailsPDF(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var thesis = await _context.thesis
+                .Include(t => t.Supervisor)
+                .Include(t => t.Programme)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (thesis == null)
+            {
+                return NotFound();
+            }
+
+
             return new ViewAsPdf(thesis) { FileName = "Gutachten.pdf" };
         }
-     
-   
+
+
 
         // GET: Thesis/Create
         public IActionResult Create()
