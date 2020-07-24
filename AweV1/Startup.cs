@@ -74,7 +74,7 @@ namespace AweV1
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            RotativaConfiguration.Setup(env, "Rotativa");
+            RotativaConfiguration.Setup(env.WebRootPath, "Rotativa");
             CreateUsersRoles(um, rm).Wait();
 
         }

@@ -105,12 +105,12 @@ toggle between hiding and showing the dropdown content */
 
 </script>
 
-<h2>Thesis: Index</h2>
+<h2>Thesis: Übersicht (Öffentlich)</h2>
 
 <form id="Form" asp-action="Index" method="get">
 
     <p>
-        <input type="button" value="Reset" class="btn btn-default pull-right" onclick="resetForm()" />
+        <input type="button" value="Zurücksetzen" class="btn btn-default pull-right" onclick="resetForm()" />
 
 
 
@@ -120,8 +120,8 @@ toggle between hiding and showing the dropdown content */
         <div class="panel-heading">
             <div class="row">
                 <div class="col-xs-4">
-                    <label class="control-label">Search by title:</label>
-                    <input class="form-control" name="Search" id="Search" value="@ViewBag.Search" placeholder="Enter keyword" onchange="document.getElementById('Form').submit()">
+                    <label class="control-label">Nach Titel suchen:</label>
+                    <input class="form-control" name="Search" id="Search" value="@ViewBag.Search" placeholder="Titel eingeben" onchange="document.getElementById('Form').submit()">
                 </div>
                 <div class="col-xs-4">
 
@@ -132,7 +132,7 @@ toggle between hiding and showing the dropdown content */
                     @Html.DropDownList("Filter", ViewBag.FilterValues, "--- Select one ---", new { id = "Filter", @class = "form-control", onchange = "document.getElementById('Form').submit()" })
                 </div> -->
                 <div class="col-xs-4">
-                    <label class="control-label">Sort by:</label>
+                    <label class="control-label">Sortieren nach:</label>
                     @Html.DropDownList("Sort", Html.GetEnumSelectList(typeof(AweV1.Controllers.ThesisController.SortCriteria)), new { id = "Sort", @class = "form-control", onchange = "document.getElementById('Form').submit()" })
                 </div>
             </div>
@@ -178,24 +178,24 @@ toggle between hiding and showing the dropdown content */
             <div class="form-inline row">
                 <div class="col-xs-4">
                     <div class="form-group pull-left">
-                        <span style="vertical-align: middle">Page&nbsp;</span>
+                        <span style="vertical-align: middle">Seite&nbsp;</span>
                         <input name="Page" id="Page" type="number" value="@ViewBag.Page" class="form-control text-center" style="vertical-align: middle; width: 25%" onchange="document.getElementById('Form').submit()" />
-                        <span style="vertical-align: middle">&nbsp;of @ViewBag.PageTotal</span>
+                        <span style="vertical-align: middle">&nbsp;von @ViewBag.PageTotal</span>
                     </div>
                 </div>
                 <div class="col-xs-4">
                     <div class="text-center">
                         <ul class="pagination" style="margin: 0">
-                            <li class="@(ViewBag.Page <= 1 ? "disabled" : null)"><a href="#" onclick="document.getElementById('Page').value = 1; document.getElementById('Form').submit()">First</a></li>
-                            <li class="@(ViewBag.Page <= 1 ? "disabled" : null)"><a href="#" onclick="document.getElementById('Page').value--; document.getElementById('Form').submit()">Prev</a></li>
-                            <li class="@(ViewBag.Page >= ViewBag.PageTotal ? "disabled" : null)"><a href="#" onclick="document.getElementById('Page').value++; document.getElementById('Form').submit()">Next</a></li>
-                            <li class="@(ViewBag.Page >= ViewBag.PageTotal ? "disabled" : null)"><a href="#" onclick="document.getElementById('Page').value = @ViewBag.PageTotal; document.getElementById('Form').submit()">Last</a></li>
+                            <li class="@(ViewBag.Page <= 1 ? "disabled" : null)"><a href="#" onclick="document.getElementById('Page').value = 1; document.getElementById('Form').submit()">Anfang</a></li>
+                            <li class="@(ViewBag.Page <= 1 ? "disabled" : null)"><a href="#" onclick="document.getElementById('Page').value--; document.getElementById('Form').submit()">Zurück</a></li>
+                            <li class="@(ViewBag.Page >= ViewBag.PageTotal ? "disabled" : null)"><a href="#" onclick="document.getElementById('Page').value++; document.getElementById('Form').submit()">Vor</a></li>
+                            <li class="@(ViewBag.Page >= ViewBag.PageTotal ? "disabled" : null)"><a href="#" onclick="document.getElementById('Page').value = @ViewBag.PageTotal; document.getElementById('Form').submit()">Ende</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-xs-4">
                     <div class="form-group pull-right">
-                        <span style="vertical-align: middle">Items per Page:&nbsp;</span>
+                        <span style="vertical-align: middle">Thesen pro Seite:&nbsp;</span>
                         @Html.DropDownList("PageSize", new SelectList(new string[] { "10", "20", "30", "40", "50" }, ViewBag.PageSize), new { id = "PageSize", @class = "form-control", style = "vertical-align: middle", onchange = "document.getElementById('Form').submit()" })
                     </div>
                 </div>

@@ -30,7 +30,7 @@
     }
 </style>
 
-<h2>Thesis: Create</h2>
+<h2>Thesis: Neu erstellen</h2>
 
 
 <form asp-action="Create">
@@ -39,7 +39,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <div class="row">
-                <div class="themclass">
+                <div class="themaclass">
                     <h4>Thema</h4>
                 </div>
             </div>
@@ -53,7 +53,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Description" class="control-label"></label>
-                <textarea asp-for="Description" class="form-control"></textarea>
+                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -71,15 +71,11 @@
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="SupervisorId" class="control-label">Supervisor</label>
+                <label asp-for="SupervisorId" class="control-label">Betreuer</label>
                 <select asp-for="SupervisorId" asp-items="ViewBag.SupervisorId" class="col-md-10 form-control">Supervisor</select>
                 <span asp-validation-for="SupervisorId" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ProgrammeId" class="control-label">Programm</label>
-                <select asp-for="ProgrammeId" asp-items="ViewBag.ProgrammeId" class="col-md-10 form-control">Programm</select>
-                <span asp-validation-for="ProgrammeId" class="text-danger"></span>
-            </div>
+            <br />
         </div>
     </div>
 
@@ -98,16 +94,6 @@
                 <label asp-for="Status" class="control-label"></label>
                 <select asp-for="Status" asp-items="@Html.GetEnumSelectList(typeof(Status))" class="form-control"></select>
                 <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Registration" class="control-label"></label>
-                <input type="date" asp-for="Registration" class="form-control" />
-                <span asp-validation-for="Registration" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Filing" class="control-label"></label>
-                <input type="date" asp-for="Filing" class="form-control" />
-                <span asp-validation-for="Filing" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="StudentFirstName" class="control-label"></label>
@@ -133,6 +119,21 @@
                 <label asp-for="Type" class="control-label"></label>
                 <select asp-for="Type" asp-items="@Html.GetEnumSelectList(typeof(AweV1.Models.Type))" class="form-control"></select>
                 <span asp-validation-for="Type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProgrammId" class="control-label">Programm</label>
+                <select asp-for="ProgrammId" asp-items="ViewBag.ProgrammId" class="form-control">Programm</select>
+                <span asp-validation-for="ProgrammId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Registration" class="control-label"></label>
+                <input type="date" asp-for="Registration" class="form-control" />
+                <span asp-validation-for="Registration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Filing" class="control-label"></label>
+                <input type="date" asp-for="Filing" class="form-control" />
+                <span asp-validation-for="Filing" class="text-danger"></span>
             </div>
         </div>
     </div>
@@ -283,15 +284,25 @@
                     </div>
                 </th>
             </tr>
-
-            <tr>
-                <div class="form-group">
-                    <label asp-for="Summary" class="control-label"></label>
-                    <textarea class="form-control" asp-for="Summary" rows="3"></textarea>
-                    <span asp-validation-for="Summary" class="text-danger"></span>
-                </div>
-            </tr>
         </table>
+        <div class="formular">
+            <div class="form-group">
+                <label asp-for="Summary" class="control-label"></label>
+                <textarea class="form-control" asp-for="Summary" rows="3"></textarea>
+                <span asp-validation-for="Summary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Strengths" class="control-label"></label>
+                <textarea class="form-control" asp-for="Strengths" rows="3"></textarea>
+                <span asp-validation-for="Strengths" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Weaknesses" class="control-label"></label>
+                <textarea class="form-control" asp-for="Weaknesses" rows="3"></textarea>
+                <span asp-validation-for="Weaknesses" class="text-danger"></span>
+            </div>
+        </div>
     </div>
 
     <div class="panel panel-default">
@@ -316,11 +327,14 @@
                 </th>
             </tr>
         </table>
+    </div>
+    <div>
         <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <div class="col text-center">
+                <input type="submit" value="Erstellen" class="btn btn-default" />
+            </div>
         </div>
 </form>
-    </div>
 
 <!--<div class="form-group">
     <label asp-for="Registration" class="control-label"></label>
@@ -350,7 +364,7 @@
 
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Zurück zur Liste</a>
 </div>
 
 @section Scripts {

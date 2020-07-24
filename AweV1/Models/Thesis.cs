@@ -14,7 +14,7 @@ namespace AweV1.Models
         [Display(Name = "Letzte Datenänderung")]
         public DateTime LastModified { get; set; } = DateTime.Now;
 
-        
+
 
         //                               ******************** Thema/Arbeit ********************
         [Required(ErrorMessage = "Bitte Titel hinzufügen!")]
@@ -48,10 +48,10 @@ namespace AweV1.Models
         //                              ******************** Student ********************
 
         // Studentname wurde in Vor und Nachname aufgeteilt - In Aufgabenstellung Name in einem
-        [Display(Name = "Student Vorname")]
+        [Display(Name = "Vorname")]
         public string StudentFirstName { get; set; }
 
-        [Display(Name = "Student Nachname")]
+        [Display(Name = "Nachname")]
         public string StudentLastName { get; set; }
 
         [Display(Name = "E-Mail")]
@@ -149,7 +149,7 @@ namespace AweV1.Models
         public int SupervisorId { get; set; }
         public Supervisor Supervisor { get; set; }
         [Required(ErrorMessage = "Bitte geben Sie ein Programm an!")]
-        public int ProgrammeId { get; set; }
+        public int ProgrammId { get; set; }
         public Programme Programme { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
