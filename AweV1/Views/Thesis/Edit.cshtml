@@ -76,9 +76,9 @@
                 <span asp-validation-for="SupervisorId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProgrammId" class="control-label">Programme</label>
-                <select asp-for="ProgrammId" asp-items="ViewBag.ProgrammId" class="col-md-10 form-control"></select>
-                <span asp-validation-for="ProgrammId" class="text-danger"></span>
+                <label asp-for="ProgrammeId" class="control-label">Programme</label>
+                <select asp-for="ProgrammeId" asp-items="ViewBag.ProgrammeId" class="col-md-10 form-control"></select>
+                <span asp-validation-for="ProgrammeId" class="text-danger"></span>
             </div>
         </div>
     </div>
@@ -99,7 +99,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Registration" class="control-label"></label>
-                <input type="date" asp-for="Registration" class="form-control" />
+                <input id="datepicker" type="date" asp-for="Registration" class="form-control" />
                 <span asp-validation-for="Registration" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -323,6 +323,7 @@
         <div class="form-group">
             <input type="submit" value="Save" class="btn btn-default" />
         </div>
+    </div>
 </form>
 
 
@@ -383,8 +384,14 @@
         }
     }
 
+    $(document).ready(function () {
+        $("#datepicker").kendoDatePicker({
+            culture: 'de-DE',
+            value: new Date()
+        });
+
 </script>
-</div>
+
 
 <div>
     <a asp-action="Index">Back to List</a>
@@ -392,4 +399,10 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2020.2.617/styles/kendo.default-v2.min.css" />
+
+    <script src="https://kendo.cdn.telerik.com/2020.2.617/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2020.2.617/js/kendo.all.min.js"></script>
 }
