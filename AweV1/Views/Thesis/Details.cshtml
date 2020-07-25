@@ -10,9 +10,11 @@
     }
     #download_link {
         text-align: center;
-                  }
-
-</style>
+    }
+    #downloadlink > a {
+        margin-top: 10px;
+    }
+    </style>
 
 <h2>Thesis: Details</h2>
 
@@ -312,8 +314,11 @@
         </tr>
     </table>
 </div>
-<div id="download_link">
-    <a asp-action="Download" asp-route-id="@Model.Id"><button class="btn btn-outline-secondary">Download Thesis</button></a>
+<br/>
+<br/>
+<div id="download_link" class="">
+    <a  style="margin-top: 10px" id="thesis" asp-action="Download" asp-route-id="@Model.Id"><button  type="button" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-cloud-download"></span> Download Thesis</button></a>
     <br/>
-    <a asp-action="DetailsPDF" asp-route-id="@Model.Id"><button class="btn btn-outline-secondary">Download Gutachten</button></a>
+    <br/>
+    <a  style="margin-top: 10px" id="gutachten" asp-action="DetailsPDF" asp-route-id="@Model.Id"><button  type="button" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-cloud-download"></span> Download Gutachten</button></a>
 </div>

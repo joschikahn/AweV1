@@ -1,8 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <ApplicationIcon>Uni Wue Icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,6 +22,10 @@
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
     <Folder Include="Migrations\My\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\Gebauede.png" />
   </ItemGroup>
 
   <ItemGroup>
