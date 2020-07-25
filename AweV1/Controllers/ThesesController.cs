@@ -35,6 +35,18 @@ namespace AweV1.Controllers
             Supervisor
         }
 
+        public enum SortCriteriaPublic
+        {
+            [Display(Name = "Titel")]
+            Title,
+            [Display(Name = "Status")]
+            Status,
+            [Display(Name = "Typ")]
+            Type,
+            [Display(Name = "Betreuer")]
+            Supervisor
+        }
+
         private readonly AppDbContext _context;
 
         public ThesisController(AppDbContext context)
@@ -43,12 +55,13 @@ namespace AweV1.Controllers
         }
 
         // GET: Thesis
-        public async Task<IActionResult> Index(string Search, Type Filter, SortCriteria Sort = SortCriteria.StudentLastName,
+        public async Task<IActionResult> Index(string Search, Status Filter, Type FilterPublic, SortCriteria Sort = SortCriteria.StudentLastName,
             int Page = 1, int PageSize = 10)
         {
             IQueryable<Thesis> query = _context.thesis;
             query = (Search != null) ? query.Where(m => (m.Title.Contains(Search))) : query;
-            query = (!Filter.Equals(null)) ? query.Where(m => m.Type == Filter) : query;
+            query = (!Filter.Equals(null)) ? query.Where(m => m.Status == Filter) : query;
+            query = (!FilterPublic.Equals(null)) ? query.Where(m => m.Type == FilterPublic) : query;
 
             switch (Sort)
             {
@@ -81,7 +94,9 @@ namespace AweV1.Controllers
 
             ViewBag.Search = Search;
             ViewBag.Filter = Filter;
-            ViewBag.FilterValues = new SelectList(await _context.thesis.Select(m => m.Type).Distinct().ToListAsync());
+            ViewBag.FilterPublic = FilterPublic;
+            ViewBag.FilterValues = new SelectList(await _context.thesis.Select(m => m.Status).Distinct().ToListAsync());
+            ViewBag.FilterValuesPublic = new SelectList(await _context.thesis.Select(m => m.Type).Distinct().ToListAsync());
             ViewBag.Sort = Sort;
             ViewBag.Page = Page;
             ViewBag.PageTotal = PageTotal;
