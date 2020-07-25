@@ -343,6 +343,23 @@ namespace AweV1.Controllers
 
             return new ValidationResult[] { };
         }
+        public async Task<IActionResult> Download(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            foreach (var thesis in _context.thesis)
+            {
+                if (thesis.Id.Equals(id))
+                {
+                    return File(thesis.UploadFile, "application/pdf", "thesis.pdf");
+                }
+            }
+
+            return NotFound();
+        }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

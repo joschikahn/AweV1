@@ -8,6 +8,10 @@
     .panel-default > .panel-heading {
         background-color: #BFD2FA;
     }
+    #download_link {
+        text-align: center;
+                  }
+
 </style>
 
 <h2>Thesis: Details</h2>
@@ -308,8 +312,8 @@
         </tr>
     </table>
 </div>
-
-
-<div>
-    <a asp-action="DetailsPDF" asp-route-id="@Model.Id">Gutachten Download</a> 
+<div id="download_link">
+    <a asp-action="Download" asp-route-id="@Model.Id"><button class="btn btn-outline-secondary">Download Thesis</button></a>
+    <br/>
+    <a asp-action="DetailsPDF" asp-route-id="@Model.Id"><button class="btn btn-outline-secondary">Download Gutachten</button></a>
 </div>
