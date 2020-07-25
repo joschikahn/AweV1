@@ -148,6 +148,7 @@ namespace AweV1.Models
         [Required(ErrorMessage = "Bitte geben Sie den Supervisor an!")]
         public int SupervisorId { get; set; }
         public Supervisor Supervisor { get; set; }
+
         [Required(ErrorMessage = "Bitte geben Sie ein Programm an!")]
         public int ProgrammeId { get; set; }
         public Programme Programme { get; set; }
