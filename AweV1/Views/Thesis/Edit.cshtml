@@ -154,8 +154,8 @@
             <tr>
                 <th>
                     <div class="form-group">
-                        <label asp-for="ContentVal" class="control-label"></label>
-                        <input asp-for="ContentVal" class="form-control" id="ContentVal" />
+                        <label asp-for="ContentVal" class="control-label"  ></label>
+                        <select asp-for="Points" id="ContentVal" asp-items="@Html.GetEnumSelectList(typeof(AweV1.Models.Points))" class="form-control"></select>
                         <span asp-validation-for="ContentVal" class="text-danger"></span>
                     </div>
                 </th>
@@ -171,7 +171,7 @@
                 <th>
                     <div class="form-group">
                         <label asp-for="LayoutVal" class="control-label"></label>
-                        <input asp-for="LayoutVal" class="form-control" id="LayoutVal" />
+                        <select asp-for="Points" id="LayoutVal" asp-items="@Html.GetEnumSelectList(typeof(AweV1.Models.Points))" class="form-control"></select>
                         <span asp-validation-for="LayoutVal" class="text-danger"></span>
                     </div>
                 </th>
@@ -187,7 +187,7 @@
                 <th>
                     <div class="form-group">
                         <label asp-for="StructureVal" class="control-label"></label>
-                        <input asp-for="StructureVal" class="form-control" id="StructureVal" />
+                        <select asp-for="Points" id="StructureVal" asp-items="@Html.GetEnumSelectList(typeof(AweV1.Models.Points))" class="form-control"></select>
                         <span asp-validation-for="StructureVal" class="text-danger"></span>
                     </div>
                 </th>
@@ -203,7 +203,7 @@
                 <th>
                     <div class="form-group">
                         <label asp-for="StyleVal" class="control-label"></label>
-                        <input asp-for="StyleVal" class="form-control" id="StyleVal" />
+                        <select asp-for="Points" id="StyleVal" asp-items="@Html.GetEnumSelectList(typeof(AweV1.Models.Points))" class="form-control"></select>
                         <span asp-validation-for="StyleVal" class="text-danger"></span>
                     </div>
                 </th>
@@ -219,7 +219,7 @@
                 <th>
                     <div class="form-group">
                         <label asp-for="LiteratureVal" class="control-label"></label>
-                        <input asp-for="LiteratureVal" class="form-control" id="LiteratureVal" />
+                        <select asp-for="Points" id="LiteratureVal" asp-items="@Html.GetEnumSelectList(typeof(AweV1.Models.Points))" class="form-control"></select>
                         <span asp-validation-for="LiteratureVal" class="text-danger"></span>
                     </div>
                 </th>
@@ -235,7 +235,7 @@
                 <th>
                     <div class="form-group">
                         <label asp-for="DifficultyVal" class="control-label"></label>
-                        <input asp-for="DifficultyVal" class="form-control" id="DifficultyVal" />
+                        <select asp-for="Points" id="DifficultyVal" asp-items="@Html.GetEnumSelectList(typeof(AweV1.Models.Points))" class="form-control"></select>
                         <span asp-validation-for="DifficultyVal" class="text-danger"></span>
                     </div>
                 </th>
@@ -251,7 +251,7 @@
                 <th>
                     <div class="form-group">
                         <label asp-for="NoveltyVal" class="control-label"></label>
-                        <input asp-for="NoveltyVal" class="form-control" id="NoveltyVal" />
+                        <select asp-for="Points" id="NoveltyVal" asp-items="@Html.GetEnumSelectList(typeof(AweV1.Models.Points))" class="form-control"></select>
                         <span asp-validation-for="NoveltyVal" class="text-danger"></span>
                     </div>
                 </th>
@@ -267,7 +267,7 @@
                 <th>
                     <div class="form-group">
                         <label asp-for="RichnessVal" class="control-label"></label>
-                        <input asp-for="RichnessVal" class="form-control" id="RichnessVal" />
+                        <select asp-for="Points" id="RichnessVal" asp-items="@Html.GetEnumSelectList(typeof(AweV1.Models.Points))" class="form-control"></select>
                         <span asp-validation-for="RichnessVal" class="text-danger"></span>
                     </div>
                 </th>
@@ -370,36 +370,38 @@
         var richnessw = document.getElementById("RichnessWt").value;
 
 
+        zwischenergebnis = (Number((6 - content) * contentw) + Number((6 - layout) * layoutw) + Number((6 - structure) * structurew) + Number( (6 - style) * stylew) + Number( ( 6 -literature) * literaturew) + Number( ( 6 - difficulty) * difficultyw) + Number( ( 6 - novelty) * noveltyw) + Number( (6 - richness) * richnessw));
 
-        zwischenergebnis = (Number(content * contentw) + Number(layout * layoutw) + Number(structure * structurew) + Number(style * stylew) + Number(literature * literaturew) + Number(difficulty * difficultyw) + Number(novelty * noveltyw) + Number(richness * richnessw));
+       
+
         res = (zwischenergebnis / 100).toFixed(2);
         document.getElementById("Ergebnis").value = res
 
 
 
-        if (document.getElementById("ContentVal").value == "") {
-            alert("alert");
+        if (document.getElementById("ContentVal").value == "0") {
+            alert("Bitte vergeben Sie Punkte fuer das Feld Inhalt");
         }
-        if (document.getElementById("LayoutVal").value == "") {
-            alert("alert");
+        if (document.getElementById("LayoutVal").value == "0") {
+            alert("Bitte vergeben Sie Punkte fuer das Feld Layout");
         }
-        if (document.getElementById("StructureVal").value == "") {
-            alert("alert");
+        if (document.getElementById("StructureVal").value == "0") {
+            alert("Bitte vergeben Sie Punkte fuer das Feld Struktur");
         }
-        if (document.getElementById("StyleVal").value == "") {
-            alert("alert");
+        if (document.getElementById("StyleVal").value == "0") {
+            alert("Bitte vergeben Sie Punkte fuer das Feld Stil");
         }
-        if (document.getElementById("LiteratureVal").value == "") {
-            alert("alert");
+        if (document.getElementById("LiteratureVal").value == "0") {
+            alert("Bitte vergeben Sie Punkte fuer das Feld Literatur");
         }
-        if (document.getElementById("DifficultyVal").value == "") {
-            alert("alert");
+        if (document.getElementById("DifficultyVal").value == "0") {
+            alert("Bitte vergeben Sie Punkte fuer das Feld Komplexität");
         }
-        if (document.getElementById("NoveltyVal").value == "") {
-            alert("alert");
+        if (document.getElementById("NoveltyVal").value == "0") {
+            alert("Bitte vergeben Sie Punkte fuer das Feld Neuheit");
         }
-        if (document.getElementById("RichnessVal").value == "") {
-            alert("alert");
+        if (document.getElementById("RichnessVal").value == "0") {
+            alert("Bitte vergeben Sie Punkte fuer das Feld Reichhaltigkeit");
         }
     }
 
@@ -410,15 +412,4 @@
     <a asp-action="Index">Zurück zur Liste</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script>
-        $(document).ready(function () {
-            $('.custom-file-input').on("change",
-                function () {
-                    var fileName = $(this).val().split("\\").pop();
-                    $(this).next('.custom-file-label').html(fileName);
-                });
-        });
-    </script>
-}
+
