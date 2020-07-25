@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AweV1.Models
 {
+    [Display(Name = "Studiengang")]
     public class Programme
     {
         public int Id { get; set; }

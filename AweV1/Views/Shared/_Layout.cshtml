@@ -34,8 +34,8 @@
                     <li><a asp-area="" asp-controller="Thesis" asp-action="Index">Thesis</a></li>
                     @if (this.User.IsInRole("Administrator"))
                     {
-                        <li><a asp-area="" asp-controller="Supervisor" asp-action="Index">Supervisor</a></li>
-                        <li><a asp-area="" asp-controller="Programme" asp-action="Index">Programme</a></li>
+                        <li><a asp-area="" asp-controller="Supervisor" asp-action="Index">Betreuer</a></li>
+                        <li><a asp-area="" asp-controller="Programme" asp-action="Index">Studiengang</a></li>
                     }
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>

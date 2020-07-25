@@ -10,7 +10,7 @@ namespace AweV1.Models
     {
 
         public int Id { get; set; }
-
+        [Required]
         [Display(Name = "Letzte Datenänderung")]
         public DateTime LastModified { get; set; } = DateTime.Now;
 
