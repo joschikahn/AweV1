@@ -123,9 +123,9 @@ toggle between hiding and showing the dropdown content */
                     <label class="control-label">Nach Titel suchen:</label>
                     <input class="form-control" name="Search" id="Search" value="@ViewBag.Search" placeholder="Titel eingeben" onchange="document.getElementById('Form').submit()">
                 </div>
-                 <div class="col-xs-4">
-                    <label class="control-label">Filtern nach:</label>
-                    @Html.DropDownList("FilterPublic", ViewBag.FilterValuesPublic, "--- Select one ---", new { id = "FilterPublic", @class = "form-control", onchange = "document.getElementById('Form').submit()" })
+                <div class="col-xs-4">
+                    
+  
                 </div>
                 <div class="col-xs-4">
                     <label class="control-label">Sortieren nach:</label>
