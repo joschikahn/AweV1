@@ -13,12 +13,17 @@
 
     /* Dropdown Button */
     .dropbtn {
-        /*background-color: #3498DB;
-        color: white;
+        background-color: #fff;
+        color: #000;
         padding: 16px;
         font-size: 16px;
         border: none;
-        cursor: pointer;*/
+        cursor: pointer;
+        border: none;
+        font-weight: bold;
+    }
+    .dropbtn:hover {
+        color: #337ab7;
     }
 
     /* Dropdown button on hover & focus
@@ -46,30 +51,25 @@
         /* Links inside the dropdown */
         .dropdown-content a {
             color: #000;
-            padding: 12px 12px;
-            */ text-decoration: none;
-            display: block;
+            text-decoration: none;
         }
 
         .dropdown-content span {
             color: #000;
-            padding: 12px 12px;
-            */ text-decoration: none;
+            text-decoration: none;
             display: block;
         }
 
         .dropdown-content a:hover {
             color: #337ab7;
+            text-decoration: underline;
         }
 
-    /* Change color of dropdown links on hover
-            .dropdown-content a:hover {
-                background-color: #ddd
-            }*/
 
     /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
     .show {
         display: block;
+        border: none;
     }
 </style>
 
@@ -139,8 +139,8 @@ toggle between hiding and showing the dropdown content */
         </div>
 
         <table class="table table-bordered">
-            <thead>
-            <th class="text-left">@Html.DisplayNameFor(model => model.Title) (@Html.DisplayNameFor(model => model.Type))</th>
+            <thead style="border-bottom: 1px solid #dddddd">
+            <th style="border-none;">@Html.DisplayNameFor(model => model.Title) (@Html.DisplayNameFor(model => model.Type))</th>
             <tr>
                 </thead>
             <tbody>
@@ -151,18 +151,17 @@ toggle between hiding and showing the dropdown content */
                     else if (item.Bachelor && !item.Master) { studiengangType = "Bachelor"; }
                     else { studiengangType = "Master"; }
 
-                    <tr>
-                        <td class="dropdown">
+                    <tr style="border-bottom: 1px solid #dddddd">
+                        <td class="dropdown" style="border-none;">
                             <input type="button" value="@Html.DisplayFor(modelItem => item.Title)" onclick="myFunction(@item.Id)" class="dropbtn" /> (@studiengangType)
                             <div id="@item.Id" class="dropdown-content">
-                                <a>@Html.DisplayFor(modelItem => item.Description)</a>
-                                <a>@Html.DisplayFor(modelItem => item.Status)</a>
+                                <span><strong>@Html.DisplayNameFor(model => model.Description):</strong> @Html.DisplayFor(modelItem => item.Description)</span>
+                                <span><strong>@Html.DisplayNameFor(model => model.Status): </strong>@Html.DisplayFor(modelItem => item.Status)</span>
                                 @foreach (var supervisor in ViewBag.supervisor)
                                 {
                                     if (supervisor.Id == item.SupervisorId)
                                     {
-
-                                        <a href="mailto:@supervisor.Email">@supervisor.LastName</a>
+                                        <span><strong>Betreuer: </strong><a href="mailto:@supervisor.Email">@supervisor.LastName</a></span>
                                     }
                                 }
 
