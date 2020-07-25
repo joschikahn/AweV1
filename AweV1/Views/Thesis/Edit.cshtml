@@ -32,7 +32,7 @@
 
 <h2>Thesis: Bearbeiten</h2>
 
-<form asp-action="Edit">
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="Id" />
 
@@ -299,8 +299,14 @@
             </div>
         </div>
     </div>
- 
 
+<div class="custom-file">
+    <br/>
+    <label class="custom-file-label">
+        Arbeit des Studenten <input type="file" id="UploadFiles" asp-for="UploadFile" class="form-control custom-file-input" style="margin-bottom:5px"/>
+    </label>
+    <br/>
+</div>
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -311,32 +317,32 @@
             </div>
         </div>
 
-            <table class="table table-bordered">
-                <tr>
-                    <th>
-                        <label for="Ergebnis">Ergebnis</label>
-                        <input type="text" class="form-control" id="Ergebnis" size="5" maxlength="8" readonly /><br />
-                        <input type="button" value="Notenvorschlag" class="btn btn-default pull-left" onclick="notenVorschlag()">
-                        <div class=" form-group"></div>
-                    </th>
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    <label for="Ergebnis">Ergebnis</label>
+                    <input type="text" class="form-control" id="Ergebnis" size="5" maxlength="8" readonly /><br />
+                    <input type="button" value="Notenvorschlag" class="btn btn-default pull-left" onclick="notenVorschlag()">
+                    <div class=" form-group"></div>
+                </th>
 
-                    <th>
-                        <div class="form-group">
-                            <label asp-for="Grade" class="control-label"></label>
-                            <select asp-for="Grade" asp-items="@Html.GetEnumSelectList(typeof(AweV1.Models.Grade))" class="form-control"></select>
-                            <span asp-validation-for="Grade" class="text-danger"></span>
-                        </div>
-                    </th>
-                </tr>
-            </table>
-        </div>
-        <div>
-            <div class="form-group">
-                <div class="col text-center">
-                    <input type="submit" value="Speichern" class="btn btn-default" />
-                </div>
+                <th>
+                    <div class="form-group">
+                        <label asp-for="Grade" class="control-label"></label>
+                        <select asp-for="Grade" asp-items="@Html.GetEnumSelectList(typeof(AweV1.Models.Grade))" class="form-control"></select>
+                        <span asp-validation-for="Grade" class="text-danger"></span>
+                    </div>
+                </th>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <div class="form-group">
+            <div class="col text-center">
+                <input type="submit" value="Speichern" class="btn btn-default" />
             </div>
-         </div>
+        </div>
+    </div>
 </form>
 
 
@@ -406,4 +412,13 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            $('.custom-file-input').on("change",
+                function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).next('.custom-file-label').html(fileName);
+                });
+        });
+    </script>
 }

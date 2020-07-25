@@ -11,6 +11,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace AweV1.Controllers
 {
@@ -194,7 +195,7 @@ namespace AweV1.Controllers
         public async Task<IActionResult> Edit(int id,
             [Bind(
                 "Id,LastModified,SupervisorId,ProgrammeId,Title,Description,Status,Registration,Filing,Type,Summary,Bachelor,Master,StudentFirstName,StudentLastName,Email,StudentID,Strengths,Weaknesses,Evaluation,ContentVal,LayoutVal,StructureVal,StyleVal,LiteratureVal,DifficultyVal,NoveltyVal,RichnessVal,ContentWt,LayoutWt,StyleWt,LiteratureWt,StructureWt,DifficultyWt,NoveltyWt,RichnessWt,Grade")]
-            Thesis thesis)
+            Thesis thesis, List<IFormFile> UploadFile)
         {
             if (id != thesis.Id)
             {
@@ -205,6 +206,17 @@ namespace AweV1.Controllers
             {
                 try
                 {
+                    foreach (var item in UploadFile)
+                    {
+                        if (item.Length > 0)
+                        {
+                            using (var stream = new MemoryStream())
+                            {
+                                await item.CopyToAsync(stream);
+                                thesis.UploadFile = stream.ToArray();
+                            }
+                        }
+                    }
                     _context.Update(thesis);
                     await _context.SaveChangesAsync();
                 }

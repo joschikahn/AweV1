@@ -153,6 +153,9 @@ namespace AweV1.Models
         public int ProgrammeId { get; set; }
         public Programme Programme { get; set; }
 
+        public byte[] UploadFile { get; set; }
+
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             // Sind Gewichtungen 100?
