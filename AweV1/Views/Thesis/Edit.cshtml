@@ -157,7 +157,7 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <label asp-for="ContentVal" class="control-label"></label>
-                                <input asp-for="ContentVal" class="form-control" />
+                                <select asp-for="ContentVal" id="ContentVal" asp-items="@Html.GetEnumSelectList(typeof(Points))" class="form-control"></select>
                                 <span asp-validation-for="ContentVal" class="text-danger"></span>
                             </div>
                         </div>
@@ -165,7 +165,7 @@
                     <th>
                         <div class="form-group">
                             <label asp-for="ContentWt" class="control-label"></label>
-                            <input asp-for="ContentWt" class="form-control" value="30" />
+                            <input asp-for="ContentWt" class="form-control" max="100" value="30" type ="text" onchange="checknumber(this)"/>
                             <span asp-validation-for="ContentWt" class="text-danger"></span>
                         </div>
                     </th>
@@ -174,14 +174,15 @@
                     <th>
                         <div class="form-group">
                             <label asp-for="LayoutVal" class="control-label"></label>
-                            <input asp-for="LayoutVal" class="form-control" />
+                            <select asp-for="LayoutVal" id="LayoutVal" asp-items="@Html.GetEnumSelectList(typeof(Points))" class="form-control"></select>
+
                             <span asp-validation-for="LayoutVal" class="text-danger"></span>
                         </div>
                     </th>
                     <th>
                         <div class="form-group">
                             <label asp-for="LayoutWt" class="control-label"></label>
-                            <input asp-for="LayoutWt" class="form-control" value="15" />
+                            <input asp-for="LayoutWt" class="form-control" value="15" type ="text" onchange="checknumber(this)"/>
                             <span asp-validation-for="LayoutWt" class="text-danger"></span>
                         </div>
                     </th>
@@ -190,14 +191,14 @@
                     <th>
                         <div class="form-group">
                             <label asp-for="StructureVal" class="control-label"></label>
-                            <input asp-for="StructureVal" class="form-control" />
+                            <select asp-for="StructureVal" id="StructureVal" asp-items="@Html.GetEnumSelectList(typeof(Points))" class="form-control"></select>
                             <span asp-validation-for="StructureVal" class="text-danger"></span>
                         </div>
                     </th>
                     <th>
                         <div class="form-group">
                             <label asp-for="StructureWt" class="control-label"></label>
-                            <input asp-for="StructureWt" class="form-control" value="10" />
+                            <input asp-for="StructureWt" class="form-control" value="10" type ="text" onchange="checknumber(this)" />
                             <span asp-validation-for="StructureWt" class="text-danger"></span>
                         </div>
                     </th>
@@ -206,14 +207,14 @@
                     <th>
                         <div class="form-group">
                             <label asp-for="StyleVal" class="control-label"></label>
-                            <input asp-for="StyleVal" class="form-control" />
+                            <select asp-for="StyleVal" id="StyleVal" asp-items="@Html.GetEnumSelectList(typeof(Points))" class="form-control"></select>
                             <span asp-validation-for="StyleVal" class="text-danger"></span>
                         </div>
                     </th>
                     <th>
                         <div class="form-group">
                             <label asp-for="StyleWt" class="control-label"></label>
-                            <input asp-for="StyleWt" class="form-control" value="10" />
+                            <input asp-for="StyleWt" class="form-control" value="10" type ="text" onchange="checknumber(this)"/>
                             <span asp-validation-for="StyleWt" class="text-danger"></span>
                         </div>
                     </th>
@@ -222,14 +223,14 @@
                     <th>
                         <div class="form-group">
                             <label asp-for="LiteratureVal" class="control-label"></label>
-                            <input asp-for="LiteratureVal" class="form-control" />
+                            <select asp-for="LiteratureVal" id="LiteratureVal" asp-items="@Html.GetEnumSelectList(typeof(Points))" class="form-control"></select>
                             <span asp-validation-for="LiteratureVal" class="text-danger"></span>
                         </div>
                     </th>
                     <th>
                         <div class="form-group">
                             <label asp-for="LiteratureWt" class="control-label"></label>
-                            <input asp-for="LiteratureWt" class="form-control" value="10" />
+                            <input asp-for="LiteratureWt" class="form-control" value="10" type ="text" onchange="checknumber(this)" />
                             <span asp-validation-for="LiteratureWt" class="text-danger"></span>
                         </div>
                     </th>
@@ -238,14 +239,14 @@
                     <th>
                         <div class="form-group">
                             <label asp-for="DifficultyVal" class="control-label"></label>
-                            <input asp-for="DifficultyVal" class="form-control" />
+                            <select asp-for="DifficultyVal" id="DifficultyVal" asp-items="@Html.GetEnumSelectList(typeof(Points))" class="form-control"></select>
                             <span asp-validation-for="DifficultyVal" class="text-danger"></span>
                         </div>
                     </th>
                     <th>
                         <div class="form-group">
                             <label asp-for="DifficultyWt" class="control-label"></label>
-                            <input asp-for="DifficultyWt" class="form-control" value="5" />
+                            <input asp-for="DifficultyWt" class="form-control" value="5" type ="text" onchange="checknumber(this)"/>
                             <span asp-validation-for="DifficultyWt" class="text-danger"></span>
                         </div>
                     </th>
@@ -254,14 +255,14 @@
                     <th>
                         <div class="form-group">
                             <label asp-for="NoveltyVal" class="control-label"></label>
-                            <input asp-for="NoveltyVal" class="form-control" />
+                            <select asp-for="NoveltyVal" id="NoveltyVal" asp-items="@Html.GetEnumSelectList(typeof(Points))" class="form-control"></select>
                             <span asp-validation-for="NoveltyVal" class="text-danger"></span>
                         </div>
                     </th>
                     <th>
                         <div class="form-group">
                             <label asp-for="NoveltyWt" class="control-label"></label>
-                            <input asp-for="NoveltyWt" class="form-control" value="10" />
+                            <input asp-for="NoveltyWt" class="form-control" value="10" type ="text" onchange="checknumber(this)"/>
                             <span asp-validation-for="NoveltyWt" class="text-danger"></span>
                         </div>
                     </th>
@@ -270,14 +271,14 @@
                     <th>
                         <div class="form-group">
                             <label asp-for="RichnessVal" class="control-label"></label>
-                            <input asp-for="RichnessVal" class="form-control" />
+                            <select asp-for="RichnessVal" id="RichnessVal" asp-items="@Html.GetEnumSelectList(typeof(Points))" class="form-control"></select>
                             <span asp-validation-for="RichnessVal" class="text-danger"></span>
                         </div>
                     </th>
                     <th>
                         <div class="form-group">
                             <label asp-for="RichnessWt" class="control-label"></label>
-                            <input asp-for="RichnessWt" class="form-control" value="10" />
+                            <input asp-for="RichnessWt" class="form-control" value="10" type ="text" onchange="checknumber(this)" />
                             <span asp-validation-for="RichnessWt" class="text-danger"></span>
                         </div>
                     </th>
@@ -353,6 +354,17 @@
 
 
 <script>
+
+    function checknumber(txtid) {
+        var mynumbervalue = parseFloat((txtid).value);
+        if (mynumbervalue > 100) {
+            txtid.value = "0";
+            alert("Bitte eine Zahl zwischen 0 und 100 eingeben")
+        }
+     }
+
+
+
     function notenVorschlag() {
         var content = document.getElementById("ContentVal").value;
         var layout = document.getElementById("LayoutVal").value;
