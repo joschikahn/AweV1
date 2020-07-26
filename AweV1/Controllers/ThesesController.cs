@@ -391,7 +391,7 @@ namespace AweV1.Controllers
             foreach (var thesis in _context.thesis)
             {
                 if (thesis.Id.Equals(id))
-                {
+                { 
                     return File(thesis.UploadFile, "application/pdf", "thesis.pdf");
                 }
             }
