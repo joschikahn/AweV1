@@ -37,7 +37,7 @@
                 </div>
                 <div class="col-xs-4">
                     <label class="control-label">Filtern nach:</label>
-                    @Html.DropDownList("Filter", ViewBag.FilterValues, "--- Filter auswählen ---", new { id = "Filter", @class = "form-control", onchange = "document.getElementById('Form').submit()" })
+                    @Html.DropDownList("Filter", Html.GetEnumSelectList(typeof(AweV1.Controllers.ThesisController.FilterEnum)), new { id = "Filter", @class = "form-control", onchange = "document.getElementById('Form').submit()" })
                 </div>
                 <div class="col-xs-4">
                     <label class="control-label">Sortieren nach:</label>

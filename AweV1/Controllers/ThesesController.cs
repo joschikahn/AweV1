@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore.SqlServer.Query.ExpressionTranslators.Internal;
 
 namespace AweV1.Controllers
 {
@@ -47,6 +48,24 @@ namespace AweV1.Controllers
             Supervisor
         }
 
+        public enum FilterEnum
+        {
+            [Display(Name = "Frei")]
+            Free = 0,
+
+            [Display(Name = "Vorgemerkt")]
+            Reserved = 1,
+
+            [Display(Name = "Angemeldet")]
+            Registered = 2,
+
+            [Display(Name = "Abgegeben")]
+            Filed = 3,
+
+            [Display(Name = "Bewertet")]
+            Graded = 4,
+        }
+
         private readonly AppDbContext _context;
 
         public ThesisController(AppDbContext context)
@@ -60,8 +79,10 @@ namespace AweV1.Controllers
         {
             IQueryable<Thesis> query = _context.thesis;
             query = (Search != null) ? query.Where(m => (m.Title.Contains(Search))) : query;
+
             query = (!Filter.Equals(null)) ? query.Where(m => m.Status == Filter) : query;
             query = (Filter.Equals(null)) ? _context.thesis : query;
+
             //query = (!FilterPublic.Equals(null)) ? query.Where(m => m.Type == FilterPublic) : query;
 
             switch (Sort)
@@ -96,6 +117,7 @@ namespace AweV1.Controllers
             ViewBag.Search = Search;
             ViewBag.Filter = Filter;
             //ViewBag.FilterPublic = FilterPublic;
+            
             ViewBag.FilterValues = new SelectList(await _context.thesis.Select(m => m.Status).Distinct().ToListAsync());
             //ViewBag.FilterValuesPublic = new SelectList(await _context.thesis.Select(m => m.Type).Distinct().ToListAsync());
             ViewBag.Sort = Sort;
