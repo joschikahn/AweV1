@@ -4,14 +4,16 @@ using AweV1.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AweV1.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200726095647_TestdatenOnmodelcreating")]
+    partial class TestdatenOnmodelcreating
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -159,7 +161,7 @@ namespace AweV1.Migrations
 
                     b.Property<int?>("Points");
 
-                    b.Property<int?>("ProgrammeId");
+                    b.Property<int>("ProgrammeId");
 
                     b.Property<DateTime?>("Registration");
 
@@ -325,7 +327,8 @@ namespace AweV1.Migrations
                 {
                     b.HasOne("AweV1.Models.Programme", "Programme")
                         .WithMany("thesisList")
-                        .HasForeignKey("ProgrammeId");
+                        .HasForeignKey("ProgrammeId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("AweV1.Models.Supervisor", "Supervisor")
                         .WithMany("thesisList")

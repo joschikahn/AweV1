@@ -151,6 +151,139 @@
             </div>
         </div>
         <div class="formular">
+
+            <table class="table table-bordered">
+                <tr>
+                    <th>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label asp-for="ContentVal" class="control-label"></label>
+                                <input asp-for="ContentVal" class="form-control" />
+                                <span asp-validation-for="ContentVal" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="form-group">
+                            <label asp-for="ContentWt" class="control-label"></label>
+                            <input asp-for="ContentWt" class="form-control" value="30" />
+                            <span asp-validation-for="ContentWt" class="text-danger"></span>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <div class="form-group">
+                            <label asp-for="LayoutVal" class="control-label"></label>
+                            <input asp-for="LayoutVal" class="form-control" />
+                            <span asp-validation-for="LayoutVal" class="text-danger"></span>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="form-group">
+                            <label asp-for="LayoutWt" class="control-label"></label>
+                            <input asp-for="LayoutWt" class="form-control" value="15" />
+                            <span asp-validation-for="LayoutWt" class="text-danger"></span>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <div class="form-group">
+                            <label asp-for="StructureVal" class="control-label"></label>
+                            <input asp-for="StructureVal" class="form-control" />
+                            <span asp-validation-for="StructureVal" class="text-danger"></span>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="form-group">
+                            <label asp-for="StructureWt" class="control-label"></label>
+                            <input asp-for="StructureWt" class="form-control" value="10" />
+                            <span asp-validation-for="StructureWt" class="text-danger"></span>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <div class="form-group">
+                            <label asp-for="StyleVal" class="control-label"></label>
+                            <input asp-for="StyleVal" class="form-control" />
+                            <span asp-validation-for="StyleVal" class="text-danger"></span>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="form-group">
+                            <label asp-for="StyleWt" class="control-label"></label>
+                            <input asp-for="StyleWt" class="form-control" value="10" />
+                            <span asp-validation-for="StyleWt" class="text-danger"></span>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <div class="form-group">
+                            <label asp-for="LiteratureVal" class="control-label"></label>
+                            <input asp-for="LiteratureVal" class="form-control" />
+                            <span asp-validation-for="LiteratureVal" class="text-danger"></span>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="form-group">
+                            <label asp-for="LiteratureWt" class="control-label"></label>
+                            <input asp-for="LiteratureWt" class="form-control" value="10" />
+                            <span asp-validation-for="LiteratureWt" class="text-danger"></span>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <div class="form-group">
+                            <label asp-for="DifficultyVal" class="control-label"></label>
+                            <input asp-for="DifficultyVal" class="form-control" />
+                            <span asp-validation-for="DifficultyVal" class="text-danger"></span>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="form-group">
+                            <label asp-for="DifficultyWt" class="control-label"></label>
+                            <input asp-for="DifficultyWt" class="form-control" value="5" />
+                            <span asp-validation-for="DifficultyWt" class="text-danger"></span>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <div class="form-group">
+                            <label asp-for="NoveltyVal" class="control-label"></label>
+                            <input asp-for="NoveltyVal" class="form-control" />
+                            <span asp-validation-for="NoveltyVal" class="text-danger"></span>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="form-group">
+                            <label asp-for="NoveltyWt" class="control-label"></label>
+                            <input asp-for="NoveltyWt" class="form-control" value="10" />
+                            <span asp-validation-for="NoveltyWt" class="text-danger"></span>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <div class="form-group">
+                            <label asp-for="RichnessVal" class="control-label"></label>
+                            <input asp-for="RichnessVal" class="form-control" />
+                            <span asp-validation-for="RichnessVal" class="text-danger"></span>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="form-group">
+                            <label asp-for="RichnessWt" class="control-label"></label>
+                            <input asp-for="RichnessWt" class="form-control" value="10" />
+                            <span asp-validation-for="RichnessWt" class="text-danger"></span>
+                        </div>
+                    </th>
+                </tr>
+            </table>
             <div class="form-group">
                 <label asp-for="Summary" class="control-label"></label>
                 <textarea class="form-control" asp-for="Summary" rows="3"></textarea>
@@ -172,136 +305,6 @@
                 <span asp-validation-for="Evaluation" class="text-danger"></span>
             </div>
         </div>
-        <table class="table table-bordered">
-            <tr>
-                <th>
-                    <div class="form-group">
-                        <label asp-for="ContentVal" class="control-label"></label>
-                        <select asp-for="Points" id="ContentVal" asp-items="@Html.GetEnumSelectList(typeof(AweV1.Models.Points))" class="form-control"></select>
-                        <span asp-validation-for="ContentVal" class="text-danger"></span>
-                    </div>
-                </th>
-                <th>
-                    <div class="form-group">
-                        <label asp-for="ContentWt" class="control-label"></label>
-                        <input asp-for="ContentWt" class="form-control" id="ContentWt" />
-                        <span asp-validation-for="ContentWt" class="text-danger"></span>
-                    </div>
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    <div class="form-group">
-                        <label asp-for="LayoutVal" class="control-label"></label>
-                        <select asp-for="Points" id="LayoutVal" asp-items="@Html.GetEnumSelectList(typeof(AweV1.Models.Points))" class="form-control"></select>
-                        <span asp-validation-for="LayoutVal" class="text-danger"></span>
-                    </div>
-                </th>
-                <th>
-                    <div class="form-group">
-                        <label asp-for="LayoutWt" class="control-label"></label>
-                        <input asp-for="LayoutWt" class="form-control" />
-                        <span asp-validation-for="LayoutWt" class="text-danger"></span>
-                    </div>
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    <div class="form-group">
-                        <label asp-for="StructureVal" class="control-label"></label>
-                        <select asp-for="Points" id="StructureVal" asp-items="@Html.GetEnumSelectList(typeof(AweV1.Models.Points))" class="form-control"></select>
-                        <span asp-validation-for="StructureVal" class="text-danger"></span>
-                    </div>
-                </th>
-                <th>
-                    <div class="form-group">
-                        <label asp-for="StructureWt" class="control-label"></label>
-                        <input asp-for="StructureWt" class="form-control" />
-                        <span asp-validation-for="StructureWt" class="text-danger"></span>
-                    </div>
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    <div class="form-group">
-                        <label asp-for="StyleVal" class="control-label"></label>
-                        <select asp-for="Points" id="StyleVal" asp-items="@Html.GetEnumSelectList(typeof(AweV1.Models.Points))" class="form-control"></select>
-                        <span asp-validation-for="StyleVal" class="text-danger"></span>
-                    </div>
-                </th>
-                <th>
-                    <div class="form-group">
-                        <label asp-for="StyleWt" class="control-label"></label>
-                        <input asp-for="StyleWt" class="form-control" id="StyleWt" />
-                        <span asp-validation-for="StyleWt" class="text-danger"></span>
-                    </div>
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    <div class="form-group">
-                        <label asp-for="LiteratureVal" class="control-label"></label>
-                        <select asp-for="Points" id="LiteratureVal" asp-items="@Html.GetEnumSelectList(typeof(AweV1.Models.Points))" class="form-control"></select>
-                        <span asp-validation-for="LiteratureVal" class="text-danger"></span>
-                    </div>
-                </th>
-                <th>
-                    <div class="form-group">
-                        <label asp-for="LiteratureWt" class="control-label"></label>
-                        <input asp-for="LiteratureWt" class="form-control" />
-                        <span asp-validation-for="LiteratureWt" class="text-danger"></span>
-                    </div>
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    <div class="form-group">
-                        <label asp-for="DifficultyVal" class="control-label"></label>
-                        <select asp-for="Points" id="DifficultyVal" asp-items="@Html.GetEnumSelectList(typeof(AweV1.Models.Points))" class="form-control"></select>
-                        <span asp-validation-for="DifficultyVal" class="text-danger"></span>
-                    </div>
-                </th>
-                <th>
-                    <div class="form-group">
-                        <label asp-for="DifficultyWt" class="control-label"></label>
-                        <input asp-for="DifficultyWt" class="form-control" />
-                        <span asp-validation-for="DifficultyWt" class="text-danger"></span>
-                    </div>
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    <div class="form-group">
-                        <label asp-for="NoveltyVal" class="control-label"></label>
-                        <select asp-for="Points" id="NoveltyVal" asp-items="@Html.GetEnumSelectList(typeof(AweV1.Models.Points))" class="form-control"></select>
-                        <span asp-validation-for="NoveltyVal" class="text-danger"></span>
-                    </div>
-                </th>
-                <th>
-                    <div class="form-group">
-                        <label asp-for="NoveltyWt" class="control-label"></label>
-                        <input asp-for="NoveltyWt" class="form-control" />
-                        <span asp-validation-for="NoveltyWt" class="text-danger"></span>
-                    </div>
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    <div class="form-group">
-                        <label asp-for="RichnessVal" class="control-label"></label>
-                        <select asp-for="Points" id="RichnessVal" asp-items="@Html.GetEnumSelectList(typeof(AweV1.Models.Points))" class="form-control"></select>
-                        <span asp-validation-for="RichnessVal" class="text-danger"></span>
-                    </div>
-                </th>
-                <th>
-                    <div class="form-group">
-                        <label asp-for="RichnessWt" class="control-label"></label>
-                        <input asp-for="RichnessWt" class="form-control" />
-                        <span asp-validation-for="RichnessWt" class="text-danger"></span>
-                    </div>
-                </th>
-            </tr>
-        </table>
     </div>
 
 <div class="custom-file">
@@ -350,8 +353,7 @@
 </form>
 
 
-<
->
+<script>
     function notenVorschlag() {
         var content = document.getElementById("ContentVal").value;
         var layout = document.getElementById("LayoutVal").value;
