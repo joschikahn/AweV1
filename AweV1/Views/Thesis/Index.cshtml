@@ -97,17 +97,8 @@
                             }
                         }
                     </td>
+
                     
-                    <!--Ausblenden wenn Status nicht bewertet-->
-                    @{
-                        if (item.Status != Status.Graded)
-                        {
-                            <script>
-                              
-                                document.getElementById("DetailsPDF").disabled = true;
-                            </script>
-                        }
-                    }
 
                     <td class="text-center" style="vertical-align: middle">
                         <a title="Thesis bearbeiten" class="btn btn-sm btn-default" asp-action="Edit" asp-route-id="@item.Id">
@@ -116,10 +107,22 @@
                         <a title="Details anzeigen" class="btn btn-sm btn-default" asp-action="Details" asp-route-id="@item.Id">
                             <span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span>
                         </a>
-                        <a title="Download Gutachten" class="btn btn-sm btn-default" asp-action="DetailsPDF" asp-route-id="@item.Id">
-                            <span class='glyphicon glyphicon-download' aria-hidden='true'></span>
-                        </a>
+                        <a id="@item.Id" title="Download Gutachten" class="btn btn-sm btn-default" asp-action="DetailsPDF" asp-route-id="@item.Id">
+                            <button id="button_@item.Id"  class="btn btn-sm btn-default">
+                           <span class='glyphicon glyphicon-download' aria-hidden='true'></span></button>
+</a>
                         
+                        <!--Ausblenden wenn Status nicht bewertet-->
+                        @{
+                            if (item.Status != Status.Graded)
+                            {
+                                                <script>
+                                    document.getElementById("button_@item.Id").disabled = true;
+                                    document.getElementById("@item.Id").disabled = true;
+                                                </script>
+                            }
+                        }
+
                         <a title="Thesis löschen" class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id">
                             <span class='glyphicon glyphicon-trash' aria-hidden='true'></span>
                         </a>
