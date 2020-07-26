@@ -127,6 +127,7 @@ namespace AweV1.Controllers
             ViewBag.PageTotal = PageTotal;
             ViewBag.PageSize = PageSize;
             ViewBag.supervisor = _context.supervisors;
+         
             if (!this.User.IsInRole("Administrator"))
                 return View("publicThesis", await query.Skip(PageSize * (Page - 1)).Take(PageSize).ToListAsync());
             return View(await query.Skip(PageSize * (Page - 1)).Take(PageSize).ToListAsync());
@@ -173,7 +174,7 @@ namespace AweV1.Controllers
             }
 
 
-            return new ViewAsPdf(thesis) { FileName = "Gutachten"+thesis.Title+thesis.StudentID+".pdf" };
+            return new ViewAsPdf(thesis) { FileName = "Gutachten "+thesis.Title +" "+thesis.StudentID+".pdf" };
         }
 
 
