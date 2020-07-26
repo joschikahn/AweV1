@@ -173,7 +173,7 @@ namespace AweV1.Controllers
             }
 
 
-            return new ViewAsPdf(thesis) { FileName = "Gutachten.pdf" };
+            return new ViewAsPdf(thesis) { FileName = "Gutachten"+thesis.Title+thesis.StudentID+".pdf" };
         }
 
 

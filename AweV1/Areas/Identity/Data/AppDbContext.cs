@@ -27,7 +27,7 @@ namespace AweV1.Data
             builder.Entity<Thesis>().HasData(
                 new Thesis()
                {
-                Id = 100,
+                Id = 1,
                 LastModified = DateTime.Now,
                 Title = "Omni Channel Retail",
                 Description = "In diesem Paper geht es um verschiedene Vertriebskanäle",
@@ -54,15 +54,15 @@ namespace AweV1.Data
                 NoveltyVal = 5,
                 RichnessVal = 5,
                 Grade = Grade.Note_10,
-                ProgrammeId = 100,
-                SupervisorId = 100
+                ProgrammeId = 1,
+                SupervisorId = 1
             });
 
 
             builder.Entity<Programme>().HasData(
                 new Programme()
                 {
-                    Id = 100,
+                    Id = 1,
                     Name = "BA Wirtschaftsinformatik",
 
                 });
@@ -72,7 +72,7 @@ namespace AweV1.Data
             builder.Entity<Supervisor>().HasData(
                 new Supervisor()
                 {
-                    Id = 100,
+                    Id = 1,
                     FirstName = "Markus",
                     LastName = "Schneider",
                     Active = true,
