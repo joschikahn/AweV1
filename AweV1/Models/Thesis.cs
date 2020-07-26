@@ -151,8 +151,7 @@ namespace AweV1.Models
         public int SupervisorId { get; set; }
         public Supervisor Supervisor { get; set; }
 
-        [Required(ErrorMessage = "Bitte geben Sie ein Programm an!")]
-        public int ProgrammeId { get; set; }
+        public int? ProgrammeId { get; set; }
         public Programme Programme { get; set; }
 
         public byte[] UploadFile { get; set; }
@@ -173,7 +172,7 @@ namespace AweV1.Models
             else if (Bachelor == false && Master == false)
             {
                 return new ValidationResult[]
-                    {new ValidationResult("Bitte Bachelor oder Master wählen")};
+                    {new ValidationResult("Bitte Bachelor und/oder Master wählen")};
             }
             // Ist Anmeldedatum vor Abgabedatum?
             else if (Registration > Filing)
@@ -300,19 +299,3 @@ namespace AweV1.Models
     }
 
 }
-/*
-ViewBag.supervisors = _context.supervisors.ToList();
-
-    @{
-    List<SelectListItem> supervisors = new List<SelectListItem>();
-    foreach (var i in ViewBag.supervisors)
-    {supvervisors.Add(NewsStyleUriParser SelectListItem() { Text = if.LastName.ToString(), Value = if.Id.TosTring() });
-    }
-    }
-
-     </div>
-            <div class="form-group">
-                <label asp-for="Supervisor" class="control-label"></label>
-                <select asp-for="Supervisor" asp-items="supervisors" class="form-control"></select>
-                <span asp-validation-for="Supervisor" class="text-danger"></span>
-            </div>*/
