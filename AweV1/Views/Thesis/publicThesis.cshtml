@@ -76,7 +76,7 @@
 <script>
     function resetForm() {
         document.getElementById("Search").value = null;
-        document.getElementById("FilterPublic").value = null;
+        document.getElementById("Filter").value = null;
         document.getElementById("Sort").value = null;
         document.getElementById("Page").value = null;
         document.getElementById("PageSize").value = null;
@@ -124,8 +124,7 @@ toggle between hiding and showing the dropdown content */
                     <input class="form-control" name="Search" id="Search" value="@ViewBag.Search" placeholder="Titel eingeben" onchange="document.getElementById('Form').submit()">
                 </div>
                 <div class="col-xs-4">
-                    
-  
+                   
                 </div>
                 <div class="col-xs-4">
                     <label class="control-label">Sortieren nach:</label>
