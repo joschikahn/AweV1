@@ -97,12 +97,14 @@
                             }
                         }
                     </td>
+                    
+                    <!--Ausblenden wenn Status nicht bewertet-->
                     @{
                         if (item.Status != Status.Graded)
                         {
                             <script>
                               
-                                document.getElementByTitle("DetailsPDF").disabled = true;
+                                document.getElementById("DetailsPDF").disabled = true;
                             </script>
                         }
                     }
@@ -114,9 +116,10 @@
                         <a title="Details anzeigen" class="btn btn-sm btn-default" asp-action="Details" asp-route-id="@item.Id">
                             <span class='glyphicon glyphicon-info-sign' aria-hidden='true'></span>
                         </a>
-                        <a id ="DetailsPDF" title="Download Gutachten" class="btn btn-sm btn-default" asp-action="DetailsPDF" asp-route-id="@item.Id">
+                        <a title="Download Gutachten" class="btn btn-sm btn-default" asp-action="DetailsPDF" asp-route-id="@item.Id">
                             <span class='glyphicon glyphicon-download' aria-hidden='true'></span>
                         </a>
+                        
                         <a title="Thesis löschen" class="btn btn-sm btn-danger" asp-action="Delete" asp-route-id="@item.Id">
                             <span class='glyphicon glyphicon-trash' aria-hidden='true'></span>
                         </a>
