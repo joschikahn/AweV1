@@ -15,13 +15,20 @@
     }
 
 </script>
-<script>
-    function hideButton(status) {
-        if (status != Status.Graded) {
-            
-        }
+
+<style>
+    .button {
+        font-size: 16px;
+        margin: 4px 2px;
+        padding: 16px 32px;
     }
-</script>
+    .a {
+        font-size: 16px;
+        margin: 4px 2px;
+        padding: 16px 32px;
+    }
+
+</style>
 
 <h2>Thesis: Übersicht</h2>
 
@@ -44,7 +51,7 @@
                 </div>
                 <div class="col-xs-4">
                     <label class="control-label">Filtern nach:</label>
-                    @Html.DropDownList("Filter",  Html.GetEnumSelectList(typeof(AweV1.Controllers.ThesisController.FilterEnum)), new { id = "Filter", @class = "form-control", onchange = "document.getElementById('Form').submit()" })
+                    @Html.DropDownList("Filter", Html.GetEnumSelectList(typeof(AweV1.Controllers.ThesisController.FilterEnum)), new { id = "Filter", @class = "form-control", onchange = "document.getElementById('Form').submit()" })
                 </div>
                 <div class="col-xs-4">
                     <label class="control-label">Sortieren nach:</label>

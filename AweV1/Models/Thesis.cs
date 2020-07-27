@@ -143,9 +143,7 @@ namespace AweV1.Models
         [Display(Name = "Note")]
         public Grade? Grade { get; set; }
 
-        public Points? Points { get; set; }
-
-
+       
         //Fremdschlüssel
         [Required(ErrorMessage = "Bitte geben Sie den Supervisor an!")]
         public int SupervisorId { get; set; }
@@ -250,25 +248,7 @@ namespace AweV1.Models
         Master = 1
     }
 
-    public enum Points
-    {
 
-        [Display(Name = "0")]
-        points_Empty = 0,
-        [Display(Name = "1")]
-        points_10 = 1,
-        [Display(Name = "2")]
-        points_13 = 2,
-        [Display(Name = "3")]
-        points_17 = 3,
-        [Display(Name = "4")]
-        points_20 = 4,
-        [Display(Name = "5")]
-        Note_23 = 5,
-
-
-
-    }
     public enum Grade
     {
         [Display(Name = "---")]

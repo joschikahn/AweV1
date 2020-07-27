@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AweV1.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20200725115451_requiredDateTime")]
-    partial class requiredDateTime
+    [Migration("20200727133921_michaelsmiggi")]
+    partial class michaelsmiggi
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -84,6 +84,13 @@ namespace AweV1.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("programme");
+
+                    b.HasData(
+                        new { Id = 1, Name = "BA Wirtschaftsinformatik" },
+                        new { Id = 200, Name = "BA Wirtschaftswissenschaften" },
+                        new { Id = 201, Name = "MA Information Systems" },
+                        new { Id = 202, Name = "MA Data Science" }
+                    );
                 });
 
             modelBuilder.Entity("AweV1.Models.Supervisor", b =>
@@ -106,6 +113,13 @@ namespace AweV1.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("supervisors");
+
+                    b.HasData(
+                        new { Id = 1, Active = true, Email = "maschneider@mail.mail", FirstName = "Markus", LastName = "Schneider" },
+                        new { Id = 200, Active = true, Email = "mazimmerlin@web.de", FirstName = "Max", LastName = "Zimmerlin" },
+                        new { Id = 201, Active = true, Email = "groß@gmail.com", FirstName = "Simone", LastName = "Groß" },
+                        new { Id = 202, Active = false, Email = "lucian.bianco@gmx.com", FirstName = "Lucia", LastName = "Bianco" }
+                    );
                 });
 
             modelBuilder.Entity("AweV1.Models.Thesis", b =>
@@ -151,7 +165,7 @@ namespace AweV1.Migrations
 
                     b.Property<int>("NoveltyWt");
 
-                    b.Property<int>("ProgrammeId");
+                    b.Property<int?>("ProgrammeId");
 
                     b.Property<DateTime?>("Registration");
 
@@ -197,6 +211,11 @@ namespace AweV1.Migrations
                     b.HasIndex("SupervisorId");
 
                     b.ToTable("thesis");
+
+                    b.HasData(
+                        new { Id = 1, Bachelor = true, ContentVal = 5, ContentWt = 30, Description = "In diesem Paper geht es um verschiedene Vertriebskanäle", DifficultyVal = 5, DifficultyWt = 5, Email = "joschikahn@web.de", Evaluation = "Unterm Strich eine gute strukturierte Arbeit nach vom Brocke zum Thema Omni Channel Retail.", Filing = new DateTime(2020, 7, 27, 15, 39, 20, 545, DateTimeKind.Local), Grade = 1, LastModified = new DateTime(2020, 7, 27, 15, 39, 20, 544, DateTimeKind.Local), LayoutVal = 5, LayoutWt = 15, LiteratureVal = 5, LiteratureWt = 10, Master = true, NoveltyVal = 5, NoveltyWt = 10, ProgrammeId = 1, Registration = new DateTime(2020, 7, 27, 15, 39, 20, 545, DateTimeKind.Local), RichnessVal = 5, RichnessWt = 10, Status = 4, Strengths = "Quellenarbeit, Zitieren und Synthese sind hervorragned ausgearbeitet.", StructureVal = 5, StructureWt = 10, StudentFirstName = "Josua", StudentID = "2278467", StudentLastName = "Homberger", StyleVal = 5, StyleWt = 10, Summary = "Omni Channel Retail eignet sich besonders für große Unternehemen. Eher ungeeignet in der Lebensmittelbranche.", SupervisorId = 1, Title = "Omni Channel Retail", Type = 0, Weaknesses = "Abstract und Fazit ausbaufähig." },
+                        new { Id = 200, Bachelor = false, ContentWt = 30, Description = "RPA gilt als die aufstrebende Technologie für die Automatisierung von Prozesse. In dieser Arbeit soll eine literarische Aufarbeitung von weiteren Möglichkeiten der Prozessautomatisierung erfolgen. Zusätzlich sollen qualitative Studien die aktuelle Situation aus der Praxis gegenüberstellen. Ziel soll die Einordnung von RPA im Vergleich zu anderen Technologien sein", DifficultyWt = 5, Email = "claustern@web.de", Evaluation = "", Filing = new DateTime(2015, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), LastModified = new DateTime(2020, 7, 27, 15, 39, 20, 547, DateTimeKind.Local), LayoutWt = 15, LiteratureWt = 10, Master = true, NoveltyWt = 10, ProgrammeId = 200, Registration = new DateTime(2011, 6, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), RichnessWt = 10, Status = 3, Strengths = "", StructureWt = 10, StudentFirstName = "Claudia", StudentID = "2278467", StudentLastName = "Stern", StyleWt = 10, Summary = "", SupervisorId = 1, Title = "Should you put all your Processes in one Basket?", Type = 1, Weaknesses = "" }
+                    );
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -313,8 +332,7 @@ namespace AweV1.Migrations
                 {
                     b.HasOne("AweV1.Models.Programme", "Programme")
                         .WithMany("thesisList")
-                        .HasForeignKey("ProgrammeId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ProgrammeId");
 
                     b.HasOne("AweV1.Models.Supervisor", "Supervisor")
                         .WithMany("thesisList")

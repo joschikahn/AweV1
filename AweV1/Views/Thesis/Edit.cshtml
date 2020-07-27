@@ -157,7 +157,14 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <label asp-for="ContentVal" class="control-label"></label>
-                                <select asp-for="ContentVal" id="ContentVal" asp-items="@Html.GetEnumSelectList(typeof(Points))" class="form-control"></select>
+                                <select  asp-for="ContentVal" id="ContentVal"class="form-control">
+                                    <option value="">Bitte auswählen</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
                                 <span asp-validation-for="ContentVal" class="text-danger"></span>
                             </div>
                         </div>
@@ -174,8 +181,14 @@
                     <th>
                         <div class="form-group">
                             <label asp-for="LayoutVal" class="control-label"></label>
-                            <select asp-for="LayoutVal" id="LayoutVal" asp-items="@Html.GetEnumSelectList(typeof(Points))" class="form-control"></select>
-
+                            <select asp-for="LayoutVal" id="LayoutVal" class="form-control">
+                                <option value="">Bitte auswählen</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
                             <span asp-validation-for="LayoutVal" class="text-danger"></span>
                         </div>
                     </th>
@@ -191,8 +204,15 @@
                     <th>
                         <div class="form-group">
                             <label asp-for="StructureVal" class="control-label"></label>
-                            <select asp-for="StructureVal" id="StructureVal" asp-items="@Html.GetEnumSelectList(typeof(Points))" class="form-control"></select>
-                            <span asp-validation-for="StructureVal" class="text-danger"></span>
+                            <select asp-for="StructureVal" id="StructureVal" class="form-control">
+                                <option value="">Bitte auswählen</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                             </select>
+                             <span asp-validation-for="StructureVal" class="text-danger"></span>
                         </div>
                     </th>
                     <th>
@@ -207,7 +227,14 @@
                     <th>
                         <div class="form-group">
                             <label asp-for="StyleVal" class="control-label"></label>
-                            <select asp-for="StyleVal" id="StyleVal" asp-items="@Html.GetEnumSelectList(typeof(Points))" class="form-control"></select>
+                            <select asp-for="StyleVal" id="StyleVal" class="form-control">
+                                <option value="">Bitte auswählen</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>                           
                             <span asp-validation-for="StyleVal" class="text-danger"></span>
                         </div>
                     </th>
@@ -223,7 +250,14 @@
                     <th>
                         <div class="form-group">
                             <label asp-for="LiteratureVal" class="control-label"></label>
-                            <select asp-for="LiteratureVal" id="LiteratureVal" asp-items="@Html.GetEnumSelectList(typeof(Points))" class="form-control"></select>
+                            <select asp-for="LiteratureVal" id="LiteratureVal" class="form-control">
+                                <option value="">Bitte auswählen</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>                    
                             <span asp-validation-for="LiteratureVal" class="text-danger"></span>
                         </div>
                     </th>
@@ -239,7 +273,14 @@
                     <th>
                         <div class="form-group">
                             <label asp-for="DifficultyVal" class="control-label"></label>
-                            <select asp-for="DifficultyVal" id="DifficultyVal" asp-items="@Html.GetEnumSelectList(typeof(Points))" class="form-control"></select>
+                            <select asp-for="DifficultyVal" id="DifficultyVal" class="form-control">
+                                <option value="">Bitte auswählen</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>        
                             <span asp-validation-for="DifficultyVal" class="text-danger"></span>
                         </div>
                     </th>
@@ -255,8 +296,14 @@
                     <th>
                         <div class="form-group">
                             <label asp-for="NoveltyVal" class="control-label"></label>
-                            <select asp-for="NoveltyVal" id="NoveltyVal" asp-items="@Html.GetEnumSelectList(typeof(Points))" class="form-control"></select>
-                            <span asp-validation-for="NoveltyVal" class="text-danger"></span>
+                            <select asp-for="NoveltyVal" id="NoveltyVal" class="form-control">
+                                <option value="">Bitte auswählen</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>                            <span asp-validation-for="NoveltyVal" class="text-danger"></span>
                         </div>
                     </th>
                     <th>
@@ -271,8 +318,14 @@
                     <th>
                         <div class="form-group">
                             <label asp-for="RichnessVal" class="control-label"></label>
-                            <select asp-for="RichnessVal" id="RichnessVal" asp-items="@Html.GetEnumSelectList(typeof(Points))" class="form-control"></select>
-                            <span asp-validation-for="RichnessVal" class="text-danger"></span>
+                            <select asp-for="RichnessVal" id="RichnessVal" class="form-control">
+                                <option value="">Bitte auswählen</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>                            <span asp-validation-for="RichnessVal" class="text-danger"></span>
                         </div>
                     </th>
                     <th>
