@@ -103,7 +103,7 @@ namespace AweV1.Controllers
 
             
             query = (Search != null) ? query.Where(m => (m.Title.Contains(Search))) : query;
-            query = _context.thesis;
+            //query = _context.thesis;
             if (!this.User.IsInRole("Administrator"))
             {
                 //query = (PublicFilter.Equals(PublicFilterEnum.All)) ? query.Where(m => m.Status == Status.Free) || query.Where(m => m.Status == Status.Reserved) : query;
@@ -121,7 +121,7 @@ namespace AweV1.Controllers
             else
             {
 
-                query = (Filter.Equals(FilterEnum.All)) ? _context.thesis : query;
+                query = (Filter.Equals(FilterEnum.All)) ? query : query;
                 query = (Filter.Equals(FilterEnum.Free)) ? query.Where(m => m.Status == Status.Free) : query;
                 query = (Filter.Equals(FilterEnum.Reserved)) ? query.Where(m => m.Status == Status.Reserved) : query;
                 query = (Filter.Equals(FilterEnum.Registered)) ? query.Where(m => m.Status == Status.Registered) : query;
@@ -141,7 +141,7 @@ namespace AweV1.Controllers
                     query = query.OrderBy(m => m.Status);
                     break;
                 case SortCriteria.Supervisor:
-                    query = query.OrderBy(m => m.Supervisor);
+                    query = query.OrderBy(m => m.Supervisor.LastName);
                     break;
                 case SortCriteria.Registration:
                     query = query.OrderBy(m => m.Registration);
@@ -153,7 +153,7 @@ namespace AweV1.Controllers
                     query = query.OrderBy(m => m.Type);
                     break;
                 default:
-                    query = query.OrderBy(m => m.StudentID);
+                    query = query.OrderBy(m => m.StudentLastName);
                     break;
             }
 
@@ -219,7 +219,7 @@ namespace AweV1.Controllers
             }
 
 
-            return new ViewAsPdf(thesis) { FileName = "Gutachten "+thesis.Title +" "+thesis.StudentID+".pdf" };
+            return new ViewAsPdf(thesis) { FileName = "Gutachten " + thesis.StudentID+".pdf" };
         }
 
 
