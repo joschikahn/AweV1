@@ -52,21 +52,28 @@ namespace AweV1.Controllers
 
         public enum FilterEnum
         {
+           
+
+            [Display(Name = "Status wählen")]
+            All = 0,
+
             [Display(Name = "Frei")]
-            Free = 0,
+            Free = 1,
 
             [Display(Name = "Vorgemerkt")]
-            Reserved = 1,
+            Reserved = 2,
 
             [Display(Name = "Angemeldet")]
-            Registered = 2,
+            Registered = 3,
 
             [Display(Name = "Abgegeben")]
-            Filed = 3,
+            Filed = 4,
 
             [Display(Name = "Bewertet")]
-            Graded = 4,
-        }
+            Graded = 5
+            
+        
+    }
 
         private readonly AppDbContext _context;
 
@@ -76,13 +83,21 @@ namespace AweV1.Controllers
         }
 
         // GET: Thesis
-        public async Task<IActionResult> Index(string Search, Status Filter, /*Type FilterPublic,*/ SortCriteria Sort = SortCriteria.StudentLastName,
+        public async Task<IActionResult> Index(string Search, FilterEnum Filter, /*Type FilterPublic,*/ SortCriteria Sort = SortCriteria.StudentLastName,
             int Page = 1, int PageSize = 10)
         {
             IQueryable<Thesis> query = _context.thesis;
             query = (Search != null) ? query.Where(m => (m.Title.Contains(Search))) : query;
-
-            query = (!Filter.Equals(null)) ? query.Where(m => m.Status == Filter) : query;
+           // query.Select(*)
+            query = _context.thesis;
+   
+            
+            query = (Filter.Equals(FilterEnum.All)) ? _context.thesis : query;
+            query = (Filter.Equals(FilterEnum.Free)) ? query.Where(m => m.Status == Status.Free): query;
+            query = (Filter.Equals(FilterEnum.Reserved)) ? query.Where(m => m.Status == Status.Reserved) : query;
+            query = (Filter.Equals(FilterEnum.Registered)) ? query.Where(m => m.Status == Status.Registered) : query;
+            query = (Filter.Equals(FilterEnum.Filed)) ? query.Where(m => m.Status == Status.Filed) : query;
+            query = (Filter.Equals(FilterEnum.Graded)) ? query.Where(m => m.Status == Status.Graded) : query;
             query = (Filter.Equals(null)) ? _context.thesis : query;
 
             //query = (!FilterPublic.Equals(null)) ? query.Where(m => m.Type == FilterPublic) : query;
