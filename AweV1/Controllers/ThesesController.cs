@@ -218,8 +218,9 @@ namespace AweV1.Controllers
                 return NotFound();
             }
 
-
-            return new ViewAsPdf(thesis) { FileName = "Gutachten " + thesis.StudentID+".pdf" };
+            string thesisACII = thesis.Title.Replace("Ü", "UE").Replace("ü", "Ue").Replace("Ä", "Ae").Replace("ä", "ae").Replace("Ö", "Oe").Replace("ö", "oe");
+            string matrk = thesis.StudentID.Replace("Ü", "UE").Replace("ü", "Ue").Replace("Ä", "Ae").Replace("ä", "ae").Replace("Ö", "Oe").Replace("ö", "oe");
+            return new ViewAsPdf(thesis) { FileName = "Gutachten " + thesisACII + " " + matrk + ".pdf" };
         }
 
 
