@@ -54,7 +54,7 @@ namespace AweV1.Controllers
         {
            
 
-            [Display(Name = "Status wählen")]
+            [Display(Name = "Alle anzeigen")]
             All = 0,
 
             [Display(Name = "Frei")]
@@ -77,7 +77,7 @@ namespace AweV1.Controllers
 
         public enum PublicFilterEnum 
         {
-            [Display(Name = "Status wählen")]
+            [Display(Name = "Alle anzeigen")]
             All = 0,
 
             [Display(Name = "Frei")]

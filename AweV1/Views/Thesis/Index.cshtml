@@ -107,11 +107,11 @@
 
 
 
-                            <a  id="@item.Id" title="DownloadGutachten" sizes"  class="btn btn-sm btn-default" asp-action="DetailsPDF"  asp-route-id="@item.Id">
-                                <button id="button_@item.Id" class="btn btn-sm btn-default">
+                            
+                                <button id="button_@item.Id" class="btn btn-sm btn-default" asp-action="DetailsPDF" asp-route-id="@item.Id">
                                     <span class='glyphicon glyphicon-download' aria-hidden='true'></span>
                                 </button>
-                            </a>
+                           
 
                             <!--Ausblenden wenn Status nicht bewertet-->
                             @{

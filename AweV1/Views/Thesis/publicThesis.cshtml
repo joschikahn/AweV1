@@ -35,6 +35,7 @@
     .dropdown {
         position: relative;
         display: inline-block;
+       
     }
 
     /* Dropdown Content (Hidden by Default) */
@@ -109,23 +110,9 @@ toggle between hiding and showing the dropdown content */
 <h2>Thesis: Übersicht (Öffentlich)</h2>
 
 <form id="Form" asp-action="Index" method="get">
-
-    <p>
-        <input type="button" value="Zurücksetzen" class="btn btn-default pull-right" onclick="resetForm()" />
-
-
-
-    </p>
-
-    <div class="panel panel-default">
+ <div class="panel panel-default">
         <div class="panel-heading">
-            <div class="row">
-                <div class="col-xs-4">
-                    <label class="control-label">Nach Titel suchen:</label>
-                    <input class="form-control" name="Search" id="Search" value="@ViewBag.Search" placeholder="Titel eingeben" onchange="document.getElementById('Form').submit()">
-                </div>
-                <div class="col-xs-4">
-                </div>
+            <div class="row">               
                 <div class="col-xs-4">
                     <label class="control-label">Filtern nach:</label>
                     @Html.DropDownList("PublicFilter", Html.GetEnumSelectList(typeof(AweV1.Controllers.ThesisController.PublicFilterEnum)), new { id = "PublicFilter", @class = "form-control", onchange = "document.getElementById('Form').submit()" })
@@ -135,7 +122,7 @@ toggle between hiding and showing the dropdown content */
 
         <table class="table table-bordered">
             <thead style="border-bottom: 1px solid #dddddd">
-            <th style="border-none;">@Html.DisplayNameFor(model => model.Title) (@Html.DisplayNameFor(model => model.Type))</th>
+            <th style="border-bottom: none;">@Html.DisplayNameFor(model => model.Title) (@Html.DisplayNameFor(model => model.Type))</th>
             <tr>
                 </thead>
             <tbody>
@@ -147,8 +134,8 @@ toggle between hiding and showing the dropdown content */
                     else { studiengangType = "Master"; }
 
                     <tr style="border-bottom: 1px solid #dddddd">
-                        <td class="dropdown" style="border-none;">
-                            <input type="button" value="@Html.DisplayFor(modelItem => item.Title)" onclick="myFunction(@item.Id)" class="dropbtn" /> (@studiengangType)
+                        <td class="dropdown" border-top: none; border-bottom: none;>
+                            <input type="button" value="@Html.DisplayFor(modelItem => item.Title)" onclick="myFunction(@item.Id)" class="dropbtn" style="border: none" /> (@studiengangType)
                             <div id="@item.Id" class="dropdown-content">
                                 <span><strong>@Html.DisplayNameFor(model => model.Description):</strong> @Html.DisplayFor(modelItem => item.Description)</span>
                                 <span><strong>@Html.DisplayNameFor(model => model.Status): </strong>@Html.DisplayFor(modelItem => item.Status)</span>
