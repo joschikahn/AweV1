@@ -153,11 +153,11 @@
 
             <table class="table table-bordered">
                 <tr>
-                    <th>
+                    <th style="width: 50%">
                         <div class="form-group">
                             <div class="form-group">
                                 <label asp-for="ContentVal" class="control-label"></label>
-                                <select  asp-for="ContentVal" id="ContentVal"class="form-control">
+                                <select asp-for="ContentVal" id="ContentVal" class="form-control">
                                     <option value="">Bitte auswählen</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -169,16 +169,16 @@
                             </div>
                         </div>
                     </th>
-                    <th>
+                    <th style="width: 50%">
                         <div class="form-group">
                             <label asp-for="ContentWt" class="control-label"></label>
-                            <input asp-for="ContentWt" class="form-control" max="100" value="30" type ="text" onchange="checknumber(this)"/>
+                            <input asp-for="ContentWt" class="form-control" max="100" value="30" type="text" onchange="checknumber(this)" />
                             <span asp-validation-for="ContentWt" class="text-danger"></span>
                         </div>
                     </th>
                 </tr>
                 <tr>
-                    <th>
+                    <th style="width: 50%">
                         <div class="form-group">
                             <label asp-for="LayoutVal" class="control-label"></label>
                             <select asp-for="LayoutVal" id="LayoutVal" class="form-control">
@@ -192,16 +192,16 @@
                             <span asp-validation-for="LayoutVal" class="text-danger"></span>
                         </div>
                     </th>
-                    <th>
+                    <th style="width: 50%">
                         <div class="form-group">
                             <label asp-for="LayoutWt" class="control-label"></label>
-                            <input asp-for="LayoutWt" class="form-control" value="15" type ="text" onchange="checknumber(this)"/>
+                            <input asp-for="LayoutWt" class="form-control" value="15" type="text" onchange="checknumber(this)" />
                             <span asp-validation-for="LayoutWt" class="text-danger"></span>
                         </div>
                     </th>
                 </tr>
                 <tr>
-                    <th>
+                    <th style="width: 50%">
                         <div class="form-group">
                             <label asp-for="StructureVal" class="control-label"></label>
                             <select asp-for="StructureVal" id="StructureVal" class="form-control">
@@ -211,20 +211,20 @@
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                                 <option value="5">5</option>
-                             </select>
-                             <span asp-validation-for="StructureVal" class="text-danger"></span>
+                            </select>
+                            <span asp-validation-for="StructureVal" class="text-danger"></span>
                         </div>
                     </th>
-                    <th>
+                    <th style="width: 50%">
                         <div class="form-group">
                             <label asp-for="StructureWt" class="control-label"></label>
-                            <input asp-for="StructureWt" class="form-control" value="10" type ="text" onchange="checknumber(this)" />
+                            <input asp-for="StructureWt" class="form-control" value="10" type="text" onchange="checknumber(this)" />
                             <span asp-validation-for="StructureWt" class="text-danger"></span>
                         </div>
                     </th>
                 </tr>
                 <tr>
-                    <th>
+                    <th style="width: 50%">
                         <div class="form-group">
                             <label asp-for="StyleVal" class="control-label"></label>
                             <select asp-for="StyleVal" id="StyleVal" class="form-control">
@@ -234,20 +234,20 @@
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                                 <option value="5">5</option>
-                            </select>                           
+                            </select>
                             <span asp-validation-for="StyleVal" class="text-danger"></span>
                         </div>
                     </th>
-                    <th>
+                    <th style="width: 50%">
                         <div class="form-group">
                             <label asp-for="StyleWt" class="control-label"></label>
-                            <input asp-for="StyleWt" class="form-control" value="10" type ="text" onchange="checknumber(this)"/>
+                            <input asp-for="StyleWt" class="form-control" value="10" type="text" onchange="checknumber(this)" />
                             <span asp-validation-for="StyleWt" class="text-danger"></span>
                         </div>
                     </th>
                 </tr>
                 <tr>
-                    <th>
+                    <th style="width: 50%">
                         <div class="form-group">
                             <label asp-for="LiteratureVal" class="control-label"></label>
                             <select asp-for="LiteratureVal" id="LiteratureVal" class="form-control">
@@ -257,20 +257,20 @@
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                                 <option value="5">5</option>
-                            </select>                    
+                            </select>
                             <span asp-validation-for="LiteratureVal" class="text-danger"></span>
                         </div>
                     </th>
-                    <th>
+                    <th style="width: 50%">
                         <div class="form-group">
                             <label asp-for="LiteratureWt" class="control-label"></label>
-                            <input asp-for="LiteratureWt" class="form-control" value="10" type ="text" onchange="checknumber(this)" />
+                            <input asp-for="LiteratureWt" class="form-control" value="10" type="text" onchange="checknumber(this)" />
                             <span asp-validation-for="LiteratureWt" class="text-danger"></span>
                         </div>
                     </th>
                 </tr>
                 <tr>
-                    <th>
+                    <th style="width: 50%">
                         <div class="form-group">
                             <label asp-for="DifficultyVal" class="control-label"></label>
                             <select asp-for="DifficultyVal" id="DifficultyVal" class="form-control">
@@ -280,20 +280,20 @@
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                                 <option value="5">5</option>
-                            </select>        
+                            </select>
                             <span asp-validation-for="DifficultyVal" class="text-danger"></span>
                         </div>
                     </th>
-                    <th>
+                    <th style="width: 50%">
                         <div class="form-group">
                             <label asp-for="DifficultyWt" class="control-label"></label>
-                            <input asp-for="DifficultyWt" class="form-control" value="5" type ="text" onchange="checknumber(this)"/>
+                            <input asp-for="DifficultyWt" class="form-control" value="5" type="text" onchange="checknumber(this)" />
                             <span asp-validation-for="DifficultyWt" class="text-danger"></span>
                         </div>
                     </th>
                 </tr>
                 <tr>
-                    <th>
+                    <th style="width: 50%">
                         <div class="form-group">
                             <label asp-for="NoveltyVal" class="control-label"></label>
                             <select asp-for="NoveltyVal" id="NoveltyVal" class="form-control">
@@ -306,19 +306,19 @@
                             </select>                            <span asp-validation-for="NoveltyVal" class="text-danger"></span>
                         </div>
                     </th>
-                    <th>
+                    <th style="width: 50%">
                         <div class="form-group">
                             <label asp-for="NoveltyWt" class="control-label"></label>
-                            <input asp-for="NoveltyWt" class="form-control" value="10" type ="text" onchange="checknumber(this)"/>
+                            <input asp-for="NoveltyWt" class="form-control" value="10" type="text" onchange="checknumber(this)" />
                             <span asp-validation-for="NoveltyWt" class="text-danger"></span>
                         </div>
                     </th>
                 </tr>
                 <tr>
-                    <th>
+                    <th style="width: 50%">
                         <div class="form-group">
                             <label asp-for="RichnessVal" class="control-label"></label>
-                            <select asp-for="RichnessVal" id="RichnessVal" class="form-control">
+                            <select asp-for="RichnessVal" id="RichnessVal" class="form-control" >
                                 <option value="">Bitte auswählen</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -328,10 +328,10 @@
                             </select>                            <span asp-validation-for="RichnessVal" class="text-danger"></span>
                         </div>
                     </th>
-                    <th>
+                    <th style="width: 50%">
                         <div class="form-group">
                             <label asp-for="RichnessWt" class="control-label"></label>
-                            <input asp-for="RichnessWt" class="form-control" value="10" type ="text" onchange="checknumber(this)" />
+                            <input asp-for="RichnessWt" class="form-control" value="10" type="text" onchange="checknumber(this)" />
                             <span asp-validation-for="RichnessWt" class="text-danger"></span>
                         </div>
                     </th>
@@ -360,13 +360,13 @@
         </div>
     </div>
 
-<div class="custom-file">
-    <br/>
-    <label class="custom-file-label">
-        Arbeit des Studenten <input type="file" id="UploadFiles" asp-for="UploadFile" class="form-control custom-file-input" style="margin-bottom:5px"/>
-    </label>
-    <br/>
-</div>
+    <div class="custom-file">
+        <br />
+        <label class="custom-file-label">
+            Arbeit des Studenten <input type="file" id="UploadFiles" asp-for="UploadFile" class="form-control custom-file-input" style="margin-bottom:5px" />
+        </label>
+        <br />
+    </div>
 
     <div class="panel panel-default">
         <div class="panel-heading">
@@ -414,7 +414,7 @@
             txtid.value = "0";
             alert("Bitte eine Zahl zwischen 0 und 100 eingeben")
         }
-     }
+    }
 
 
 
@@ -441,9 +441,9 @@
         var richnessw = document.getElementById("RichnessWt").value;
 
 
-        zwischenergebnis = (Number((6 - content) * contentw) + Number((6 - layout) * layoutw) + Number((6 - structure) * structurew) + Number( (6 - style) * stylew) + Number( ( 6 -literature) * literaturew) + Number( ( 6 - difficulty) * difficultyw) + Number( ( 6 - novelty) * noveltyw) + Number( (6 - richness) * richnessw));
+        zwischenergebnis = (Number((6 - content) * contentw) + Number((6 - layout) * layoutw) + Number((6 - structure) * structurew) + Number((6 - style) * stylew) + Number((6 - literature) * literaturew) + Number((6 - difficulty) * difficultyw) + Number((6 - novelty) * noveltyw) + Number((6 - richness) * richnessw));
 
-       
+
 
         res = (zwischenergebnis / 100).toFixed(2);
         document.getElementById("Ergebnis").value = res
