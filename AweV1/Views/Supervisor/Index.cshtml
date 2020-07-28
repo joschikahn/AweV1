@@ -5,9 +5,9 @@
 }
 
 <script>
-    function resetForm() {
+     function resetForm() {
         document.getElementById("Search").value = null;
-        document.getElementById("Filter").value = null;
+        //document.getElementById("Filter").value = null;
         document.getElementById("Sort").value = null;
         document.getElementById("Page").value = null;
         document.getElementById("PageSize").value = null;
@@ -34,11 +34,7 @@
                 <div class="col-xs-4">
 
                 </div>
-                <!-- Filter-Funktion auskommentiert, da sie nicht richtig funktioniert (siehe Thesis-Controller Z. 40) -->
-                <!-- <div class="col-xs-4">
-                <label class="control-label">Filter by type:</label>
-                @Html.DropDownList("Filter", ViewBag.FilterValues, "--- Select one ---", new { id = "Filter", @class = "form-control", onchange = "document.getElementById('Form').submit()" })
-            </div> -->
+
                 <div class="col-xs-4">
                     <label class="control-label">Sortieren nach:</label>
                     @Html.DropDownList("Sort", Html.GetEnumSelectList(typeof(AweV1.Controllers.SupervisorController.SortCriteria)), new { id = "Sort", @class = "form-control", onchange = "document.getElementById('Form').submit()" })
