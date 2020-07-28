@@ -2,6 +2,8 @@
 
 using AweV1.Data;
 using AweV1.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -10,11 +12,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
-using System.Net.Mime;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.EntityFrameworkCore.SqlServer.Query.ExpressionTranslators.Internal;
 
 namespace AweV1.Controllers
 {
@@ -52,7 +50,7 @@ namespace AweV1.Controllers
 
         public enum FilterEnum
         {
-           
+
 
             [Display(Name = "Alle anzeigen")]
             All = 0,
@@ -71,11 +69,11 @@ namespace AweV1.Controllers
 
             [Display(Name = "Bewertet")]
             Graded = 5
-            
-        
-    }
 
-        public enum PublicFilterEnum 
+
+        }
+
+        public enum PublicFilterEnum
         {
             [Display(Name = "Alle anzeigen")]
             All = 0,
@@ -99,21 +97,13 @@ namespace AweV1.Controllers
             int Page = 1, int PageSize = 10)
         {
             IQueryable<Thesis> query = _context.thesis;
-            
 
-            
+
+
             query = (Search != null) ? query.Where(m => (m.Title.Contains(Search))) : query;
-            //query = _context.thesis;
+
             if (!this.User.IsInRole("Administrator"))
             {
-                //query = (PublicFilter.Equals(PublicFilterEnum.All)) ? query.Where(m => m.Status == Status.Free) || query.Where(m => m.Status == Status.Reserved) : query;
-                /*if (PublicFilter.Equals(PublicFilterEnum.All))
-                {
-                   query = query.Where(m => m.Status == Status.Free || m.Status == Status.Registered);
-                   //query = query.Where(m => m.Status == Status.Reserved);
-                }
-                else { query = query; }*/
-
                 query = (PublicFilter.Equals(PublicFilterEnum.All)) ? query.Where(m => m.Status == Status.Free || m.Status == Status.Reserved) : query;
                 query = (PublicFilter.Equals(PublicFilterEnum.Free)) ? query.Where(m => m.Status == Status.Free) : query;
                 query = (PublicFilter.Equals(PublicFilterEnum.Reserved)) ? query.Where(m => m.Status == Status.Reserved) : query;
@@ -130,7 +120,7 @@ namespace AweV1.Controllers
                 query = (Filter.Equals(null)) ? _context.thesis : query;
             }
 
-            
+
 
             switch (Sort)
             {
@@ -163,16 +153,16 @@ namespace AweV1.Controllers
 
             ViewBag.Search = Search;
             ViewBag.Filter = Filter;
-            //ViewBag.FilterPublic = FilterPublic;
-            
+
+
             ViewBag.FilterValues = new SelectList(await _context.thesis.Select(m => m.Status).Distinct().ToListAsync());
-            //ViewBag.FilterValuesPublic = new SelectList(await _context.thesis.Select(m => m.Type).Distinct().ToListAsync());
+
             ViewBag.Sort = Sort;
             ViewBag.Page = Page;
             ViewBag.PageTotal = PageTotal;
             ViewBag.PageSize = PageSize;
             ViewBag.supervisor = _context.supervisors;
-         
+
             if (!this.User.IsInRole("Administrator"))
                 return View("publicThesis", await query.Skip(PageSize * (Page - 1)).Take(PageSize).ToListAsync());
             return View(await query.Skip(PageSize * (Page - 1)).Take(PageSize).ToListAsync());
@@ -230,10 +220,10 @@ namespace AweV1.Controllers
         {
             ViewData["SupervisorId"] = new SelectList(_context.supervisors, "Id", "LastName");
             List<SelectListItem> programme = new SelectList(_context.programme, "Id", "Name").ToList();
-            programme.Insert(0,new SelectListItem(){Value= "0", Text = "- bitte auswählen -"});
+            programme.Insert(0, new SelectListItem() { Value = "0", Text = "- bitte auswählen -" });
             ViewData["ProgrammeId"] = programme;
 
-            
+
             return View();
         }
 
@@ -250,7 +240,7 @@ namespace AweV1.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (thesis.ProgrammeId==0)
+                if (thesis.ProgrammeId == 0)
                 {
                     thesis.ProgrammeId = null;
                     thesis.Programme = null;
@@ -397,7 +387,7 @@ namespace AweV1.Controllers
             foreach (var thesis in _context.thesis)
             {
                 if (thesis.Id.Equals(id))
-                { 
+                {
                     return File(thesis.UploadFile, "application/pdf", "thesis.pdf");
                 }
             }

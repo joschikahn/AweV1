@@ -143,7 +143,7 @@ namespace AweV1.Models
         [Display(Name = "Note")]
         public Grade? Grade { get; set; }
 
-       
+
         //Fremdschlüssel
         [Required(ErrorMessage = "Bitte geben Sie den Betreuer an!")]
         public int SupervisorId { get; set; }
@@ -179,7 +179,7 @@ namespace AweV1.Models
                     {new ValidationResult("Anmeldedatum muss vor dem Abgabedatum liegen!")};
 
             }
-            // Was sollte alles eingetragen sein, wenn es Status benotet ist?
+            // Was sollte alles eingetragen sein, wenn der Status benotet ist?
             else if ((Status == Status.Graded) && (Grade == Models.Grade.Note_Empty))
             {
                 return new ValidationResult[] { new ValidationResult("Bitte Note einfügen!") };

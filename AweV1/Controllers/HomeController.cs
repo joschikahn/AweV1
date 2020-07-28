@@ -9,7 +9,7 @@ namespace AweV1.Controllers
     {
         private readonly AppDbContext _context;
 
-        // evtl. kann das Weg und muss in jede einzelen Controllerklasse rein
+
         public HomeController(AppDbContext context)
         {
             _context = context;
