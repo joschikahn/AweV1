@@ -95,7 +95,7 @@ namespace AweV1.Controllers
         }
 
         // GET: Thesis
-        public async Task<IActionResult> Index(string Search, FilterEnum Filter, PublicFilterEnum PublicFilter, SortCriteria Sort = SortCriteria.StudentLastName,
+        public async Task<IActionResult> Index(string Search, FilterEnum Filter, PublicFilterEnum PublicFilter, SortCriteria Sort,
             int Page = 1, int PageSize = 10)
         {
             IQueryable<Thesis> query = _context.thesis;
