@@ -8,7 +8,7 @@ namespace AweV1.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Bitte Programame eingeben!")]
+        [Required(ErrorMessage = "Bitte Studiengang eingeben!")]
         public string Name { get; set; }
 
         // 1:m Verbindung zu Thesis
