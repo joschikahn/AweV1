@@ -34,7 +34,7 @@ namespace AweV1.Models
         public DateTime? Filing { get; set; }
 
         [Display(Name = "Typ")]
-        public Type Type { get; set; }
+        public Type? Type { get; set; }
 
         [Display(Name = "Zusammenfassung")]
         public string Summary { get; set; }

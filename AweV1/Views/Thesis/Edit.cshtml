@@ -114,7 +114,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="Type" class="control-label"></label>
-                <select asp-for="Type" asp-items="@Html.GetEnumSelectList(typeof(AweV1.Models.Type))" class="form-control"></select>
+                <select asp-for="Type" class="form-control">
+                    <option value="">- bitte wählen -</option>
+                    <option value="0">Bachelor</option>
+                    <option value="1">Master</option>
+                </select>
                 <span asp-validation-for="Type" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -172,7 +176,7 @@
                     <th style="width: 50%">
                         <div class="form-group">
                             <label asp-for="ContentWt" class="control-label"></label>
-                            <input asp-for="ContentWt" class="form-control" max="100" value="30" type="text" onchange="checknumber(this)" />
+                            <input asp-for="ContentWt" class="form-control" max="100" type="number" onchange="checknumber(this)" />
                             <span asp-validation-for="ContentWt" class="text-danger"></span>
                         </div>
                     </th>
@@ -195,7 +199,7 @@
                     <th style="width: 50%">
                         <div class="form-group">
                             <label asp-for="LayoutWt" class="control-label"></label>
-                            <input asp-for="LayoutWt" class="form-control" value="15" type="text" onchange="checknumber(this)" />
+                            <input asp-for="LayoutWt" class="form-control" max="100" type="number" onchange="checknumber(this)" />
                             <span asp-validation-for="LayoutWt" class="text-danger"></span>
                         </div>
                     </th>
@@ -218,7 +222,7 @@
                     <th style="width: 50%">
                         <div class="form-group">
                             <label asp-for="StructureWt" class="control-label"></label>
-                            <input asp-for="StructureWt" class="form-control" value="10" type="text" onchange="checknumber(this)" />
+                            <input asp-for="StructureWt" class="form-control" max="100" type="number" onchange="checknumber(this)" />
                             <span asp-validation-for="StructureWt" class="text-danger"></span>
                         </div>
                     </th>
@@ -241,7 +245,7 @@
                     <th style="width: 50%">
                         <div class="form-group">
                             <label asp-for="StyleWt" class="control-label"></label>
-                            <input asp-for="StyleWt" class="form-control" value="10" type="text" onchange="checknumber(this)" />
+                            <input asp-for="StyleWt" class="form-control" max="100" type="number" onchange="checknumber(this)" />
                             <span asp-validation-for="StyleWt" class="text-danger"></span>
                         </div>
                     </th>
@@ -264,7 +268,7 @@
                     <th style="width: 50%">
                         <div class="form-group">
                             <label asp-for="LiteratureWt" class="control-label"></label>
-                            <input asp-for="LiteratureWt" class="form-control" value="10" type="text" onchange="checknumber(this)" />
+                            <input asp-for="LiteratureWt" class="form-control" max="100" type="number" onchange="checknumber(this)" />
                             <span asp-validation-for="LiteratureWt" class="text-danger"></span>
                         </div>
                     </th>
@@ -287,7 +291,7 @@
                     <th style="width: 50%">
                         <div class="form-group">
                             <label asp-for="DifficultyWt" class="control-label"></label>
-                            <input asp-for="DifficultyWt" class="form-control" value="5" type="text" onchange="checknumber(this)" />
+                            <input asp-for="DifficultyWt" class="form-control" max="100" type="number" onchange="checknumber(this)" />
                             <span asp-validation-for="DifficultyWt" class="text-danger"></span>
                         </div>
                     </th>
@@ -309,7 +313,7 @@
                     <th style="width: 50%">
                         <div class="form-group">
                             <label asp-for="NoveltyWt" class="control-label"></label>
-                            <input asp-for="NoveltyWt" class="form-control" value="10" type="text" onchange="checknumber(this)" />
+                            <input asp-for="NoveltyWt" class="form-control" max="100" type="number" onchange="checknumber(this)" />
                             <span asp-validation-for="NoveltyWt" class="text-danger"></span>
                         </div>
                     </th>
@@ -331,7 +335,7 @@
                     <th style="width: 50%">
                         <div class="form-group">
                             <label asp-for="RichnessWt" class="control-label"></label>
-                            <input asp-for="RichnessWt" class="form-control" value="10" type="text" onchange="checknumber(this)" />
+                            <input asp-for="RichnessWt" class="form-control" max="100" type="number" onchange="checknumber(this)" />
                             <span asp-validation-for="RichnessWt" class="text-danger"></span>
                         </div>
                     </th>
@@ -410,8 +414,8 @@
 
     function checknumber(txtid) {
         var mynumbervalue = parseFloat((txtid).value);
-        if (mynumbervalue > 100) {
-            txtid.value = "0";
+        if (!mynumbervalue.isInteger || mynumbervalue > 100 || mynumbervalue < 0) {
+           txtid.value = "0";
             alert("Bitte eine Zahl zwischen 0 und 100 eingeben")
         }
     }
@@ -419,61 +423,66 @@
 
 
     function notenVorschlag() {
-        var content = document.getElementById("ContentVal").value;
-        var layout = document.getElementById("LayoutVal").value;
-        var structure = document.getElementById("StructureVal").value;
-        var style = document.getElementById("StyleVal").value;
-        var literature = document.getElementById("LiteratureVal").value;
-        var difficulty = document.getElementById("DifficultyVal").value;
-        var novelty = document.getElementById("NoveltyVal").value;
-        var richness = document.getElementById("RichnessVal").value;
+        var content = parseInt(document.getElementById("ContentVal").value);
+        var layout = parseInt(document.getElementById("LayoutVal").value);
+        var structure = parseInt(document.getElementById("StructureVal").value);
+        var style = parseInt(document.getElementById("StyleVal").value);
+        var literature = parseInt(document.getElementById("LiteratureVal").value);
+        var difficulty = parseInt(document.getElementById("DifficultyVal").value);
+        var novelty = parseInt(document.getElementById("NoveltyVal").value);
+        var richness = parseInt(document.getElementById("RichnessVal").value);
 
         var res;
         var zwischenergebnis;
 
-        var contentw = document.getElementById("ContentWt").value;
-        var layoutw = document.getElementById("LayoutWt").value;
-        var structurew = document.getElementById("StructureWt").value;
-        var stylew = document.getElementById("StyleWt").value;
-        var literaturew = document.getElementById("LiteratureWt").value;
-        var difficultyw = document.getElementById("DifficultyWt").value;
-        var noveltyw = document.getElementById("NoveltyWt").value;
-        var richnessw = document.getElementById("RichnessWt").value;
+        var contentw = parseInt(document.getElementById("ContentWt").value);
+        var layoutw = parseInt(document.getElementById("LayoutWt").value);
+        var structurew = parseInt(document.getElementById("StructureWt").value);
+        var stylew = parseInt(document.getElementById("StyleWt").value);
+        var literaturew = parseInt(document.getElementById("LiteratureWt").value);
+        var difficultyw = parseInt(document.getElementById("DifficultyWt").value);
+        var noveltyw = parseInt(document.getElementById("NoveltyWt").value);
+        var richnessw = parseInt(document.getElementById("RichnessWt").value);
 
-
-        zwischenergebnis = (Number((6 - content) * contentw) + Number((6 - layout) * layoutw) + Number((6 - structure) * structurew) + Number((6 - style) * stylew) + Number((6 - literature) * literaturew) + Number((6 - difficulty) * difficultyw) + Number((6 - novelty) * noveltyw) + Number((6 - richness) * richnessw));
-
-
-
-        res = (zwischenergebnis / 100).toFixed(2);
-        document.getElementById("Ergebnis").value = res
-
-
-
-        if (document.getElementById("ContentVal").value == "0") {
+        var wtSum = (contentw) + (layoutw) + (structurew) + (stylew) + (literaturew) + (difficultyw) + (noveltyw) + (richnessw);
+        if (wtSum != 100) {
+            alert("Summe der Gewichtungen muss 100 sein ist aber " + wtSum);
+        } else if (document.getElementById("ContentVal").value == "") {
             alert("Bitte vergeben Sie Punkte fuer das Feld Inhalt");
         }
-        if (document.getElementById("LayoutVal").value == "0") {
+        else if (document.getElementById("LayoutVal").value == "") {
             alert("Bitte vergeben Sie Punkte fuer das Feld Layout");
         }
-        if (document.getElementById("StructureVal").value == "0") {
+        else if (document.getElementById("StructureVal").value == "") {
             alert("Bitte vergeben Sie Punkte fuer das Feld Struktur");
         }
-        if (document.getElementById("StyleVal").value == "0") {
+        else if (document.getElementById("StyleVal").value == "") {
             alert("Bitte vergeben Sie Punkte fuer das Feld Stil");
         }
-        if (document.getElementById("LiteratureVal").value == "0") {
+        else if (document.getElementById("LiteratureVal").value == "") {
             alert("Bitte vergeben Sie Punkte fuer das Feld Literatur");
         }
-        if (document.getElementById("DifficultyVal").value == "0") {
+        else if (document.getElementById("DifficultyVal").value == "") {
             alert("Bitte vergeben Sie Punkte fuer das Feld Komplexität");
         }
-        if (document.getElementById("NoveltyVal").value == "0") {
+        else if (document.getElementById("NoveltyVal").value == "") {
             alert("Bitte vergeben Sie Punkte fuer das Feld Neuheit");
         }
-        if (document.getElementById("RichnessVal").value == "0") {
+        else if (document.getElementById("RichnessVal").value == "") {
             alert("Bitte vergeben Sie Punkte fuer das Feld Reichhaltigkeit");
+        }  else {
+
+
+            zwischenergebnis = (((6 - content) * contentw) + ((6 - layout) * layoutw) + ((6 - structure) * structurew) + ((6 - style) * stylew) + ((6 - literature) * literaturew) + ((6 - difficulty) * difficultyw) + ((6 - novelty) * noveltyw) + ((6 - richness) * richnessw));
+
+
+
+            res = (zwischenergebnis / 100).toFixed(2);
+            document.getElementById("Ergebnis").value = res
+
         }
+
+        
     }
 
 </script>

@@ -232,6 +232,8 @@ namespace AweV1.Controllers
             List<SelectListItem> programme = new SelectList(_context.programme, "Id", "Name").ToList();
             programme.Insert(0,new SelectListItem(){Value= "0", Text = "- bitte auswählen -"});
             ViewData["ProgrammeId"] = programme;
+
+            
             return View();
         }
 
@@ -262,6 +264,7 @@ namespace AweV1.Controllers
             List<SelectListItem> programme = new SelectList(_context.programme, "Id", "Name").ToList();
             programme.Insert(0, new SelectListItem() { Value = "0", Text = "- bitte auswählen -" });
             ViewData["ProgrammeId"] = programme;
+
             return View(thesis);
         }
 
@@ -281,7 +284,9 @@ namespace AweV1.Controllers
             }
 
             ViewData["SupervisorId"] = new SelectList(_context.supervisors, "Id", "LastName");
-            ViewData["ProgrammeId"] = new SelectList(_context.programme, "Id", "Name");
+            List<SelectListItem> programme = new SelectList(_context.programme, "Id", "Name").ToList();
+            programme.Insert(0, new SelectListItem() { Value = "0", Text = "- bitte auswählen -" });
+            ViewData["ProgrammeId"] = programme;
             return View(thesis);
         }
 
@@ -303,6 +308,11 @@ namespace AweV1.Controllers
 
             if (ModelState.IsValid)
             {
+                if (thesis.ProgrammeId == 0)
+                {
+                    thesis.ProgrammeId = null;
+                    thesis.Programme = null;
+                }
                 try
                 {
                     foreach (var item in UploadFile)
@@ -335,7 +345,9 @@ namespace AweV1.Controllers
             }
 
             ViewData["SupervisorId"] = new SelectList(_context.supervisors, "Id", "LastName");
-            ViewData["ProgrammeId"] = new SelectList(_context.programme, "Id", "Name");
+            List<SelectListItem> programme = new SelectList(_context.programme, "Id", "Name").ToList();
+            programme.Insert(0, new SelectListItem() { Value = "0", Text = "- bitte auswählen -" });
+            ViewData["ProgrammeId"] = programme;
             return View(thesis);
         }
 
