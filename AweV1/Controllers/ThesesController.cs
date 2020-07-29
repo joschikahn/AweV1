@@ -388,6 +388,7 @@ namespace AweV1.Controllers
             {
                 if (thesis.Id.Equals(id))
                 {
+                    if (thesis.UploadFile == null) return NotFound();
                     return File(thesis.UploadFile, "application/pdf", "thesis.pdf");
                 }
             }

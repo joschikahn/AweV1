@@ -412,12 +412,15 @@
 
 <script>
 
+    
     function checknumber(txtid) {
         var mynumbervalue = parseFloat((txtid).value);
-        if (!mynumbervalue.isInteger || mynumbervalue > 100 || mynumbervalue < 0) {
+        if (mynumbervalue > 100 || mynumbervalue < 0||  isNaN(mynumbervalue)) {
+            numbersOk = false;
            txtid.value = "0";
-            alert("Bitte eine Zahl zwischen 0 und 100 eingeben")
+            alert("Bitte eine Zahl zwischen 0 und 100 eingeben");
         }
+        
     }
 
 
